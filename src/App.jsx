@@ -7,7 +7,6 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import TechStack from "./components/TechStack/TechStack";
 import Testimonial from "./components/Testimonial/Testimonial";
 import WorkExperience from "./components/WorkExperience/WorkExperience";
-import "normalize.css"
 import ScrollToTop from "react-scroll-to-top";
 import "./App.css";
 import NavbarMobile from "./components/Sidebar/NavbarMobile";

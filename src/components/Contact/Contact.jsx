@@ -5,9 +5,9 @@ import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const serviceId = "service_sw31vab";
-const templateId = "template_795w2ua";
-const apiKey = "OoGEGjGcO1b_AQ8LU";
+const serviceId = "";
+const templateId = "";
+const apiKey = "";
 
 const Contact = () => {
   const refForm = useRef();
