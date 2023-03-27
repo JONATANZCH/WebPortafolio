@@ -1,0 +1,45 @@
+.mobile-view {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 70px;
+    width: 100%;
+    top: 0;
+    z-index: 5;
+}
+.navbar-header {
+    width: 100%;
+    color: #8a36d2;
+    background-color: #adadadc4;
+}
+
+.navbar-header p svg {
+    cursor: pointer;
+    margin: 6px;
+}
+
+.navbar-mobile {
+    width: 220px;
+    background-color: #adadadc4;
+    padding: .9em;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.navbar-mobile ul li {
+    color: white;
+    cursor: pointer;
+    padding: .4em;
+    list-style: none;
+}
+.nav__item-mobile .active {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.685);
+    border-radius: 10px;
+    padding: 10px;
+}
+@media(min-width: 1000px) {
+    .mobile-view {
+        display: none;
+    }
+}

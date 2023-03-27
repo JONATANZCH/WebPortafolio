@@ -1,0 +1,48 @@
+.sidebar__profile img {
+    border-radius: 90px;
+    margin-top: 10px;
+    height: 130px;
+    width: 130px;
+    display: flex;
+    vertical-align: middle;
+    margin: 0 auto;
+    object-fit: cover;
+    border: 1px solid #0000009a;
+}
+
+
+.navbar__items ul li {
+    color: rgb(255, 255, 255);
+    list-style-type: none;
+    cursor: pointer;
+    margin-top: 30px;
+    font-weight: 300;
+}
+
+
+.navbar__items ul li svg {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.navbar__icons ul li {
+    margin-top: 35px;
+    cursor: pointer;
+    list-style-type: none;
+    padding-left: .7em;
+}
+
+.navbar__icons ul li svg {
+    margin-left: 10px;
+}
+
+.nav__item .active {
+    border-left: 2px solid #8a36d2;
+    color: black;
+    font-weight: 700;
+}
+
+#dark .nav__item .active {
+    color: #8a36d2;
+    border-left: 2px solid #ffffff;
+}

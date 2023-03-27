@@ -1,0 +1,307 @@
+@media(min-width: 1024px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1400px;
+        margin: auto;
+    }
+}
+
+.content {
+    padding-top: 50px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding-bottom: 1rem;
+}
+.title-span {
+    font-size: 1.2rem;
+}
+@media(min-width: 768px) {
+    .content {
+        padding-top: 40px;
+        margin: 20px auto;
+    }
+    .title {
+        font-size: 2.8rem;
+    }
+    .description {
+        font-size: 1rem;
+    }
+}
+.description {
+    font-size: 0.9rem;
+    margin-bottom: .4rem;
+}
+
+.s-center {
+    text-align: center;
+}
+
+@media(min-width: 1024px) {
+    .s-center {
+        text-align: left;
+    }
+}
+
+.flex {
+    display: grid;
+    grid-gap: .1rem;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+}
+.countdown-p {
+    display: grid;
+    place-items: center;
+}
+
+@media(min-width: 580px) {
+    .flex {
+        display: flex;
+    }
+    .countdown {
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+    }
+}
+.countdown {
+    align-items: center;
+    font-size: 0.8rem;
+}
+@media(min-width: 1024px) {
+    .countdown {
+        justify-content: flex-start;
+    }
+}
+.countdown-item {
+    padding: 0 .75rem;
+    align-items: center;
+    position: relative;
+}
+
+.countdown-item:not(:last-of-type):before {
+    position: absolute;
+    right: 0;
+    content: "";
+    display: block;
+    width: 1px;
+    height: 50%;
+    background: #ffffff;
+    opacity: .5;
+}
+
+.countdown-number {
+    font-size: 1.75em;
+    font-weight: bold;
+    margin-right: .25rem;
+    color: #8a36d2;
+}
+.countdown-letter {
+    opacity: .5;
+}
+
+
+.form-container {
+    height: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.form {
+    display: inline-flex;
+}
+.form-icon {
+    padding: .4rem;
+    font-size: 22px;
+}
+.form-icon:hover {
+    color: white;
+}
+.form-icon-g {
+    color: rgba(15, 15, 75, 0.74);
+    padding-left: 0;
+}
+.form-icon-i {
+    color: #fd5949;
+}
+.form-icon-l {
+    color:  #0e76a8;
+}
+.form-icon-t {
+    color: #00acee;
+}
+.form-icon-w {
+    color: #25d366;
+}
+.form-icon-f {
+    color: #3b5998;
+}
+.form-hint {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto; 
+}
+@media(min-width: 1024px) {
+    .form-hint {
+        display: inline-block;
+    }
+    .form-container {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+}
+.button,.button::after {
+    padding: 5px 10px;
+    font-size: .9rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: transparent;
+    position: relative;
+    font-weight: 300;
+}
+  
+.button::after {
+    --move1: inset(50% 50% 50% 50%);
+    --move2: inset(31% 0 40% 0);
+    --move3: inset(39% 0 15% 0);
+    --move4: inset(45% 0 40% 0);
+    --move5: inset(45% 0 6% 0);
+    --move6: inset(14% 0 61% 0);
+    clip-path: var(--move1);
+    content: 'Download CV';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+}
+  
+.button:hover::after {
+    animation: glitch_4011 1s;
+    text-shadow: 10 10px 10px black;
+    animation-timing-function: steps(2, end);
+    text-shadow: -3px -3px 0px #8a36d2, 3px 3px 0px #E94BE8;
+    background-color: transparent;
+    border: 3px solid #8a36d2;
+}
+  
+.button:hover {
+    text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
+}
+
+.button:hover {
+    background-color: transparent;
+    border: 1px solid #8a36d2;
+    box-shadow: 0px 10px 10px -10px #8a36d2;
+}
+  
+@keyframes glitch_4011 {
+    0% {
+      clip-path: var(--move1);
+      transform: translate(0px,-10px);
+    }
+  
+    10% {
+      clip-path: var(--move2);
+      transform: translate(-10px,10px);
+    }
+  
+    20% {
+      clip-path: var(--move3);
+      transform: translate(10px,0px);
+    }
+  
+    30% {
+      clip-path: var(--move4);
+      transform: translate(-10px,10px);
+    }
+  
+    40% {
+      clip-path: var(--move5);
+      transform: translate(10px,-10px);
+    }
+  
+    50% {
+      clip-path: var(--move6);
+      transform: translate(-10px,10px);
+    }
+  
+    60% {
+      clip-path: var(--move1);
+      transform: translate(10px,-10px);
+    }
+  
+    70% {
+      clip-path: var(--move3);
+      transform: translate(-10px,10px);
+    }
+  
+    80% {
+      clip-path: var(--move2);
+      transform: translate(10px,-10px);
+    }
+  
+    90% {
+      clip-path: var(--move4);
+      transform: translate(-10px,10px);
+    }
+  
+    100% {
+      clip-path: var(--move1);
+      transform: translate(0);
+    }
+}
+
+
+.graphic {
+    position: relative;
+    display: grid;
+    padding-top: 3rem;
+    grid-template-columns: 1fr 75%;
+}
+
+.graphic-robot {
+    width: auto;
+    grid-column-start: 2;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.graphic-circles {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.graphic-circles img {
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: screen;
+}
+
+.graphic-energy {
+    animation: turn1 10s linear infinite;
+}
+
+.graphic-circle-2 {
+    animation: turn1 26s linear infinite;
+}
+
+.graphic-circle-1 {
+    animation: turn2 16s linear infinite;
+}
+
+@keyframes turn1 {
+    to {
+        transform: rotate(1turn);
+    }
+}
+@keyframes turn2 {
+    to {
+        transform: rotate(-1turn);
+    }
+}

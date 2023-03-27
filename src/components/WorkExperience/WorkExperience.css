@@ -1,0 +1,24 @@
+.timline-section {
+    margin-top: 20px;
+}
+.work-section {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+.vertical-timeline-element-title {
+    font-weight: 700;
+    font-size: xx-large;
+}
+.place {
+    font-style: italic;
+    font-weight: lighter;
+}
+.date-class {
+    color: black;
+}
+#dark .date-class {
+    color: white;
+}
+.logros-list p {
+    font-size: .8rem;
+}
