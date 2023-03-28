@@ -41,7 +41,7 @@ const Testimonial = () => {
             name: "Miguel Sarabia",
             position: "Ing. Ambiental",
             des: "❝Además de su gran amistad tengo el honor de aprender en primera fila de su pasión a las nuevas tecnologías y al desarrollo web.❞",
-            img: "https://scontent.fmex10-1.fna.fbcdn.net/v/t39.30808-6/335042986_982927066423672_5009602678691141360_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFjKOTBk5CHINVwmsl5Sy9uXMgw9-thNR5cyDD362E1HorqXFVoG38EZnbC4HGTbzn6ZjcZWU4XvK5RxBiNnaBp&_nc_ohc=7fKKOXas7sQAX8HvglB&_nc_ht=scontent.fmex10-1.fna&oh=00_AfCFHy1DA0r9uFbsVQTY8xNicz2vQwA9nwova9_pSHzrjA&oe=64209462"
+            img: "https://ca.slack-edge.com/T04BJ71TNF2-U04SZLWKGAW-a8a5fd6fb7b3-512"
         },
         {
             name: "Adrian Paillacho",
@@ -53,7 +53,7 @@ const Testimonial = () => {
             name: "Giovanni Almazo",
             position: "Data Analyst",
             des: "❝Trabajé en el banco con David y lo más admirable de él era su servicio, amabilidad y actitud ante los retos laborales y proyectos en conjunto.❞",
-            img: "https://scontent.fmex10-4.fna.fbcdn.net/v/t39.30808-6/321216729_552410839765236_8425411001979050137_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEs4-A-XKb1BEq-DswSyhKhpKpBvZgTyb-kqkG9mBPJvzefd8zFZL2iU7_Bs3tu1HMQm3gPbBzhKJfvsvX4lquf&_nc_ohc=IgXnD3NlzWEAX_Yx_TD&_nc_ht=scontent.fmex10-4.fna&oh=00_AfBzGSXB1FxrVmXkfCBc8-LxQYlKG6tvnzJzb3qviq2rrw&oe=6421AC5A"
+            img: "https://ca.slack-edge.com/T04BJ71TNF2-U04ARHGESAZ-c5dc6693d3bf-512"
         },
     ]
 
@@ -110,7 +110,7 @@ const Testimonial = () => {
                         <img src={item.img} alt="people" className="center-image"/>
                         <p className="item-name">{item.name}</p>
                         <p className="item-position">{item.position}</p>
-                        <p className="item-des">{item.des}</p>
+                        <p className="item-dest">{item.des}</p>
                     </div>
                   
                 </div>

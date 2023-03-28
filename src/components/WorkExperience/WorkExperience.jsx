@@ -91,10 +91,10 @@ const WorkExperience = () => {
               <h3 className="vertical-timeline-element-title">
                 {item.companyname}
               </h3>
-              <h5 className="vertical-timeline-element-subtitle" style={{color: "#b6b6b6"}}>
+              <h5 className="vertical-timeline-element-subtitle" style={{color: "#ffffff"}}>
                 {item.position}
               </h5>
-              <p>{item.des}</p>
+              <p className="item-des">{item.des}</p>
               <strong className="place">{item.place}</strong>
               <div className="row">
                 {item.logros.map((logro, index) => (

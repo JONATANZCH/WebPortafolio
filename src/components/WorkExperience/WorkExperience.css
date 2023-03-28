@@ -21,4 +21,9 @@
 }
 .logros-list p {
     font-size: .8rem;
+    color: #7c7c7c;
+}
+
+.item-des {
+    color: #636363;
 }

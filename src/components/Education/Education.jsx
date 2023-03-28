@@ -36,7 +36,7 @@ const Education = () => {
         },
     ]
 
-    const colors = ["#fdd0d0","#0c2638", "#c0b6ca", "#7f58a3"];
+    const colors = ["#fdd0d0","#0c2638", "#c0b6ca", "#af88d3"];
 
   return (
     <div className="container" id="education">
@@ -64,7 +64,7 @@ const Education = () => {
               <h5 className="vertical-timeline-element-subtitle" style={{color: "#ffffff"}}>
                 {item.degre}
               </h5>
-              <p>{item.description}</p>
+              <p className="item-descrption">{item.description}</p>
               <strong className="place">{item.place}</strong>
               
             </VerticalTimelineElement>
