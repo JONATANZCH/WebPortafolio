@@ -10,43 +10,39 @@ import { DiReact } from "react-icons/di";
 const WorkExperience = () => {
   const data = [
     {
-      companyname: "Banco Azteca",
-      position: "Analista de Datos y captación",
-      year: "Diciembre 2019 – Diciembre 2020",
-      place: "México, Texcoco, Méx",
-      des: "Analizar base de datos con más de 5 mil clientes para clasificarlos en base a sus capacidades y diseño de estrategia de servicio y retención ofreciéndoles instrumentos financieros;",
+      companyname: "Promass",
+      position: "Desarrollador backend",
+      year: "Febrero  2023 – Actualidad",
+      place: "México, Remoto, Méx",
+      des: "Desarrollar en diferentes lenguajes de programación tanto Front-end y Back-end aplicaciones web con diferentes arquitecturas",
       logros: [
         {
           logro:
-            "① Logré incrementar hasta en un 20% las ventas en seguros y retener hasta un 50% al cliente en base a la estrategia y planeación por medio del análisis y programación de datos",
+            "① Nodejs, sails, sequelize, Nest, django, typeORM, TypeScript, JavaScript, Reactjs, Php, Laravel, Python, Java, Vue, SCSS, sass, HTML, Ajax, Codelgniter, Docker, AWS, npm, hooks, Redux",
         },
         {
           logro:
-            "② Desarrollé hasta en 30% la cultura del ahorro en los clientes de inversión a través del rendimiento financiero obtenido por el banco y la estrategia planteada para el crecimiento y rendimiento del banco.",
+            "② Manejo y mantenimiento y requerimientos rn bases de datos SQLServer, PostgreSQL, Redis, MongoDB, Mysql, Oracle",
         },
       ],
     },
     {
-      companyname: "Banco Azteca",
-      position: "Asesor financiero",
-      year: "Diciembre 2018 – Diciembre 2019",
+      companyname: "Programador full stack",
+      position: "Programador Full Stack",
+      year: "Diciembre 2019 – Diciembre 2022",
       place: "México, Texcoco, Méx.",
-      des: "Analicé base de datos con más de 10 mil clientes para guiar a las personas en que puedan conseguir los objetivos que se hayan planteado, buscando siempre la mejora de la salud financiera de los clientes;",
+      des: "Analicé base de datos con más de 10 mil clientes para guiar a las personas en que puedan conseguir los objetivos que se hayan planteado, buscando siempre la mejora de data de los clientes;",
       logros: [
         {
           logro:
-            "① Logré incrementar hasta en un 90% la captación y afiliación de clientes potenciales;",
-        },
-        {
-          logro:
-            "② Logré manejar 60 clientes nuevos por semana y venderles crédito a través de una solicitud honesta y financieramente sana para que el cliente pudiera alcanzar sus metas a través esta herramienta financiera.",
-        },
+            "① ReactJS, Nodejs, Django, JS, Tailwind, ",
+        }
       ],
     },
     {
       companyname: "Banco Azteca",
-      position: "Analista de Nómina",
-      year: "Diciembre 2017 – Diciembre 2018",
+      position: "Analista programador trainee",
+      year: "Diciembre 2017 – Diciembre 2020",
       place: "México, Texcoco, Méx.",
       des: "Analizar los datos y documentos de las nominas en busca de deficiencias y errores.",
       logros: [

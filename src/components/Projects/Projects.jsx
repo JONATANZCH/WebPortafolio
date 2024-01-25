@@ -199,6 +199,17 @@ const Projects = () => {
       des: "Bonito juego hecho con JavaScript vailla",
       link: "https://nimble-pothos-bd8422.netlify.app/",
     },
+    {
+      name: "RickAndMorty",
+      imagen: imgProject.Rick,
+      des: "API RickAndMorty",
+      link: "https://superlative-yeot-9c5196.netlify.app/",
+      techused: [
+        {
+          techname: "ReactJs Vite",
+        },
+      ],
+    },
   ];
 
   return (
