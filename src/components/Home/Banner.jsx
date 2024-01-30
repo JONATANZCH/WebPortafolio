@@ -60,19 +60,19 @@ const Banner = () => {
               <span className="countdown-p">Works:</span>
               <div className="flex">
                 <div className="countdown-item flex">
-                  <span className="countdown-number">40</span>
+                  <span className="countdown-number">+40</span>
                   <span className="countdown-letter">Proyects</span>
                 </div>
                 <div className="countdown-item flex">
-                  <span className="countdown-number">800</span>
+                  <span className="countdown-number">+10000</span>
                   <span className="countdown-letter">Hrs. of Studing</span>
                 </div>
                 <div className="countdown-item flex">
-                  <span className="countdown-number">25</span>
+                  <span className="countdown-number">+25</span>
                   <span className="countdown-letter">Contributions</span>
                 </div>
                 <div className="countdown-item flex">
-                  <span className="countdown-number">2</span>
+                  <span className="countdown-number">5</span>
                   <span className="countdown-letter">Years of Experience</span>
                 </div>
               </div>

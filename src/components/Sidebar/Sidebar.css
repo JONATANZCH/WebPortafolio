@@ -41,9 +41,11 @@
     margin-top: 35px;
 }
 
-.container-fluid {
-    padding: 0;
-    overflow: hidden;
+@media only screen and (min-width: 400px) {
+    .container-fluid {
+        padding: 0;
+        overflow: hidden;
+    }
 }
 
 @media(max-width: 1000px) {

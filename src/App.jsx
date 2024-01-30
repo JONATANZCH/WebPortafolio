@@ -31,7 +31,7 @@ function App() {
         <Education/>
         <Testimonial/>
         <Contact/>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
       <ScrollToTop smooth={true}
         top="20"
