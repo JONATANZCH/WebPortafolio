@@ -5,6 +5,12 @@
     box-shadow: 10px 10px 21px -4px rgba(0,0,0,0.75);
 }
 
+@media (min-width: 480px) {
+    .about {
+        max-width: 60%;
+    }
+}
+
 #dark .about {
     background: rgba( 1, 21, 81, 0.3 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.1 );
@@ -14,14 +20,19 @@
     border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
+.about-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
 
 .about-image img {
     display: grid;
     place-items: center;
-    height: 200px;
-    width: 200px;
-    border: 3px solid black;
-    margin: 0 auto 50px auto;
+    height: 250px;
+    width: 250px;
     border-radius: 5%;
 }
 .about-line {
@@ -37,15 +48,18 @@
 }
 
 .about-title {
-    text-align: center;
-    padding: 0 1px;
+    text-align: left;
+    padding: 0 15px;
     color: white;
 }
 .about-details {
-    text-align: center;
-    padding: 2rem 1rem;
+    text-align: left;
     color: white;
     font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
    
 .tools {

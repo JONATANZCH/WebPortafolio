@@ -1,38 +1,14 @@
 .home {
-    height: 100vh;
     /* background-color: rgba(0, 51, 0, 0.288); */
     color: rgb(255, 255, 255);
     /* #030303da */
     /* border-bottom: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
-
-@media(min-width: 768px) {
-    .home {
-        height: 100vh;
-    }
-}
-@media(min-width: 912px) {
-    .home {
-        height: 75vh;
-    }
-}
-@media(min-width: 1024px) {
-    .home {
-        height: 50vh;
-    }
-}
-
-@media(min-width: 1200px) {
-    .home {
-        height: 85vh;
-    }
-}
-@media(min-width: 1400px) {
-    .home {
-        height: 65vh;
-    }
-}
-
 
 .toggleWrapper {
     position: fixed;

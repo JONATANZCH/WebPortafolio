@@ -107,10 +107,10 @@ const TechStack = () => {
         "Herramienta que he utilizado en para estilar páginas web de una manera rápida y única.",
     },
     {
-      name: "Excel",
-      image: stackImage.excel,
+      name: "Nest",
+      image: stackImage.nest,
       description:
-        "Herramienta que he utilizado en gestión de bases de datos y más tareas.",
+        "Framework favorito de backend en el cual me especializo.",
     },
     {
       name: "Replit",

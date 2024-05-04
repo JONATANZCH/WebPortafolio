@@ -18,22 +18,13 @@ const About = () => {
           </div>
         </div>
 
-        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12 p-4">
+          {/* <h2 className="about-title">Hola soy David J. Zapeta Ch.</h2> */}
           
-            <div className="about-image">
-              <img src={image} alt="me image" />
-            </div>
-          
-        </div>
-        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-          
-            <h2 className="about-title">Hola soy David J. Zapeta Ch.</h2>
-          
-          <hr className="about-line" />
+          {/* <hr className="about-line" /> */}
           
             <p className="about-details">
-              Soy desarrollador web, me apasiona la tecnología y el análisis
-              empresarial, ademas que la música ya que toco guitarra y piano.
+            Soy especialista en desarrollo web, con experiencia en la industria financiera, me apasiona la tecnología e Inteligencia Artificial.
               Tengo 28 años y soy del Estado de México, me encantaría ser parte
               de tu equipo, si tienes alguna duda o quieres saber más de mi,
               puedes contactarme a través de mis redes sociales o por un mensaje
@@ -41,6 +32,13 @@ const About = () => {
             </p>
           
         </div>
+        <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+          
+          <div className="about-image">
+            <img src={image} alt="me image" />
+          </div>
+        </div>
+        
       </div>
     </div>
   );

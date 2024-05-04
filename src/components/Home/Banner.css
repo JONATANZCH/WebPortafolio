@@ -7,12 +7,6 @@
     }
 }
 
-@media only screen and (min-width: 767px) {
-    .content {
-        padding-top: 50px;
-    }
-}
-
 .title {
     font-size: 1.5rem;
     font-weight: 700;
@@ -49,6 +43,12 @@
     grid-gap: .1rem;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
+
+.countdown {
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
 .countdown-p {
     display: grid;
     place-items: center;
@@ -257,13 +257,17 @@
 .graphic {
     position: relative;
     display: grid;
-    padding-top: 3rem;
-    grid-template-columns: 1fr 90%;
+    grid-template-columns: 1fr 70%;
+    align-items: center;
 }
 
 .graphic-robot {
     width: auto;
     grid-column-start: 2;
+    mask-image: linear-gradient(
+        black 65%,
+        transparent
+    );
 }
 
 .absolute {

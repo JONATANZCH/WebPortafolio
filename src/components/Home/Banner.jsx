@@ -25,7 +25,7 @@ const Banner = () => {
           <div className="content">
             {/* Titulo */}
               <h1 className="title s-center"><span className="title-span">Soy </span ><GlitchText theme='purple' text="Jonatan Chávez"/></h1>
-              <h2 className="s-center title">
+              <h2 className="s-center title pt-0 mt-0">
                 <Typewriter
                 options={{
                   strings: [
@@ -51,12 +51,12 @@ const Banner = () => {
                 <a className="form-icon-l form-icon" href={urlLink} target="_blank" rel="noopener noreferrer"><AiOutlineLinkedin size={20}/></a>
                 <a className="form-icon-t form-icon" href={urlTwit} target="_blank" rel="noopener noreferrer"><AiOutlineTwitter size={20}/></a>
                 <a className="form-icon-w form-icon" href={urlWats} target="_blank" rel="noopener noreferrer"><AiOutlineWhatsApp size={20}/></a>
-                <a className="form-icon-f form-icon" href={urlFace} target="_blank" rel="noopener noreferrer"><BsFacebook size={19}/></a>
+                {/* <a className="form-icon-f form-icon" href={urlFace} target="_blank" rel="noopener noreferrer"><BsFacebook size={19}/></a> */}
               </form>
               <a href={MyCv} download="Jonatan_cv.pdf"><button className="form-hint button s-center">Download CV</button></a>
             </div>
           {/* Countdown */}
-            <div className="countdown flex">
+            <div className="countdown">
               <span className="countdown-p">Works:</span>
               <div className="flex">
                 <div className="countdown-item flex">

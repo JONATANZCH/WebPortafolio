@@ -18,11 +18,11 @@ const WorkExperience = () => {
       logros: [
         {
           logro:
-            "① Nodejs, sails, sequelize, Nest, django, typeORM, TypeScript, JavaScript, Reactjs, Php, Laravel, Python, Java, Vue, SCSS, sass, HTML, Ajax, Codelgniter, Docker, AWS, npm, hooks, Redux",
+            "① Nodejs, Nest, sails, sequelize, Nest, Microservicios, TypeScript, JavaScript, Reactjs, Php, Laravel, Python, Java, Vue, SCSS, sass, HTML, Ajax, Codelgniter, Docker, AWS, npm, hooks, Redux",
         },
         {
           logro:
-            "② Manejo y mantenimiento y requerimientos rn bases de datos SQLServer, PostgreSQL, Redis, MongoDB, Mysql, Oracle",
+            "② Manejo y mantenimiento y requerimientos en bases de datos SQLServer, PostgreSQL, Redis, MongoDB, Mysql, Oracle",
         },
       ],
     },
@@ -35,7 +35,7 @@ const WorkExperience = () => {
       logros: [
         {
           logro:
-            "① ReactJS, Nodejs, Django, JS, Tailwind, ",
+            "① ReactJS, Nodejs, Python, JS, Tailwind, ",
         }
       ],
     },

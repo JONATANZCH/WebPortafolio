@@ -14,7 +14,7 @@ import css from "../image/css.png"
 import html from "../image/html.png"
 import postgres from "../image/postgresql.png"
 import tailwind from "../image/tailwindcss.png"
-import excel from "../image/excel.png"
+import nest from "../image/nest.png"
 import replit from "../image/replit.png"
 
 export default {
@@ -34,6 +34,6 @@ export default {
     html,
     postgres,
     tailwind,
-    excel,
+    nest,
     replit
 }

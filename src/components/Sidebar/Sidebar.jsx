@@ -6,7 +6,7 @@ import SidebarList from "./SidebarList";
 
 
 const Sidebar = ({changeTheme}) => {
-  const [expandSidebar, setExpandSidebar] = useState(true);
+  const [expandSidebar, setExpandSidebar] = useState(false);
 
   const handleExpandClick = () => {
     setExpandSidebar(!expandSidebar);

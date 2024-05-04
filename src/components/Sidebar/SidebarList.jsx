@@ -1,6 +1,5 @@
 import React from "react";
 import "./SidebarList.css";
-import profile from "../image/me.jpg";
 import {
   FcVoicePresentation,
   FcHome,
@@ -18,9 +17,6 @@ const SidebarList = ({ expandSidebar }) => {
     <React.Fragment>
       {expandSidebar ? (
         <div className="navbar__items">
-          <div className="sidebar__profile">
-            <img src={profile} alt="img" />
-          </div>
           <ul>
             <li className="nav__item">
               <Link to="home" 
