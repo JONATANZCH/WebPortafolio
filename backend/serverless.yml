@@ -1,0 +1,69 @@
+service: jz-portfolio-api
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: ${opt:stage, 'prod'}
+  memorySize: 256
+  timeout: 29
+
+  environment:
+    NODE_ENV: production
+    DATABASE_URL: ${env:DATABASE_URL, ssm:/jz-portfolio/DATABASE_URL}
+    SENDGRID_API_KEY: ${env:SENDGRID_API_KEY, ssm:/jz-portfolio/SENDGRID_API_KEY}
+    CONTACT_TO_EMAIL: ${env:CONTACT_TO_EMAIL, 'jonatanzch@gmail.com'}
+    CONTACT_FROM_EMAIL: ${env:CONTACT_FROM_EMAIL, 'no-reply@jonatanzarate.dev'}
+
+  # CORS: allow requests from the Netlify-hosted frontend
+  httpApi:
+    cors:
+      allowedOrigins:
+        - 'https://jonatanzarate.dev'
+        - 'https://www.jonatanzarate.dev'
+        - 'http://localhost:3000'
+      allowedMethods:
+        - GET
+        - POST
+        - OPTIONS
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+
+functions:
+  api:
+    handler: dist/lambda.handler
+    description: JZ Portfolio NestJS API — contact form and health check
+    events:
+      # Root path
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      # All sub-paths (proxy+ catches /api/contact, /health, etc.)
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+    noPrependStageInUrl: true
+
+package:
+  individually: false
+  patterns:
+    - 'dist/**'
+    - 'node_modules/**'
+    - '!node_modules/.cache/**'
+    - '!src/**'
+    - '!*.ts'
+    - '!*.md'
+    - '!.env*'
+    - '!test/**'
