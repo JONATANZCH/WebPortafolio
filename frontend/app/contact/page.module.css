@@ -1,0 +1,167 @@
+/* ================================================================
+   Contact page — CSS Module
+   ================================================================ */
+
+.main {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 5rem 1.5rem 6rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---- Page header ---- */
+.header {
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-bricolage);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 1rem;
+  background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.subheading {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.125rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ---- Two-column grid ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ---- Form column ---- */
+.formColumn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 2.25rem;
+}
+
+/* ---- Info column ---- */
+.infoColumn {
+  position: sticky;
+  top: 2rem;
+}
+
+.infoCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoTitle {
+  font-family: var(--font-bricolage);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.infoLabel {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.infoLink {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9375rem;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+
+.infoLink:hover {
+  color: var(--secondary);
+}
+
+/* Availability badge */
+.availability {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.875rem;
+  color: var(--secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.availabilityDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--secondary);
+  flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ================================================================
+   Responsive — tablet & mobile
+   ================================================================ */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .infoColumn {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 4rem 1rem 5rem;
+  }
+
+  .formColumn,
+  .infoCard {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .header {
+    text-align: left;
+    margin-bottom: 2.5rem;
+  }
+}
