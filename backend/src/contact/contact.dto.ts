@@ -20,7 +20,7 @@ export class CreateContactDto {
 
   @IsString()
   @IsNotEmpty({ message: 'El asunto es requerido.' })
-  @MinLength(4, { message: 'El asunto debe tener al menos 4 caracteres.' })
+  @MinLength(3, { message: 'El asunto debe tener al menos 3 caracteres.' })
   @MaxLength(200, { message: 'El asunto no puede superar los 200 caracteres.' })
   subject: string;
 
