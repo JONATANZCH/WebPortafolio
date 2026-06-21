@@ -1,0 +1,95 @@
+/* ============================================================
+   Blog listing page — /blog
+   ============================================================ */
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+
+.page {
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* ── Centered container ───────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ── Page header ──────────────────────────────────────────── */
+
+.header {
+  margin-bottom: 3.5rem;
+}
+
+.heading {
+  font-family: var(--font-bricolage);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text);
+  background: linear-gradient(135deg, var(--text) 40%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.subheading {
+  font-family: var(--font-space-grotesk);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+/* ── Responsive grid ──────────────────────────────────────── */
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+
+  /* 1 column on mobile */
+  grid-template-columns: 1fr;
+}
+
+/* 2 columns on tablet */
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 3 columns on desktop */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+  border: 1px dashed var(--border);
+  border-radius: 1rem;
+  background-color: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+.emptyText {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.0625rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
