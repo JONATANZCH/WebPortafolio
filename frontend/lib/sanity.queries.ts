@@ -78,6 +78,9 @@ export interface About {
   bio?: unknown[];
   image?: SanityImage;
   skills?: string[];
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
 }
 
 // ============================================================
@@ -154,7 +157,10 @@ export const ABOUT_QUERY = `*[_type == "about"][0] {
   title,
   bio,
   image,
-  skills
+  skills,
+  github,
+  linkedin,
+  twitter
 }`;
 
 // ============================================================
