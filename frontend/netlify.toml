@@ -1,0 +1,35 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_SANITY_PROJECT_ID = "ohw2y3ub"
+  NEXT_PUBLIC_SANITY_DATASET = "production"
+  # Override NEXT_PUBLIC_API_URL in Netlify dashboard to your Lambda endpoint
+  NEXT_PUBLIC_API_URL = "https://api.jonatanzarate.dev"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+  targetPort = 3000
+
+# Next.js plugin — handles SSR, ISR, and image optimisation on Netlify
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# API proxy: forward /api/* requests to the Lambda backend
+# Set LAMBDA_API_BASE in the Netlify dashboard
+[[redirects]]
+  from   = "/api/*"
+  to     = "https://api.jonatanzarate.dev/api/:splat"
+  status = 200
+  force  = true
+
+  [redirects.headers]
+    X-Forwarded-Host = "jonatanzarate.dev"
+
+# SPA fallback — let Next.js handle all unmatched routes
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
