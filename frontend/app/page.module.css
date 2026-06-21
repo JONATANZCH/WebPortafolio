@@ -1,0 +1,68 @@
+/* ============================================================
+   Home Page — Blog Preview Section
+   ============================================================ */
+
+.blogPreview {
+  padding: 5rem 0;
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.blogInner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.blogHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.blogHeading {
+  font-family: var(--font-bricolage);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.blogSeeAll {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+
+.blogSeeAll:hover {
+  opacity: 0.75;
+  color: var(--primary);
+}
+
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .blogGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+}
