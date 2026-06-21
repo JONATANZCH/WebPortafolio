@@ -1,0 +1,290 @@
+/* ============================================================
+   ProjectCard — bento card variants: featured, regular, more
+   ============================================================ */
+
+/* ── Base card ────────────────────────────────────────────── */
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  height: 100%;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow: 0 8px 40px color-mix(in srgb, var(--primary) 10%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ── Featured card ────────────────────────────────────────── */
+
+.cardFeatured {
+  /* spans 2 rows — handled by parent grid */
+}
+
+.cardFeatured:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  box-shadow: 0 12px 48px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* ── Regular card ─────────────────────────────────────────── */
+
+.cardRegular {
+  /* standard single cell */
+}
+
+/* ── "More" card ──────────────────────────────────────────── */
+
+.cardMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text);
+  border-style: dashed;
+  min-height: 140px;
+  background: transparent;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
+.cardMore:hover {
+  border-color: var(--secondary);
+  background-color: color-mix(in srgb, var(--secondary) 6%, transparent);
+  color: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.moreInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  pointer-events: none;
+}
+
+.moreCount {
+  font-family: var(--font-bricolage);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.moreLabel {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cardMore:hover .moreLabel {
+  color: var(--secondary);
+}
+
+.moreArrow {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cardMore:hover .moreArrow {
+  transform: translateX(4px);
+  color: var(--secondary);
+}
+
+/* ── Image: featured ──────────────────────────────────────── */
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+/* Gradient overlay so text remains readable on featured */
+.imageWrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    color-mix(in srgb, var(--surface) 90%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Placeholder (no image) ───────────────────────────────── */
+
+.imagePlaceholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--primary) 20%, transparent) 0%,
+    color-mix(in srgb, var(--secondary) 15%, transparent) 100%
+  );
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Regular card thumbnail ───────────────────────────────── */
+
+.regularImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  flex-shrink: 0;
+  order: -1;
+}
+
+.regularImageWrapper .imageWrapper {
+  aspect-ratio: unset;
+  height: 100%;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  flex: 1;
+}
+
+.cardFeatured .body {
+  padding: 1.5rem;
+  gap: 1rem;
+}
+
+/* ── Title ────────────────────────────────────────────────── */
+
+.title {
+  font-family: var(--font-bricolage);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.cardFeatured .title {
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+}
+
+/* ── Description ──────────────────────────────────────────── */
+
+.description {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--muted);
+  flex: 1;
+}
+
+.descriptionClamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Tech chips ───────────────────────────────────────────── */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background-color: color-mix(in srgb, var(--bg) 60%, transparent);
+  font-family: var(--font-space-grotesk);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.card:hover .chip {
+  border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+  color: color-mix(in srgb, var(--primary) 80%, var(--muted));
+}
+
+/* ── Links ────────────────────────────────────────────────── */
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.linkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.4375rem 0.875rem;
+  border-radius: 9999px;
+  font-family: var(--font-space-grotesk);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #0a0a0f;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.linkBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 40%, transparent);
+  opacity: 0.92;
+  color: #0a0a0f;
+}
+
+.linkBtnGhost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.linkBtnGhost:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--secondary) 50%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--secondary) 12%, transparent);
+}
