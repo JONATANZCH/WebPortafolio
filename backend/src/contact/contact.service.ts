@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  OnModuleInit,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import axios from 'axios';
@@ -6,13 +11,26 @@ import { ContactMessage } from './contact.entity';
 import { ContactResponseDto, CreateContactDto } from './contact.dto';
 
 @Injectable()
-export class ContactService {
+export class ContactService implements OnModuleInit {
   private readonly logger = new Logger(ContactService.name);
 
   constructor(
     @InjectRepository(ContactMessage)
     private readonly contactRepository: Repository<ContactMessage>,
   ) {}
+
+  onModuleInit() {
+    const missing: string[] = [];
+    if (!process.env.SENDGRID_API_KEY) missing.push('SENDGRID_API_KEY');
+    if (!process.env.CONTACT_EMAIL_TO) missing.push('CONTACT_EMAIL_TO');
+    if (!process.env.CONTACT_FROM_EMAIL) missing.push('CONTACT_FROM_EMAIL');
+
+    if (missing.length > 0) {
+      const msg = `Missing required environment variables: ${missing.join(', ')}`;
+      this.logger.error(msg);
+      throw new Error(msg);
+    }
+  }
 
   /**
    * Persists the message to the database and dispatches a notification email
@@ -61,15 +79,9 @@ export class ContactService {
    * Sends a notification email via SendGrid's Mail Send v3 endpoint.
    */
   private async sendEmail(message: ContactMessage): Promise<void> {
-    const apiKey = process.env.SENDGRID_API_KEY;
-    if (!apiKey) {
-      this.logger.warn('SENDGRID_API_KEY is not set — skipping email send.');
-      return;
-    }
-
-    const toEmail = process.env.CONTACT_TO_EMAIL ?? 'jonatanzch@gmail.com';
-    const fromEmail =
-      process.env.CONTACT_FROM_EMAIL ?? 'no-reply@jonatanzarate.dev';
+    const apiKey = process.env.SENDGRID_API_KEY!;
+    const toEmail = process.env.CONTACT_EMAIL_TO!;
+    const fromEmail = process.env.CONTACT_FROM_EMAIL!;
 
     const html = this.buildEmailHtml(message);
 
