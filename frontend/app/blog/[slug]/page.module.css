@@ -1,0 +1,334 @@
+/* ============================================================
+   Blog post detail page — /blog/[slug]
+   ============================================================ */
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+
+.page {
+  min-height: 100vh;
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+}
+
+/* ── Centered container ───────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: 840px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ── Back navigation ──────────────────────────────────────── */
+
+.backNav {
+  margin-bottom: 2.5rem;
+}
+
+.backLink {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--primary);
+}
+
+/* ── Hero section ─────────────────────────────────────────── */
+
+.hero {
+  margin-bottom: 2.5rem;
+}
+
+/* ── Category pills ───────────────────────────────────────── */
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.categoryPill {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+/* ── Article title ────────────────────────────────────────── */
+
+.title {
+  font-family: var(--font-bricolage);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text);
+  margin: 0 0 1.25rem;
+}
+
+/* ── Meta (author + date) ─────────────────────────────────── */
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.author {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.metaDivider {
+  color: var(--border);
+}
+
+.date {
+  /* inherits muted color from .meta */
+}
+
+/* ── Cover image ──────────────────────────────────────────── */
+
+.coverImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  background-color: var(--surface);
+}
+
+.coverImage {
+  object-fit: cover;
+}
+
+/* ── Prose / PortableText body ────────────────────────────── */
+
+.prose {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 700px;
+  margin-inline: auto;
+}
+
+/* Headings */
+.prose :global(h2) {
+  font-family: var(--font-bricolage);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text);
+  margin: 2.5rem 0 1rem;
+}
+
+.prose :global(h3) {
+  font-family: var(--font-bricolage);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--text);
+  margin: 2rem 0 0.75rem;
+}
+
+.prose :global(h4) {
+  font-family: var(--font-bricolage);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* Paragraphs */
+.prose :global(p) {
+  color: color-mix(in srgb, var(--text) 80%, var(--muted));
+  margin: 0 0 1.25rem;
+}
+
+/* Links */
+.prose :global(a) {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--primary) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.prose :global(a:hover) {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+/* Lists */
+.prose :global(ul),
+.prose :global(ol) {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose :global(li) {
+  margin-bottom: 0.4rem;
+  color: color-mix(in srgb, var(--text) 80%, var(--muted));
+}
+
+/* Blockquote */
+.prose :global(blockquote) {
+  border-left: 3px solid var(--primary);
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.prose :global(blockquote p) {
+  margin: 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Inline code */
+.prose :global(code) {
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.875em;
+  color: var(--secondary);
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border: 1px solid var(--border);
+  padding: 0.1em 0.4em;
+  border-radius: 0.3rem;
+}
+
+/* Code blocks */
+.prose :global(pre) {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose :global(pre code) {
+  font-size: 0.875rem;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* Horizontal rule */
+.prose :global(hr) {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Strong / em */
+.prose :global(strong) {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.prose :global(em) {
+  color: color-mix(in srgb, var(--text) 85%, var(--muted));
+}
+
+/* ── Post prev/next navigation ────────────────────────────── */
+
+.postNav {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.postNavInner {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.postNavPrev {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.postNavNext {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.postNavLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-decoration: none;
+  max-width: 24ch;
+  transition: opacity 0.2s ease;
+}
+
+.postNavNext .postNavLink {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.postNavLink:hover,
+.postNavLink:focus-visible {
+  opacity: 0.75;
+}
+
+.postNavLabel {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.postNavTitle {
+  font-family: var(--font-space-grotesk);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* ── Responsive adjustments ───────────────────────────────── */
+
+@media (max-width: 480px) {
+  .postNavInner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .postNavNext {
+    justify-content: flex-start;
+  }
+
+  .postNavNext .postNavLink {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
