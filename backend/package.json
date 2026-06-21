@@ -17,9 +17,11 @@
   "type": "module",
   "dependencies": {
     "@nestjs/common": "^11.1.27",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.27",
     "@nestjs/platform-express": "^11.1.27",
     "@nestjs/typeorm": "^11.0.2",
+    "aws-serverless-express": "^3.4.0",
     "axios": "^1.18.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
