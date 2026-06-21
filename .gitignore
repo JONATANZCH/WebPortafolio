@@ -9,6 +9,8 @@ coverage/
 # Environment
 .env.local
 .env.*.local
+!.env.local.example
+!.env.*.local.example
 
 # Build outputs
 .next/

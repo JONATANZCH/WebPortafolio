@@ -1,6 +1,6 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import type { SanityImageSource } from '@sanity/image-url';
 
 // ============================================================
 // Sanity Client
@@ -37,7 +37,7 @@ export async function sanityFetch<T = unknown>({
   revalidate = 60,
   tags = [],
 }: SanityFetchOptions): Promise<T> {
-  const fetchOptions: RequestInit = {};
+  const fetchOptions: Record<string, any> = {};
 
   if (revalidate === false) {
     fetchOptions.cache = 'no-store';
