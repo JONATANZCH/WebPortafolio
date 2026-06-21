@@ -6,26 +6,28 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Job Title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'company',
       title: 'Company',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'location',
-      title: 'Location',
+      name: 'role',
+      title: 'Role / Job Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 4,
     }),
     defineField({
       name: 'startDate',
       title: 'Start Date',
       type: 'date',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'endDate',
@@ -33,25 +35,35 @@ export default defineType({
       type: 'date',
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+      name: 'isCurrent',
+      title: 'Current Position',
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
-      name: 'responsibilities',
-      title: 'Responsibilities',
+      name: 'skills',
+      title: 'Skills Used',
       type: 'array',
       of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      initialValue: 0,
     }),
   ],
   preview: {
     select: {
-      title: 'title',
-      company: 'company',
-    },
-    prepare(selection) {
-      const {company} = selection
-      return {...selection, subtitle: company && `at ${company}`}
+      title: 'role',
+      subtitle: 'company',
     },
   },
+  orderings: [
+    {
+      title: 'Order',
+      name: 'orderAsc',
+      by: [{field: 'order', direction: 'asc'}],
+    },
+  ],
 })

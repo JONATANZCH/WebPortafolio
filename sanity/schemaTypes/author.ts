@@ -9,14 +9,12 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-      },
+      name: 'email',
+      title: 'Email',
+      type: 'string',
     }),
     defineField({
       name: 'image',

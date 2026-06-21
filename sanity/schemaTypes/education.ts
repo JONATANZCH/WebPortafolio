@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'school',
-      title: 'School/University',
+      title: 'School / University',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -15,6 +15,7 @@ export default defineType({
       name: 'degree',
       title: 'Degree',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'field',
@@ -22,29 +23,34 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'startDate',
-      title: 'Start Date',
-      type: 'date',
-    }),
-    defineField({
-      name: 'endDate',
-      title: 'End Date',
-      type: 'date',
-    }),
-    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'graduationDate',
+      title: 'Graduation Date',
+      type: 'date',
+    }),
+    defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      initialValue: 0,
     }),
   ],
   preview: {
     select: {
       title: 'school',
-      degree: 'degree',
-    },
-    prepare(selection) {
-      const {degree} = selection
-      return {...selection, subtitle: degree}
+      subtitle: 'degree',
     },
   },
+  orderings: [
+    {
+      title: 'Order',
+      name: 'orderAsc',
+      by: [{field: 'order', direction: 'asc'}],
+    },
+  ],
 })

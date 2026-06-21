@@ -7,7 +7,7 @@ export default defineType({
   fields: [
     defineField({
       name: 'author',
-      title: 'Author',
+      title: 'Author Name',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
@@ -22,6 +22,13 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'text',
+      title: 'Testimonial Text',
+      type: 'text',
+      rows: 4,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'image',
       title: 'Author Image',
       type: 'image',
@@ -30,23 +37,30 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'content',
-      title: 'Testimonial Content',
-      type: 'text',
-      validation: (Rule) => Rule.required(),
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
     }),
     defineField({
-      name: 'rating',
-      title: 'Rating',
+      name: 'order',
+      title: 'Order',
       type: 'number',
-      validation: (Rule) => Rule.min(1).max(5),
+      initialValue: 0,
     }),
   ],
   preview: {
     select: {
       title: 'author',
-      subtitle: 'content',
+      subtitle: 'company',
       media: 'image',
     },
   },
+  orderings: [
+    {
+      title: 'Order',
+      name: 'orderAsc',
+      by: [{field: 'order', direction: 'asc'}],
+    },
+  ],
 })

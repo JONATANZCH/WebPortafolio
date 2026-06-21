@@ -19,35 +19,66 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
-      title: 'Description',
+      title: 'Short Description',
       type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'longDescription',
+      title: 'Long Description',
+      type: 'array',
+      of: [{type: 'block'}],
     }),
     defineField({
       name: 'image',
-      title: 'Image',
+      title: 'Main Image',
       type: 'image',
       options: {
         hotspot: true,
       },
     }),
     defineField({
-      name: 'technologies',
-      title: 'Technologies',
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {hotspot: true},
+        },
+      ],
+    }),
+    defineField({
+      name: 'stack',
+      title: 'Tech Stack',
       type: 'array',
       of: [{type: 'string'}],
     }),
     defineField({
-      name: 'link',
-      title: 'Project Link',
+      name: 'github',
+      title: 'GitHub URL',
       type: 'url',
     }),
     defineField({
-      name: 'githubLink',
-      title: 'GitHub Link',
+      name: 'liveUrl',
+      title: 'Live URL',
       type: 'url',
+    }),
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      initialValue: 0,
     }),
   ],
   preview: {
@@ -56,4 +87,11 @@ export default defineType({
       media: 'image',
     },
   },
+  orderings: [
+    {
+      title: 'Order',
+      name: 'orderAsc',
+      by: [{field: 'order', direction: 'asc'}],
+    },
+  ],
 })
