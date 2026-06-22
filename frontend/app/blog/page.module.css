@@ -10,6 +10,27 @@
   padding-bottom: 6rem;
 }
 
+/* ── Back nav ────────────────────────────────────────────── */
+
+.backNav {
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.backLink:hover {
+  color: var(--primary);
+}
+
 /* ── Centered container ───────────────────────────────────── */
 
 .container {

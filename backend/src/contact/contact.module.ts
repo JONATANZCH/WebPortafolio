@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { ContactMessage } from './contact.entity';
-import { ContactService } from './contact.service';
-import { ContactController } from './contact.controller';
+import { ContactMessage } from './contact.entity.js';
+import { ContactService } from './contact.service.js';
+import { ContactController } from './contact.controller.js';
 
 @Module({
   imports: [

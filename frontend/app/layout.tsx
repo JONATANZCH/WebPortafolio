@@ -1,28 +1,35 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import './globals.css';
+import PageLoader from '../components/PageLoader';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Jonatan Zarate | Desarrollador Full-Stack',
-    template: '%s | Jonatan Zarate',
+    default: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
+    template: '%s | David Jonatan Zapeta Chavez',
+  },
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   description:
-    'Desarrollador Full-Stack especializado en TypeScript, React y Node.js. Construyo productos digitales con atención al detalle — APIs escalables e interfaces que los usuarios disfrutan usar.',
+    'Cloud & DevOps Engineer con 5+ años de experiencia. Especialista en microservicios, infraestructura como código y observabilidad. Construyo sistemas resilientes y escalables en Azure/AWS.',
   keywords: [
-    'desarrollador full-stack',
-    'software engineer',
-    'TypeScript',
-    'React',
-    'Next.js',
-    'Node.js',
-    'NestJS',
-    'PostgreSQL',
-    'portfolio',
-    'México',
-    'CDMX',
+    'cloud engineer',
+    'devops',
+    'backend developer',
+    'microservicios',
+    'aws',
+    'azure',
+    'terraform',
+    'nestjs',
+    'node.js',
+    'postgresql',
+    'kubernetes',
+    'docker',
   ],
-  authors: [{ name: 'Jonatan Zarate', url: 'https://jonatanzarate.dev' }],
-  creator: 'Jonatan Zarate',
+  authors: [{ name: 'David Jonatan Zapeta Chavez', url: 'https://jonatanzarate.dev' }],
+  creator: 'David Jonatan Zapeta Chavez',
   metadataBase: new URL('https://jonatanzarate.dev'),
   alternates: {
     canonical: '/',
@@ -31,10 +38,10 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_MX',
     url: 'https://jonatanzarate.dev',
-    siteName: 'Jonatan Zarate',
-    title: 'Jonatan Zarate | Desarrollador Full-Stack',
+    siteName: 'David Jonatan Zapeta Chavez',
+    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
     description:
-      'Desarrollador Full-Stack especializado en TypeScript, React y Node.js. Proyectos, artículos y experiencia profesional.',
+      'Cloud & DevOps Engineer con 5+ años construyendo sistemas resilientes en Azure/AWS. Especialista en microservicios, infraestructura como código y observabilidad.',
     images: [
       {
         url: '/og-image.png',
@@ -46,9 +53,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jonatan Zarate | Desarrollador Full-Stack',
+    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
     description:
-      'Desarrollador Full-Stack — TypeScript, React, Node.js. Hecho desde la CDMX.',
+      'Cloud & DevOps Engineer. Microservicios, Terraform, AWS/Azure. Desde CDMX.',
     images: ['/og-image.png'],
     creator: '@jonatanzch',
   },
@@ -70,8 +77,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="es">
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      </head>
+      <body>
+        <Suspense fallback={<PageLoader />}>
+          {children}
+        </Suspense>
+      </body>
     </html>
   );
 }

@@ -156,13 +156,8 @@ export default function TestimonialsCarouselClient({ testimonials }: Props) {
 
               {/* Content */}
               <blockquote className={styles.content}>
-                {current.content}
+                {current.text}
               </blockquote>
-
-              {/* Rating */}
-              {typeof current.rating === 'number' && current.rating > 0 && (
-                <StarRating rating={current.rating} />
-              )}
 
               {/* Author row */}
               <div className={styles.authorRow}>

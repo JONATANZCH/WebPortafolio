@@ -36,20 +36,23 @@ export interface Project {
   slug?: { current: string };
   description?: string;
   image?: SanityImage;
-  technologies?: string[];
-  link?: string;
-  githubLink?: string;
+  stack?: string[];
+  github?: string;
+  liveUrl?: string;
+  featured?: boolean;
+  order?: number;
 }
 
 export interface Experience {
   _id: string;
-  title: string;
+  role: string;
   company: string;
-  location?: string;
   startDate?: string;
   endDate?: string;
   description?: string;
-  responsibilities?: string[];
+  isCurrent?: boolean;
+  skills?: string[];
+  order?: number;
 }
 
 export interface Education {
@@ -57,9 +60,9 @@ export interface Education {
   school: string;
   degree?: string;
   field?: string;
-  startDate?: string;
-  endDate?: string;
   description?: string;
+  graduationDate?: string;
+  order?: number;
 }
 
 export interface Testimonial {
@@ -68,12 +71,14 @@ export interface Testimonial {
   role?: string;
   company?: string;
   image?: SanityImage;
-  content: string;
-  rating?: number;
+  text: string;
+  featured?: boolean;
+  order?: number;
 }
 
 export interface About {
   _id: string;
+  fullName?: string;
   title?: string;
   bio?: unknown[];
   image?: SanityImage;
@@ -110,50 +115,55 @@ export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $sl
   body
 }`;
 
-export const PROJECTS_QUERY = `*[_type == "project"] | order(_createdAt desc) {
+export const PROJECTS_QUERY = `*[_type == "project"] | order(featured desc, order asc) {
   _id,
   title,
   slug,
   description,
   image,
-  technologies,
-  link,
-  githubLink
+  stack,
+  github,
+  liveUrl,
+  featured,
+  order
 }`;
 
-export const EXPERIENCE_QUERY = `*[_type == "experience"] | order(startDate desc) {
+export const EXPERIENCE_QUERY = `*[_type == "experience"] | order(order asc) {
   _id,
-  title,
+  role,
   company,
-  location,
   startDate,
   endDate,
   description,
-  responsibilities
+  isCurrent,
+  skills,
+  order
 }`;
 
-export const EDUCATION_QUERY = `*[_type == "education"] | order(startDate desc) {
+export const EDUCATION_QUERY = `*[_type == "education"] | order(order asc) {
   _id,
   school,
   degree,
   field,
-  startDate,
-  endDate,
-  description
+  description,
+  graduationDate,
+  order
 }`;
 
-export const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(_createdAt desc) {
+export const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(featured desc, order asc) {
   _id,
   author,
   role,
   company,
   image,
-  content,
-  rating
+  text,
+  featured,
+  order
 }`;
 
 export const ABOUT_QUERY = `*[_type == "about"][0] {
   _id,
+  fullName,
   title,
   bio,
   image,

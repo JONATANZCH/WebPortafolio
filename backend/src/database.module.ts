@@ -2,8 +2,13 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.local' });
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: '.env.local' });
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -13,9 +18,7 @@ dotenv.config({ path: '.env.local' });
       // Explicitly disable synchronize in production — only allow in development
       synchronize: process.env.NODE_ENV === 'development',
       logging: process.env.NODE_ENV === 'development',
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
     }),

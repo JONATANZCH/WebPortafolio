@@ -8,23 +8,23 @@ import {
 @Entity('contact_messages')
 export class ContactMessage {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({ type: 'varchar', length: 120 })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar', length: 254 })
-  email: string;
+  email!: string;
 
   @Column({ type: 'varchar', length: 200 })
-  subject: string;
+  subject!: string;
 
   @Column({ type: 'text' })
-  message: string;
+  message!: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @Column({ type: 'boolean', default: false })
-  read: boolean;
+  read!: boolean;
 }

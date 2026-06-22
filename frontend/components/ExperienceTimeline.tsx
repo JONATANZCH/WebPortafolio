@@ -20,20 +20,17 @@ function ExperienceEntry({ entry }: { entry: Experience }) {
         <div className={styles.dot} />
       </div>
       <div className={styles.card}>
-        <p className={styles.role}>{entry.title}</p>
+        <p className={styles.role}>{entry.role}</p>
         <p className={styles.organization}>{entry.company}</p>
-        {entry.location && (
-          <p className={styles.location}>{entry.location}</p>
-        )}
         <p className={styles.dates}>
           {formatDateRange(entry.startDate, entry.endDate)}
         </p>
         {entry.description && (
           <p className={styles.description}>{entry.description}</p>
         )}
-        {entry.responsibilities && entry.responsibilities.length > 0 && (
+        {entry.skills && entry.skills.length > 0 && (
           <ul className={styles.responsibilities}>
-            {entry.responsibilities.map((item, i) => (
+            {entry.skills.map((item, i) => (
               <li key={i}>{item}</li>
             ))}
           </ul>
@@ -54,9 +51,11 @@ function EducationEntry({ entry }: { entry: Education }) {
       <div className={styles.card}>
         {degreeField && <p className={styles.role}>{degreeField}</p>}
         <p className={styles.organization}>{entry.school}</p>
-        <p className={styles.dates}>
-          {formatDateRange(entry.startDate, entry.endDate)}
-        </p>
+        {entry.graduationDate && (
+          <p className={styles.dates}>
+            {formatDate(entry.graduationDate)}
+          </p>
+        )}
         {entry.description && (
           <p className={styles.description}>{entry.description}</p>
         )}

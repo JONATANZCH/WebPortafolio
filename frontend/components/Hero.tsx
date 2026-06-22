@@ -1,4 +1,5 @@
 import styles from './Hero.module.css';
+import { getAbout } from '@/lib/sanity.queries';
 
 const TECH_STACK = [
   'TypeScript',
@@ -20,7 +21,27 @@ const TECH_STACK = [
 
 const MARQUEE_ITEMS = [...TECH_STACK, ...TECH_STACK];
 
-export default function Hero() {
+export default async function Hero() {
+  const about = await getAbout();
+
+  // Parse fullName into first and last name
+  const fullNameRaw = about?.fullName || 'David Jonatan';
+  const nameParts = fullNameRaw.split(' ');
+  const firstName = nameParts[0] || 'David';
+  const lastName = nameParts.slice(1).join(' ') || 'Jonatan';
+
+  // Get bio text from the bio array (first paragraph)
+  let bioText = 'Ingeniero Backend Cloud & DevOps con 5+ años de experiencia diseñando y escalando sistemas de alta demanda.';
+  if (about?.bio && Array.isArray(about.bio) && about.bio[0]) {
+    const firstBlock = about.bio[0] as any;
+    if (firstBlock.children && firstBlock.children[0]) {
+      bioText = firstBlock.children[0].text || bioText;
+    }
+  }
+
+  // Get title (role) - e.g. "Cloud & DevOps Engineer | Backend Specialist" → "Cloud & DevOps Engineer"
+  const title = about?.title?.split(' | ')[0]?.trim() || 'Cloud & DevOps Engineer';
+
   return (
     <section className={styles.hero} aria-label="Hero section">
       {/* Mesh gradient background orbs */}
@@ -35,19 +56,17 @@ export default function Hero() {
       <div className={styles.content}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} aria-hidden="true" />
-          <span>Full-Stack Developer</span>
+          <span>{title}</span>
         </div>
 
         <h1 className={styles.heading}>
-          <span className={styles.firstName}>Jonatan</span>
+          <span className={styles.firstName}>{firstName}</span>
           {' '}
-          <span className={styles.lastName}>Zarate</span>
+          <span className={styles.lastName}>{lastName}</span>
         </h1>
 
         <p className={styles.bio}>
-          Construyo productos digitales con atención al detalle — desde APIs escalables
-          hasta interfaces que los usuarios disfrutan usar. Especializado en TypeScript,
-          React y Node.js con un fuerte enfoque en rendimiento y experiencia de usuario.
+          {bioText}
         </p>
 
         {/* Stack chips */}

@@ -1,0 +1,47 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background with rounded corners -->
+  <rect width="32" height="32" rx="7" fill="url(#gradBg)"/>
+
+  <!-- Cloud shape base (represents cloud infrastructure) -->
+  <g>
+    <!-- Top arc of cloud -->
+    <path d="M8 16 Q8 12 11 10 Q13 8 16 8 Q19 8 21 10 Q24 12 24 16"
+          stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Bottom base -->
+    <path d="M8 16 L24 16" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Left side -->
+    <path d="M8 16 Q6 16 6 18 Q6 20 8 20" stroke="white" stroke-width="1.8"
+          fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Right side -->
+    <path d="M24 16 Q26 16 26 18 Q26 20 24 20" stroke="white" stroke-width="1.8"
+          fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Bottom of cloud -->
+    <path d="M8 20 L24 20" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Interconnected nodes (represents DevOps/infrastructure) -->
+  <g opacity="0.95">
+    <!-- Left node -->
+    <circle cx="11" cy="15" r="1.2" fill="white"/>
+    <!-- Center node -->
+    <circle cx="16" cy="17" r="1.2" fill="white"/>
+    <!-- Right node -->
+    <circle cx="21" cy="15" r="1.2" fill="white"/>
+
+    <!-- Connection lines -->
+    <line x1="11" y1="15" x2="16" y2="17" stroke="white" stroke-width="0.8" opacity="0.8"/>
+    <line x1="16" y1="17" x2="21" y2="15" stroke="white" stroke-width="0.8" opacity="0.8"/>
+  </g>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradBg" x1="0" y1="0" x2="32" y2="32">
+      <stop offset="0%" style="stop-color:#c084fc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

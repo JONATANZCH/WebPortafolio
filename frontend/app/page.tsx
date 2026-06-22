@@ -11,6 +11,7 @@ import Hero from '../components/Hero';
 import ProjectsGrid from '../components/ProjectsGrid';
 import ExperienceTimeline from '../components/ExperienceTimeline';
 import TestimonialsCarousel from '../components/TestimonialsCarousel';
+import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import BlogCard from '../components/BlogCard';
 import Link from 'next/link';
@@ -74,6 +75,16 @@ export default async function Home() {
             </div>
           </section>
         )}
+        {/* Contact section */}
+        <section id="contacto" className={styles.contactSection}>
+          <div className={styles.contactInner}>
+            <h2 className={styles.contactHeading}>Contáctame</h2>
+            <p className={styles.contactSubheading}>
+              ¿Tienes un proyecto en mente? Cuéntame sobre él.
+            </p>
+            <ContactForm />
+          </div>
+        </section>
       </main>
 
       <Footer />

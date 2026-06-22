@@ -81,13 +81,13 @@ function TechChips({ technologies }: { technologies: string[] }) {
   );
 }
 
-function CardLinks({ link, githubLink }: { link?: string; githubLink?: string }) {
-  if (!link && !githubLink) return null;
+function CardLinks({ liveUrl, github }: { liveUrl?: string; github?: string }) {
+  if (!liveUrl && !github) return null;
   return (
     <div className={styles.links}>
-      {link && (
+      {liveUrl && (
         <a
-          href={link}
+          href={liveUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.linkBtn}
@@ -97,9 +97,9 @@ function CardLinks({ link, githubLink }: { link?: string; githubLink?: string })
           <span>Ver proyecto</span>
         </a>
       )}
-      {githubLink && (
+      {github && (
         <a
-          href={githubLink}
+          href={github}
           target="_blank"
           rel="noopener noreferrer"
           className={`${styles.linkBtn} ${styles.linkBtnGhost}`}
@@ -164,11 +164,11 @@ export default function ProjectCard(props: ProjectCardProps) {
           </p>
         )}
 
-        {project.technologies && project.technologies.length > 0 && (
-          <TechChips technologies={project.technologies} />
+        {project.stack && project.stack.length > 0 && (
+          <TechChips technologies={project.stack} />
         )}
 
-        <CardLinks link={project.link} githubLink={project.githubLink} />
+        <CardLinks liveUrl={project.liveUrl} github={project.github} />
       </div>
 
       {!isFeatured && project.image && (

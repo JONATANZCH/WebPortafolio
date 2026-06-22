@@ -8,7 +8,7 @@ export default async function TestimonialsCarousel() {
   return (
     <section id="testimonios" aria-label="Testimonials" className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.heading}>Lo que dicen</h2>
+        <h2 className={styles.heading}>Comentarios</h2>
         <TestimonialsCarouselClient testimonials={testimonials} />
       </div>
     </section>

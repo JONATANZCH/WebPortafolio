@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { getBlogPosts } from '../../lib/sanity.queries';
 import BlogCard from '../../components/BlogCard';
+import Navigation from '../../components/Navigation';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -12,8 +14,13 @@ export default async function BlogPage() {
   const posts = await getBlogPosts();
 
   return (
-    <main className={styles.page}>
+    <>
+      <Navigation />
+      <main className={styles.page}>
       <div className={styles.container}>
+        <nav className={styles.backNav}>
+          <Link href="/" className={styles.backLink}>← Inicio</Link>
+        </nav>
         <header className={styles.header}>
           <h1 className={styles.heading}>Artículos</h1>
           <p className={styles.subheading}>
@@ -40,5 +47,6 @@ export default async function BlogPage() {
         )}
       </div>
     </main>
+    </>
   );
 }

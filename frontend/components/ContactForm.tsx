@@ -31,7 +31,8 @@ interface ToastState {
 /* Validation helpers                                                    */
 /* ------------------------------------------------------------------ */
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// RFC 5322 simplified (good enough for most cases)
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function validateField(field: keyof FormValues, value: string): string | undefined {
   switch (field) {

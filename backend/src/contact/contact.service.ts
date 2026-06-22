@@ -7,8 +7,8 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import axios from 'axios';
-import { ContactMessage } from './contact.entity';
-import { ContactResponseDto, CreateContactDto } from './contact.dto';
+import { ContactMessage } from './contact.entity.js';
+import { ContactResponseDto, CreateContactDto } from './contact.dto.js';
 
 @Injectable()
 export class ContactService implements OnModuleInit {
@@ -36,7 +36,8 @@ export class ContactService implements OnModuleInit {
    * Persists the message to the database and dispatches a notification email
    * via the SendGrid v3 Mail Send API.
    */
-  async createContact(dto: CreateContactDto): Promise<ContactResponseDto> {
+  async createContact(dto: CreateContactDto, ip?: string): Promise<ContactResponseDto> {
+    this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, email: ${dto.email}`);
     // 1. Persist to database
     let saved: ContactMessage;
     try {
