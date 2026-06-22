@@ -3,6 +3,7 @@
   publish = ".next"
 
 [build.environment]
+  NODE_VERSION = "20"
   NEXT_PUBLIC_SANITY_PROJECT_ID = "ohw2y3ub"
   NEXT_PUBLIC_SANITY_DATASET = "production"
   # Set NEXT_PUBLIC_API_URL and NETLIFY_API_URL in the Netlify dashboard
