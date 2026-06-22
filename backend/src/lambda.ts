@@ -1,19 +1,25 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import helmet from 'helmet';
 import { AppModule } from './app.module.js';
+import serverless from 'serverless-http';
 import type { INestApplication } from '@nestjs/common';
 
-let cachedApp: INestApplication | null = null;
+let cachedHandler: ReturnType<typeof serverless> | null = null;
 
-async function bootstrapApp(): Promise<INestApplication> {
-  if (cachedApp) {
-    return cachedApp;
-  }
+async function bootstrapApp(): Promise<ReturnType<typeof serverless>> {
+  if (cachedHandler) return cachedHandler;
 
   const app = await NestFactory.create(AppModule);
 
+  app.use(helmet());
+
+  const allowedOrigins = process.env.FRONTEND_URL
+    ? [process.env.FRONTEND_URL]
+    : ['http://localhost:3000'];
+
   app.enableCors({
-    origin: ['http://localhost:3000', 'https://jonatanzarate.dev'],
+    origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
@@ -33,18 +39,12 @@ async function bootstrapApp(): Promise<INestApplication> {
 
   await app.init();
 
-  cachedApp = app;
-  return app;
+  const expressApp = app.getHttpAdapter().getInstance();
+  cachedHandler = serverless(expressApp);
+  return cachedHandler;
 }
 
 export const handler = async (event: any, context: any): Promise<any> => {
-  const app = await bootstrapApp();
-  const expressApp = app.getHttpAdapter().getInstance();
-
-  return new Promise((resolve, reject) => {
-    const { createServer, proxy } = require('aws-serverless-express');
-    const server = createServer(expressApp);
-    context.callbackWaitsForEmptyEventLoop = false;
-    proxy(server, event, context, 'PROMISE').promise.then(resolve).catch(reject);
-  });
+  const handle = await bootstrapApp();
+  return handle(event, context);
 };
