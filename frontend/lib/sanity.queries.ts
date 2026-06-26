@@ -192,13 +192,49 @@ export const ABOUT_QUERY = `*[_type == "about" && language == $language][0] {
 // Data Fetcher Helper Functions
 // ============================================================
 
-export async function getBlogPosts(language: Language = 'es'): Promise<BlogPost[]> {
-  return sanityFetch<BlogPost[]>({
-    query: BLOG_POSTS_QUERY,
+async function fetchWithFallback<T>(
+  query: string,
+  language: Language,
+  revalidate: number,
+  tag: string,
+  isArray: true,
+): Promise<T[]>;
+async function fetchWithFallback<T>(
+  query: string,
+  language: Language,
+  revalidate: number,
+  tag: string,
+  isArray: false,
+): Promise<T | null>;
+async function fetchWithFallback<T>(
+  query: string,
+  language: Language,
+  revalidate: number,
+  tag: string,
+  isArray: boolean,
+): Promise<T[] | T | null> {
+  const result = await sanityFetch<T[] | T | null>({
+    query,
     params: { language },
-    revalidate: 60,
-    tags: [`post:${language}`],
+    revalidate,
+    tags: [tag],
   });
+
+  const isEmpty = isArray ? (result as T[]).length === 0 : result === null;
+  if (isEmpty && language !== 'es') {
+    return sanityFetch<T[] | T | null>({
+      query,
+      params: { language: 'es' },
+      revalidate,
+      tags: [`${tag.split(':')[0]}:es`],
+    });
+  }
+
+  return result;
+}
+
+export async function getBlogPosts(language: Language = 'es'): Promise<BlogPost[]> {
+  return fetchWithFallback<BlogPost>(BLOG_POSTS_QUERY, language, 60, `post:${language}`, true);
 }
 
 export async function getBlogPostBySlug(slug: string, language: Language = 'es'): Promise<BlogPost | null> {
@@ -211,46 +247,21 @@ export async function getBlogPostBySlug(slug: string, language: Language = 'es')
 }
 
 export async function getProjects(language: Language = 'es'): Promise<Project[]> {
-  return sanityFetch<Project[]>({
-    query: PROJECTS_QUERY,
-    params: { language },
-    revalidate: 300,
-    tags: [`project:${language}`],
-  });
+  return fetchWithFallback<Project>(PROJECTS_QUERY, language, 300, `project:${language}`, true);
 }
 
 export async function getExperience(language: Language = 'es'): Promise<Experience[]> {
-  return sanityFetch<Experience[]>({
-    query: EXPERIENCE_QUERY,
-    params: { language },
-    revalidate: 3600,
-    tags: [`experience:${language}`],
-  });
+  return fetchWithFallback<Experience>(EXPERIENCE_QUERY, language, 3600, `experience:${language}`, true);
 }
 
 export async function getEducation(language: Language = 'es'): Promise<Education[]> {
-  return sanityFetch<Education[]>({
-    query: EDUCATION_QUERY,
-    params: { language },
-    revalidate: 3600,
-    tags: [`education:${language}`],
-  });
+  return fetchWithFallback<Education>(EDUCATION_QUERY, language, 3600, `education:${language}`, true);
 }
 
 export async function getTestimonials(language: Language = 'es'): Promise<Testimonial[]> {
-  return sanityFetch<Testimonial[]>({
-    query: TESTIMONIALS_QUERY,
-    params: { language },
-    revalidate: 300,
-    tags: [`testimonial:${language}`],
-  });
+  return fetchWithFallback<Testimonial>(TESTIMONIALS_QUERY, language, 300, `testimonial:${language}`, true);
 }
 
 export async function getAbout(language: Language = 'es'): Promise<About | null> {
-  return sanityFetch<About | null>({
-    query: ABOUT_QUERY,
-    params: { language },
-    revalidate: 3600,
-    tags: [`about:${language}`],
-  });
+  return fetchWithFallback<About>(ABOUT_QUERY, language, 3600, `about:${language}`, false);
 }
