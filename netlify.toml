@@ -1,13 +1,30 @@
 [build]
-  command = "cd frontend && npm run build"
-  publish = "frontend/.next"
-  base = ""
+  base = "frontend"
+  command = "npm install --legacy-peer-deps && npm run build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22.12.0"
   NODE_ENV = "production"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Redirect root to default locale
+[[redirects]]
+  from = "/"
+  to = "/es"
+  status = 302
+
+# Fallback for client-side navigation
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/es/:splat"
   status = 200
+  conditions = {Language = ["es"]}
+
+[[redirects]]
+  from = "/*"
+  to = "/en/:splat"
+  status = 200
+  conditions = {Language = ["en"]}
