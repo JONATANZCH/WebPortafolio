@@ -1,10 +1,12 @@
 import {defineField, defineType} from 'sanity'
+import {languageField} from './language'
 
 export default defineType({
   name: 'education',
   title: 'Education',
   type: 'document',
   fields: [
+    languageField,
     defineField({
       name: 'school',
       title: 'School / University',

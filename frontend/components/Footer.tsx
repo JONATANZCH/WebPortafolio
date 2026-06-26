@@ -1,9 +1,16 @@
+'use client';
+
 import Link from 'next/link';
-import { getAbout } from '../lib/sanity.queries';
+import { useTranslations } from 'next-intl';
+import { type About } from '@/lib/sanity.queries';
 import styles from './Footer.module.css';
 
-export default async function Footer() {
-  const about = await getAbout();
+interface FooterProps {
+  about: About | null;
+}
+
+export default function Footer({ about }: FooterProps) {
+  const t = useTranslations();
   const github = about?.github ?? 'https://github.com/jonatanzch';
   const linkedin = about?.linkedin ?? 'https://linkedin.com/in/jonatanzarate';
   const twitter = about?.twitter ?? 'https://twitter.com/jonatanzch';
@@ -11,12 +18,12 @@ export default async function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <p className={styles.tagline}>Hecho desde la CDMX · 2026</p>
+        <p className={styles.tagline}>Made in CDMX · 2026</p>
 
         <div className={styles.right}>
           <nav className={styles.navLinks} aria-label="Footer navigation">
-            <Link href="/blog" className={styles.navLink}>Blog</Link>
-            <Link href="/contacto" className={styles.navLink}>Contacto</Link>
+            <Link href="/blog" className={styles.navLink}>{t('common.blog')}</Link>
+            <Link href="/#contacto" className={styles.navLink}>{t('common.contact')}</Link>
           </nav>
 
           <div className={styles.socialLinks}>

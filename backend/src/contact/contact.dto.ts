@@ -4,30 +4,38 @@ import {
   IsString,
   MaxLength,
   MinLength,
+  IsOptional,
 } from 'class-validator';
+
+export type Language = 'es' | 'en';
 
 export class CreateContactDto {
   @IsString()
-  @IsNotEmpty({ message: 'El nombre es requerido.' })
-  @MinLength(2, { message: 'El nombre debe tener al menos 2 caracteres.' })
-  @MaxLength(120, { message: 'El nombre no puede superar los 120 caracteres.' })
+  @IsNotEmpty({ message: 'Name is required.' })
+  @MinLength(2, { message: 'Name must be at least 2 characters.' })
+  @MaxLength(120, { message: 'Name cannot exceed 120 characters.' })
   name!: string;
 
-  @IsEmail({}, { message: 'El email no es válido.' })
-  @IsNotEmpty({ message: 'El email es requerido.' })
-  @MaxLength(254, { message: 'El email no puede superar los 254 caracteres.' })
+  @IsEmail({}, { message: 'Email is invalid.' })
+  @IsNotEmpty({ message: 'Email is required.' })
+  @MaxLength(254, { message: 'Email cannot exceed 254 characters.' })
   email!: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'El asunto es requerido.' })
-  @MinLength(3, { message: 'El asunto debe tener al menos 3 caracteres.' })
-  @MaxLength(200, { message: 'El asunto no puede superar los 200 caracteres.' })
+  @IsNotEmpty({ message: 'Subject is required.' })
+  @MinLength(3, { message: 'Subject must be at least 3 characters.' })
+  @MaxLength(200, { message: 'Subject cannot exceed 200 characters.' })
   subject!: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'El mensaje es requerido.' })
-  @MinLength(10, { message: 'El mensaje debe tener al menos 10 caracteres.' })
+  @IsNotEmpty({ message: 'Message is required.' })
+  @MinLength(10, { message: 'Message must be at least 10 characters.' })
+  @MaxLength(5000, { message: 'Message cannot exceed 5000 characters.' })
   message!: string;
+
+  @IsOptional()
+  @IsString()
+  language?: Language;
 }
 
 export class ContactResponseDto {

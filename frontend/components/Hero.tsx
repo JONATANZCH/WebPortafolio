@@ -1,5 +1,8 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { type About } from '@/lib/sanity.queries';
 import styles from './Hero.module.css';
-import { getAbout } from '@/lib/sanity.queries';
 
 const TECH_STACK = [
   'TypeScript',
@@ -21,8 +24,12 @@ const TECH_STACK = [
 
 const MARQUEE_ITEMS = [...TECH_STACK, ...TECH_STACK];
 
-export default async function Hero() {
-  const about = await getAbout();
+interface HeroProps {
+  about: About | null;
+}
+
+export default function Hero({ about }: HeroProps) {
+  const t = useTranslations();
 
   // Parse fullName into first and last name
   const fullNameRaw = about?.fullName || 'David Jonatan';
@@ -31,7 +38,7 @@ export default async function Hero() {
   const lastName = nameParts.slice(1).join(' ') || 'Jonatan';
 
   // Get bio text from the bio array (first paragraph)
-  let bioText = 'Ingeniero Backend Cloud & DevOps con 5+ años de experiencia diseñando y escalando sistemas de alta demanda.';
+  let bioText = 'Cloud & DevOps Engineer with 5+ years of experience designing and scaling high-demand systems.';
   if (about?.bio && Array.isArray(about.bio) && about.bio[0]) {
     const firstBlock = about.bio[0] as any;
     if (firstBlock.children && firstBlock.children[0]) {
@@ -81,10 +88,10 @@ export default async function Hero() {
         {/* CTA buttons */}
         <div className={styles.actions}>
           <a href="#proyectos" className={styles.btnPrimary}>
-            Ver proyectos
+            {t('hero.cta_projects')}
           </a>
           <a href="#contacto" className={styles.btnSecondary}>
-            Contáctame
+            {t('hero.cta_contact')}
           </a>
         </div>
       </div>

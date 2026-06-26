@@ -1,0 +1,55 @@
+{
+  "common": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "available": "Disponible"
+  },
+  "hero": {
+    "cta_projects": "Ver proyectos",
+    "cta_contact": "Contáctame"
+  },
+  "blog": {
+    "title": "Últimos artículos",
+    "see_all": "Ver todos"
+  },
+  "contact": {
+    "title": "Contáctame",
+    "subtitle": "¿Tienes un proyecto en mente? Cuéntame sobre él.",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "submit": "Enviar",
+      "sending": "Enviando...",
+      "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
+      "success": "¡Mensaje enviado exitosamente!"
+    },
+    "validation": {
+      "name_required": "El nombre es requerido.",
+      "name_min": "El nombre debe tener al menos 2 caracteres.",
+      "email_required": "El email es requerido.",
+      "email_invalid": "Ingresa un correo electrónico válido.",
+      "subject_required": "El asunto es requerido.",
+      "subject_min": "El asunto debe tener al menos 3 caracteres.",
+      "message_required": "El mensaje es requerido.",
+      "message_min": "El mensaje debe tener al menos 10 caracteres."
+    }
+  },
+  "footer": {
+    "description": "Cloud & DevOps Engineer. Construyendo sistemas resilientes y escalables.",
+    "links": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "email": "Email"
+    }
+  },
+  "language_switcher": {
+    "label": "Idioma",
+    "spanish": "Español",
+    "english": "English"
+  }
+}

@@ -1,11 +1,13 @@
 import {defineField, defineType} from 'sanity'
+import {languageField} from './language'
 
 export default defineType({
   name: 'about',
   title: 'About',
   type: 'document',
-  // Singleton — only one document of this type should exist
+  // Singleton per language — one document per language
   fields: [
+    languageField,
     defineField({
       name: 'fullName',
       title: 'Full Name',

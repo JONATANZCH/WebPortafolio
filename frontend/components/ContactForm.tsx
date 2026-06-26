@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
+import { type Language } from '@/lib/sanity.queries';
 import styles from './ContactForm.module.css';
 
 /* ------------------------------------------------------------------ */
@@ -34,35 +36,39 @@ interface ToastState {
 // RFC 5322 simplified (good enough for most cases)
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function validateField(field: keyof FormValues, value: string): string | undefined {
-  switch (field) {
-    case 'name':
-      if (!value.trim()) return 'El nombre es requerido.';
-      if (value.trim().length < 2) return 'El nombre debe tener al menos 2 caracteres.';
-      break;
-    case 'email':
-      if (!value.trim()) return 'El correo es requerido.';
-      if (!EMAIL_REGEX.test(value.trim())) return 'Ingresa un correo electrónico válido.';
-      break;
-    case 'subject':
-      if (!value.trim()) return 'El asunto es requerido.';
-      if (value.trim().length < 3) return 'El asunto debe tener al menos 3 caracteres.';
-      break;
-    case 'message':
-      if (!value.trim()) return 'El mensaje es requerido.';
-      if (value.trim().length < 10) return 'El mensaje debe tener al menos 10 caracteres.';
-      break;
-  }
-  return undefined;
+function createValidator(t: any) {
+  return function validateField(field: keyof FormValues, value: string): string | undefined {
+    switch (field) {
+      case 'name':
+        if (!value.trim()) return t('contact.validation.name_required');
+        if (value.trim().length < 2) return t('contact.validation.name_min');
+        break;
+      case 'email':
+        if (!value.trim()) return t('contact.validation.email_required');
+        if (!EMAIL_REGEX.test(value.trim())) return t('contact.validation.email_invalid');
+        break;
+      case 'subject':
+        if (!value.trim()) return t('contact.validation.subject_required');
+        if (value.trim().length < 3) return t('contact.validation.subject_min');
+        break;
+      case 'message':
+        if (!value.trim()) return t('contact.validation.message_required');
+        if (value.trim().length < 10) return t('contact.validation.message_min');
+        break;
+    }
+    return undefined;
+  };
 }
 
-function validateAll(values: FormValues): FormErrors {
-  const errors: FormErrors = {};
-  (Object.keys(values) as (keyof FormValues)[]).forEach((field) => {
-    const err = validateField(field, values[field]);
-    if (err) errors[field] = err;
-  });
-  return errors;
+function createValidateAll(validateField: (field: keyof FormValues, value: string) => string | undefined) {
+  return function validateAll(values: FormValues): FormErrors {
+    const errors: FormErrors = {};
+    (Object.keys(values) as (keyof FormValues)[]).forEach((field) => {
+      const err = validateField(field, values[field]);
+      if (err) errors[field] = err;
+    });
+    return errors;
+  };
 }
 
 /* ------------------------------------------------------------------ */
@@ -96,7 +102,15 @@ const INITIAL_VALUES: FormValues = {
   message: '',
 };
 
-export default function ContactForm() {
+interface ContactFormProps {
+  locale: Language;
+}
+
+export default function ContactForm({ locale }: ContactFormProps) {
+  const t = useTranslations();
+  const validateField = createValidator(t);
+  const validateAll = createValidateAll(validateField);
+
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
@@ -145,18 +159,21 @@ export default function ContactForm() {
     try {
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Language': locale,
+        },
+        body: JSON.stringify({ ...values, language: locale }),
       });
 
       if (!res.ok) throw new Error('Server responded with an error.');
 
-      showToast('success', '¡Mensaje enviado! Me pondré en contacto pronto.');
+      showToast('success', t('contact.form.success'));
       setValues(INITIAL_VALUES);
       setErrors({});
       setTouched({});
     } catch {
-      showToast('error', 'Algo salió mal. Por favor intenta de nuevo.');
+      showToast('error', t('contact.form.error'));
     } finally {
       setIsSubmitting(false);
     }
@@ -168,7 +185,7 @@ export default function ContactForm() {
         {/* Name */}
         <div className={styles.field}>
           <label htmlFor="name" className={styles.label}>
-            Nombre
+            {t('contact.form.name')}
           </label>
           <input
             id="name"
@@ -177,7 +194,7 @@ export default function ContactForm() {
             value={values.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Tu nombre"
+            placeholder={locale === 'es' ? 'Tu nombre' : 'Your name'}
             className={`${styles.input} ${touched.name && errors.name ? styles.inputError : ''}`}
             autoComplete="name"
             disabled={isSubmitting}
@@ -190,7 +207,7 @@ export default function ContactForm() {
         {/* Email */}
         <div className={styles.field}>
           <label htmlFor="email" className={styles.label}>
-            Correo electrónico
+            {t('contact.form.email')}
           </label>
           <input
             id="email"
@@ -199,7 +216,7 @@ export default function ContactForm() {
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="tu@correo.com"
+            placeholder={locale === 'es' ? 'tu@correo.com' : 'your@email.com'}
             className={`${styles.input} ${touched.email && errors.email ? styles.inputError : ''}`}
             autoComplete="email"
             disabled={isSubmitting}
@@ -212,7 +229,7 @@ export default function ContactForm() {
         {/* Subject */}
         <div className={styles.field}>
           <label htmlFor="subject" className={styles.label}>
-            Asunto
+            {t('contact.form.subject')}
           </label>
           <input
             id="subject"
@@ -221,7 +238,7 @@ export default function ContactForm() {
             value={values.subject}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="¿De qué trata tu mensaje?"
+            placeholder={locale === 'es' ? '¿De qué trata tu mensaje?' : 'What is your message about?'}
             className={`${styles.input} ${touched.subject && errors.subject ? styles.inputError : ''}`}
             disabled={isSubmitting}
           />
@@ -233,7 +250,7 @@ export default function ContactForm() {
         {/* Message */}
         <div className={styles.field}>
           <label htmlFor="message" className={styles.label}>
-            Mensaje
+            {t('contact.form.message')}
           </label>
           <textarea
             id="message"
@@ -241,7 +258,7 @@ export default function ContactForm() {
             value={values.message}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Cuéntame sobre tu proyecto o idea..."
+            placeholder={locale === 'es' ? 'Cuéntame sobre tu proyecto o idea...' : 'Tell me about your project or idea...'}
             rows={6}
             className={`${styles.textarea} ${touched.message && errors.message ? styles.inputError : ''}`}
             disabled={isSubmitting}
@@ -252,7 +269,7 @@ export default function ContactForm() {
         </div>
 
         <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
-          {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
+          {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
         </button>
       </form>
 

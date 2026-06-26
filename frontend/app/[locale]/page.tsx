@@ -1,3 +1,4 @@
+import { getMessages, getTranslations } from 'next-intl/server';
 import {
   getAbout,
   getProjects,
@@ -5,28 +6,37 @@ import {
   getEducation,
   getTestimonials,
   getBlogPosts,
-} from '../lib/sanity.queries';
-import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
-import ProjectsGrid from '../components/ProjectsGrid';
-import ExperienceTimeline from '../components/ExperienceTimeline';
-import TestimonialsCarousel from '../components/TestimonialsCarousel';
-import ContactForm from '../components/ContactForm';
-import Footer from '../components/Footer';
-import BlogCard from '../components/BlogCard';
+  type Language,
+} from '@/lib/sanity.queries';
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import ProjectsGrid from '@/components/ProjectsGrid';
+import ExperienceTimeline from '@/components/ExperienceTimeline';
+import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import ContactForm from '@/components/ContactForm';
+import Footer from '@/components/Footer';
+import BlogCard from '@/components/BlogCard';
 import Link from 'next/link';
 import styles from './page.module.css';
 
-export default async function Home() {
-  // Fetch all data server-side in parallel
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Home(props: PageProps) {
+  const params = await props.params;
+  const locale = params.locale as Language;
+  const t = await getTranslations({ locale });
+
+  // Fetch all data server-side in parallel with language parameter
   const [about, projects, experience, education, testimonials, blogPosts] =
     await Promise.all([
-      getAbout(),
-      getProjects(),
-      getExperience(),
-      getEducation(),
-      getTestimonials(),
-      getBlogPosts(),
+      getAbout(locale),
+      getProjects(locale),
+      getExperience(locale),
+      getEducation(locale),
+      getTestimonials(locale),
+      getBlogPosts(locale),
     ]);
 
   // Pass the pre-fetched data to components that accept it
@@ -47,7 +57,7 @@ export default async function Home() {
       <Navigation />
 
       <main>
-        <Hero />
+        <Hero about={about} />
 
         <ProjectsGrid />
 
@@ -60,9 +70,9 @@ export default async function Home() {
           <section id="blog" className={styles.blogPreview}>
             <div className={styles.blogInner}>
               <div className={styles.blogHeader}>
-                <h2 className={styles.blogHeading}>Últimos artículos</h2>
+                <h2 className={styles.blogHeading}>{t('blog.title')}</h2>
                 <Link href="/blog" className={styles.blogSeeAll}>
-                  Ver todos →
+                  {t('blog.see_all')} →
                 </Link>
               </div>
               <ul className={styles.blogGrid} role="list">
@@ -78,16 +88,16 @@ export default async function Home() {
         {/* Contact section */}
         <section id="contacto" className={styles.contactSection}>
           <div className={styles.contactInner}>
-            <h2 className={styles.contactHeading}>Contáctame</h2>
+            <h2 className={styles.contactHeading}>{t('contact.title')}</h2>
             <p className={styles.contactSubheading}>
-              ¿Tienes un proyecto en mente? Cuéntame sobre él.
+              {t('contact.subtitle')}
             </p>
-            <ContactForm />
+            <ContactForm locale={locale} />
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer about={about} />
     </>
   );
 }

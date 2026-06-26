@@ -1,91 +1,9 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import './globals.css';
-import PageLoader from '../components/PageLoader';
+import { ReactNode } from 'react';
 
-export const metadata: Metadata = {
-  title: {
-    default: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
-    template: '%s | David Jonatan Zapeta Chavez',
-  },
-  icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
-  description:
-    'Cloud & DevOps Engineer con 5+ años de experiencia. Especialista en microservicios, infraestructura como código y observabilidad. Construyo sistemas resilientes y escalables en Azure/AWS.',
-  keywords: [
-    'cloud engineer',
-    'devops',
-    'backend developer',
-    'microservicios',
-    'aws',
-    'azure',
-    'terraform',
-    'nestjs',
-    'node.js',
-    'postgresql',
-    'kubernetes',
-    'docker',
-  ],
-  authors: [{ name: 'David Jonatan Zapeta Chavez', url: 'https://jonatanzarate.dev' }],
-  creator: 'David Jonatan Zapeta Chavez',
-  metadataBase: new URL('https://jonatanzarate.dev'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'es_MX',
-    url: 'https://jonatanzarate.dev',
-    siteName: 'David Jonatan Zapeta Chavez',
-    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
-    description:
-      'Cloud & DevOps Engineer con 5+ años construyendo sistemas resilientes en Azure/AWS. Especialista en microservicios, infraestructura como código y observabilidad.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Jonatan Zarate — Desarrollador Full-Stack',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
-    description:
-      'Cloud & DevOps Engineer. Microservicios, Terraform, AWS/Azure. Desde CDMX.',
-    images: ['/og-image.png'],
-    creator: '@jonatanzch',
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
+interface RootLayoutProps {
+  children: ReactNode;
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="es">
-      <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-      </head>
-      <body>
-        <Suspense fallback={<PageLoader />}>
-          {children}
-        </Suspense>
-      </body>
-    </html>
-  );
+export default function RootLayout({ children }: RootLayoutProps) {
+  return children;
 }

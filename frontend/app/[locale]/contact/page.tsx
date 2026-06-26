@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { type Language } from '@/lib/sanity.queries';
 import ContactForm from '@/components/ContactForm';
 import styles from './page.module.css';
 
@@ -7,7 +8,14 @@ export const metadata: Metadata = {
   description: 'Ponte en contacto conmigo',
 };
 
-export default function ContactPage() {
+interface ContactPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function ContactPage(props: ContactPageProps) {
+  const params = await props.params;
+  const locale = params.locale as Language;
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -23,7 +31,7 @@ export default function ContactPage() {
         <div className={styles.grid}>
           {/* Form column */}
           <div className={styles.formColumn}>
-            <ContactForm />
+            <ContactForm locale={locale} />
           </div>
 
           {/* Info column */}

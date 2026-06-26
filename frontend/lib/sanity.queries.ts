@@ -1,5 +1,7 @@
 import { sanityFetch } from './sanity';
 
+export type Language = 'es' | 'en';
+
 // ============================================================
 // Type Definitions
 // ============================================================
@@ -21,6 +23,7 @@ export interface SanityImage {
 export interface BlogPost {
   _id: string;
   _createdAt: string;
+  language: Language;
   title: string;
   slug: { current: string };
   author?: { name: string };
@@ -32,6 +35,7 @@ export interface BlogPost {
 
 export interface Project {
   _id: string;
+  language: Language;
   title: string;
   slug?: { current: string };
   description?: string;
@@ -45,6 +49,7 @@ export interface Project {
 
 export interface Experience {
   _id: string;
+  language: Language;
   role: string;
   company: string;
   startDate?: string;
@@ -57,6 +62,7 @@ export interface Experience {
 
 export interface Education {
   _id: string;
+  language: Language;
   school: string;
   degree?: string;
   field?: string;
@@ -67,6 +73,7 @@ export interface Education {
 
 export interface Testimonial {
   _id: string;
+  language: Language;
   author: string;
   role?: string;
   company?: string;
@@ -78,6 +85,7 @@ export interface Testimonial {
 
 export interface About {
   _id: string;
+  language: Language;
   fullName?: string;
   title?: string;
   bio?: unknown[];
@@ -92,9 +100,10 @@ export interface About {
 // GROQ Query Strings
 // ============================================================
 
-export const BLOG_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
+export const BLOG_POSTS_QUERY = `*[_type == "post" && language == $language] | order(publishedAt desc) {
   _id,
   _createdAt,
+  language,
   title,
   slug,
   author->{ name },
@@ -103,9 +112,10 @@ export const BLOG_POSTS_QUERY = `*[_type == "post"] | order(publishedAt desc) {
   publishedAt
 }`;
 
-export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $slug][0] {
+export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "post" && language == $language && slug.current == $slug][0] {
   _id,
   _createdAt,
+  language,
   title,
   slug,
   author->{ name },
@@ -115,8 +125,9 @@ export const BLOG_POST_BY_SLUG_QUERY = `*[_type == "post" && slug.current == $sl
   body
 }`;
 
-export const PROJECTS_QUERY = `*[_type == "project"] | order(featured desc, order asc) {
+export const PROJECTS_QUERY = `*[_type == "project" && language == $language] | order(featured desc, order asc) {
   _id,
+  language,
   title,
   slug,
   description,
@@ -128,8 +139,9 @@ export const PROJECTS_QUERY = `*[_type == "project"] | order(featured desc, orde
   order
 }`;
 
-export const EXPERIENCE_QUERY = `*[_type == "experience"] | order(order asc) {
+export const EXPERIENCE_QUERY = `*[_type == "experience" && language == $language] | order(order asc) {
   _id,
+  language,
   role,
   company,
   startDate,
@@ -140,8 +152,9 @@ export const EXPERIENCE_QUERY = `*[_type == "experience"] | order(order asc) {
   order
 }`;
 
-export const EDUCATION_QUERY = `*[_type == "education"] | order(order asc) {
+export const EDUCATION_QUERY = `*[_type == "education" && language == $language] | order(order asc) {
   _id,
+  language,
   school,
   degree,
   field,
@@ -150,8 +163,9 @@ export const EDUCATION_QUERY = `*[_type == "education"] | order(order asc) {
   order
 }`;
 
-export const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(featured desc, order asc) {
+export const TESTIMONIALS_QUERY = `*[_type == "testimonial" && language == $language] | order(featured desc, order asc) {
   _id,
+  language,
   author,
   role,
   company,
@@ -161,8 +175,9 @@ export const TESTIMONIALS_QUERY = `*[_type == "testimonial"] | order(featured de
   order
 }`;
 
-export const ABOUT_QUERY = `*[_type == "about"][0] {
+export const ABOUT_QUERY = `*[_type == "about" && language == $language][0] {
   _id,
+  language,
   fullName,
   title,
   bio,
@@ -177,59 +192,65 @@ export const ABOUT_QUERY = `*[_type == "about"][0] {
 // Data Fetcher Helper Functions
 // ============================================================
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(language: Language = 'es'): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: BLOG_POSTS_QUERY,
+    params: { language },
     revalidate: 60,
-    tags: ['post'],
+    tags: [`post:${language}`],
   });
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getBlogPostBySlug(slug: string, language: Language = 'es'): Promise<BlogPost | null> {
   return sanityFetch<BlogPost | null>({
     query: BLOG_POST_BY_SLUG_QUERY,
-    params: { slug },
+    params: { slug, language },
     revalidate: 60,
-    tags: [`post:${slug}`],
+    tags: [`post:${slug}:${language}`],
   });
 }
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjects(language: Language = 'es'): Promise<Project[]> {
   return sanityFetch<Project[]>({
     query: PROJECTS_QUERY,
+    params: { language },
     revalidate: 300,
-    tags: ['project'],
+    tags: [`project:${language}`],
   });
 }
 
-export async function getExperience(): Promise<Experience[]> {
+export async function getExperience(language: Language = 'es'): Promise<Experience[]> {
   return sanityFetch<Experience[]>({
     query: EXPERIENCE_QUERY,
+    params: { language },
     revalidate: 3600,
-    tags: ['experience'],
+    tags: [`experience:${language}`],
   });
 }
 
-export async function getEducation(): Promise<Education[]> {
+export async function getEducation(language: Language = 'es'): Promise<Education[]> {
   return sanityFetch<Education[]>({
     query: EDUCATION_QUERY,
+    params: { language },
     revalidate: 3600,
-    tags: ['education'],
+    tags: [`education:${language}`],
   });
 }
 
-export async function getTestimonials(): Promise<Testimonial[]> {
+export async function getTestimonials(language: Language = 'es'): Promise<Testimonial[]> {
   return sanityFetch<Testimonial[]>({
     query: TESTIMONIALS_QUERY,
+    params: { language },
     revalidate: 300,
-    tags: ['testimonial'],
+    tags: [`testimonial:${language}`],
   });
 }
 
-export async function getAbout(): Promise<About | null> {
+export async function getAbout(language: Language = 'es'): Promise<About | null> {
   return sanityFetch<About | null>({
     query: ABOUT_QUERY,
+    params: { language },
     revalidate: 3600,
-    tags: ['about'],
+    tags: [`about:${language}`],
   });
 }

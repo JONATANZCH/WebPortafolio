@@ -1,17 +1,23 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getBlogPosts } from '../../lib/sanity.queries';
-import BlogCard from '../../components/BlogCard';
-import Navigation from '../../components/Navigation';
+import { getBlogPosts, type Language } from '@/lib/sanity.queries';
+import BlogCard from '@/components/BlogCard';
+import Navigation from '@/components/Navigation';
 import styles from './page.module.css';
+
+interface BlogPageProps {
+  params: Promise<{ locale: string }>;
+}
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Technical writing and thoughts on software engineering',
 };
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts();
+export default async function BlogPage(props: BlogPageProps) {
+  const params = await props.params;
+  const locale = params.locale as Language;
+  const posts = await getBlogPosts(locale);
 
   return (
     <>

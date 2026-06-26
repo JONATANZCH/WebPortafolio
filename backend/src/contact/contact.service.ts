@@ -8,7 +8,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import axios from 'axios';
 import { ContactMessage } from './contact.entity.js';
-import { ContactResponseDto, CreateContactDto } from './contact.dto.js';
+import { ContactResponseDto, CreateContactDto, Language } from './contact.dto.js';
+import { I18nService } from '../i18n/i18n.service.js';
 
 @Injectable()
 export class ContactService implements OnModuleInit {
@@ -17,6 +18,7 @@ export class ContactService implements OnModuleInit {
   constructor(
     @InjectRepository(ContactMessage)
     private readonly contactRepository: Repository<ContactMessage>,
+    private readonly i18nService: I18nService,
   ) {}
 
   onModuleInit() {
@@ -36,8 +38,12 @@ export class ContactService implements OnModuleInit {
    * Persists the message to the database and dispatches a notification email
    * via the SendGrid v3 Mail Send API.
    */
-  async createContact(dto: CreateContactDto, ip?: string): Promise<ContactResponseDto> {
-    this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, email: ${dto.email}`);
+  async createContact(
+    dto: CreateContactDto,
+    ip?: string,
+    language: Language = 'es',
+  ): Promise<ContactResponseDto> {
+    this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, email: ${dto.email}, language: ${language}`);
     // 1. Persist to database
     let saved: ContactMessage;
     try {
@@ -52,14 +58,14 @@ export class ContactService implements OnModuleInit {
     } catch (dbError) {
       this.logger.error('Failed to save contact message to DB', dbError);
       throw new BadRequestException(
-        'No se pudo guardar el mensaje. Inténtalo de nuevo.',
+        this.i18nService.getErrorMessage('SAVE_FAILED', language),
       );
     }
 
     // 2. Send email notification via SendGrid (best-effort — do not fail the
     //    request if the email service is unavailable)
     try {
-      await this.sendEmail(saved);
+      await this.sendEmail(saved, language);
     } catch (emailError) {
       this.logger.warn(
         `Email notification failed for message ${saved.id}`,
@@ -79,12 +85,13 @@ export class ContactService implements OnModuleInit {
   /**
    * Sends a notification email via SendGrid's Mail Send v3 endpoint.
    */
-  private async sendEmail(message: ContactMessage): Promise<void> {
+  private async sendEmail(message: ContactMessage, language: Language = 'es'): Promise<void> {
     const apiKey = process.env.SENDGRID_API_KEY!;
     const toEmail = process.env.CONTACT_EMAIL_TO!;
     const fromEmail = process.env.CONTACT_FROM_EMAIL!;
 
-    const html = this.buildEmailHtml(message);
+    const html = this.buildEmailHtml(message, language);
+    const subjectPrefix = this.i18nService.getEmailMessage('SUBJECT_PREFIX', language);
 
     await axios.post(
       'https://api.sendgrid.com/v3/mail/send',
@@ -92,7 +99,7 @@ export class ContactService implements OnModuleInit {
         personalizations: [
           {
             to: [{ email: toEmail }],
-            subject: `[Portfolio] Nuevo mensaje: ${message.subject}`,
+            subject: `${subjectPrefix} ${message.subject}`,
           },
         ],
         from: { email: fromEmail, name: 'Portfolio Contact Form' },
@@ -108,18 +115,30 @@ export class ContactService implements OnModuleInit {
       },
     );
 
-    this.logger.log(`Email sent for message ${message.id}`);
+    this.logger.log(`Email sent for message ${message.id} (language: ${language})`);
   }
 
   /**
    * Builds the HTML body of the notification email.
    */
-  private buildEmailHtml(message: ContactMessage): string {
-    const formattedDate = new Intl.DateTimeFormat('es-MX', {
+  private buildEmailHtml(message: ContactMessage, language: Language = 'es'): string {
+    const locale = language === 'en' ? 'en-US' : 'es-MX';
+    const formattedDate = new Intl.DateTimeFormat(locale, {
       dateStyle: 'full',
       timeStyle: 'short',
       timeZone: 'America/Mexico_City',
     }).format(message.createdAt);
+
+    // Get email messages in the specified language
+    const msg = (key: string) => this.i18nService.getEmailMessage(key, language);
+    const headerTitle = msg('HEADER_TITLE');
+    const headerSubtitle = msg('HEADER_SUBTITLE');
+    const labelName = msg('LABEL_NAME');
+    const labelEmail = msg('LABEL_EMAIL');
+    const labelSubject = msg('LABEL_SUBJECT');
+    const labelDate = msg('LABEL_DATE');
+    const labelMessage = msg('LABEL_MESSAGE');
+    const footerId = msg('FOOTER_ID');
 
     return `
 <!DOCTYPE html>
@@ -160,10 +179,10 @@ export class ContactService implements OnModuleInit {
                 color: #0a0a0f;
                 letter-spacing: -0.02em;
               ">
-                Nuevo mensaje de contacto
+                ${headerTitle}
               </h1>
               <p style="margin: 4px 0 0; font-size: 13px; color: #0a0a0f; opacity: 0.7;">
-                Portfolio — jonatanzarate.dev
+                ${headerSubtitle}
               </p>
             </td>
           </tr>
@@ -175,13 +194,13 @@ export class ContactService implements OnModuleInit {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 24px;">
                 <tr>
                   <td style="padding: 8px 0; border-bottom: 1px solid #1e1e2e;">
-                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">Nombre</span><br />
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">${labelName}</span><br />
                     <span style="font-size: 15px; color: #e8e8f0; margin-top: 4px; display: block;">${this.escapeHtml(message.name)}</span>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; border-bottom: 1px solid #1e1e2e;">
-                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">Email</span><br />
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">${labelEmail}</span><br />
                     <a href="mailto:${this.escapeHtml(message.email)}" style="font-size: 15px; color: #2dd4bf; margin-top: 4px; display: block; text-decoration: none;">
                       ${this.escapeHtml(message.email)}
                     </a>
@@ -189,13 +208,13 @@ export class ContactService implements OnModuleInit {
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; border-bottom: 1px solid #1e1e2e;">
-                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">Asunto</span><br />
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">${labelSubject}</span><br />
                     <span style="font-size: 15px; color: #e8e8f0; margin-top: 4px; display: block;">${this.escapeHtml(message.subject)}</span>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; border-bottom: 1px solid #1e1e2e;">
-                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">Fecha</span><br />
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6b80;">${labelDate}</span><br />
                     <span style="font-size: 13px; color: #6b6b80; margin-top: 4px; display: block;">${formattedDate}</span>
                   </td>
                 </tr>
@@ -214,7 +233,7 @@ export class ContactService implements OnModuleInit {
                   text-transform: uppercase;
                   letter-spacing: 0.08em;
                   color: #6b6b80;
-                ">Mensaje</p>
+                ">${labelMessage}</p>
                 <p style="
                   margin: 0;
                   font-size: 15px;
@@ -232,7 +251,7 @@ export class ContactService implements OnModuleInit {
                 text-align: center;
                 letter-spacing: 0.04em;
               ">
-                ID: <code style="color: #c084fc;">${message.id}</code>
+                ${footerId} <code style="color: #c084fc;">${message.id}</code>
               </p>
             </td>
           </tr>

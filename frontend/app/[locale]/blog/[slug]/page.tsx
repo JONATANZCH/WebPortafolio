@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
-import { getBlogPostBySlug, getBlogPosts } from '../../../lib/sanity.queries';
-import { urlFor } from '../../../lib/sanity';
+import { getBlogPostBySlug, getBlogPosts, type Language } from '@/lib/sanity.queries';
+import { urlFor } from '@/lib/sanity';
 import styles from './page.module.css';
 
 // ============================================================
@@ -12,15 +12,16 @@ import styles from './page.module.css';
 // ============================================================
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 // ============================================================
 // Helpers
 // ============================================================
 
-function formatDate(dateString: string): string {
-  return new Intl.DateTimeFormat('es-MX', {
+function formatDate(dateString: string, locale: Language): string {
+  const localeStr = locale === 'es' ? 'es-MX' : 'en-US';
+  return new Intl.DateTimeFormat(localeStr, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -32,8 +33,12 @@ function formatDate(dateString: string): string {
 // ============================================================
 
 export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  return posts.map((post) => ({ slug: post.slug.current }));
+  const postsEs = await getBlogPosts('es');
+  const postsEn = await getBlogPosts('en');
+  return [
+    ...postsEs.map((post) => ({ locale: 'es', slug: post.slug.current })),
+    ...postsEn.map((post) => ({ locale: 'en', slug: post.slug.current })),
+  ];
 }
 
 // ============================================================
@@ -41,8 +46,8 @@ export async function generateStaticParams() {
 // ============================================================
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const { slug, locale } = await params;
+  const post = await getBlogPostBySlug(slug, locale as Language);
 
   if (!post) {
     return { title: 'Artículo no encontrado' };
@@ -59,11 +64,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // ============================================================
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const language = locale as Language;
 
   const [post, allPosts] = await Promise.all([
-    getBlogPostBySlug(slug),
-    getBlogPosts(),
+    getBlogPostBySlug(slug, language),
+    getBlogPosts(language),
   ]);
 
   if (!post) {
@@ -120,7 +126,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
               {post.author?.name && <span className={styles.metaDivider} aria-hidden="true">·</span>}
               <time className={styles.date} dateTime={publishedDate}>
-                {formatDate(publishedDate)}
+                {formatDate(publishedDate, language)}
               </time>
             </div>
           </header>
