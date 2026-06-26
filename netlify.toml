@@ -10,21 +10,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Redirect root to default locale
 [[redirects]]
   from = "/"
   to = "/es"
   status = 302
-
-# Fallback for client-side navigation
-[[redirects]]
-  from = "/*"
-  to = "/es/:splat"
-  status = 200
-  conditions = {Language = ["es"]}
-
-[[redirects]]
-  from = "/*"
-  to = "/en/:splat"
-  status = 200
-  conditions = {Language = ["en"]}
