@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PortableText } from '@portabletext/react';
 import { getBlogPostBySlug, getBlogPosts, type Language } from '@/lib/sanity.queries';
+import { setRequestLocale } from 'next-intl/server';
 import { urlFor } from '@/lib/sanity';
 import styles from './page.module.css';
 
@@ -32,13 +33,19 @@ function formatDate(dateString: string, locale: Language): string {
 // Static generation
 // ============================================================
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  const postsEs = await getBlogPosts('es');
-  const postsEn = await getBlogPosts('en');
-  return [
-    ...postsEs.map((post) => ({ locale: 'es', slug: post.slug.current })),
-    ...postsEn.map((post) => ({ locale: 'en', slug: post.slug.current })),
-  ];
+  try {
+    const postsEs = await getBlogPosts('es');
+    const postsEn = await getBlogPosts('en');
+    return [
+      ...postsEs.map((post) => ({ locale: 'es', slug: post.slug.current })),
+      ...postsEn.map((post) => ({ locale: 'en', slug: post.slug.current })),
+    ];
+  } catch {
+    return [];
+  }
 }
 
 // ============================================================
@@ -66,6 +73,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug, locale } = await params;
   const language = locale as Language;
+  setRequestLocale(locale);
 
   const [post, allPosts] = await Promise.all([
     getBlogPostBySlug(slug, language),

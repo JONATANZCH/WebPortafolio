@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { type Language } from '@/lib/sanity.queries';
+import { setRequestLocale } from 'next-intl/server';
+import { locales } from '@/i18n.config';
 import ContactForm from '@/components/ContactForm';
 import styles from './page.module.css';
 
@@ -12,9 +14,14 @@ interface ContactPageProps {
   params: Promise<{ locale: string }>;
 }
 
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function ContactPage(props: ContactPageProps) {
   const params = await props.params;
   const locale = params.locale as Language;
+  setRequestLocale(locale);
 
   return (
     <main className={styles.main}>

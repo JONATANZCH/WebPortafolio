@@ -1,4 +1,4 @@
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import {
   getAbout,
   getProjects,
@@ -26,6 +26,7 @@ interface PageProps {
 export default async function Home(props: PageProps) {
   const params = await props.params;
   const locale = params.locale as Language;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale });
 
   // Fetch all data server-side in parallel with language parameter

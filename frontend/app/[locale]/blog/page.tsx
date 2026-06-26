@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getBlogPosts, type Language } from '@/lib/sanity.queries';
+import { setRequestLocale } from 'next-intl/server';
+import { locales } from '@/i18n.config';
 import BlogCard from '@/components/BlogCard';
 import Navigation from '@/components/Navigation';
 import styles from './page.module.css';
@@ -14,9 +16,14 @@ export const metadata: Metadata = {
   description: 'Technical writing and thoughts on software engineering',
 };
 
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function BlogPage(props: BlogPageProps) {
   const params = await props.params;
   const locale = params.locale as Language;
+  setRequestLocale(locale);
   const posts = await getBlogPosts(locale);
 
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { locales, type Locale } from '@/i18n.config';
 import '@/app/globals.css';
 import PageLoader from '@/components/PageLoader';
@@ -86,6 +86,7 @@ export async function generateStaticParams() {
 export default async function LocaleLayout(props: LocaleLayoutProps) {
   const params = await props.params;
   const { locale } = params;
+  setRequestLocale(locale);
   const messages = await getMessages({ locale });
 
   return (
