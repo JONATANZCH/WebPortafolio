@@ -1,4 +1,4 @@
-import { getExperience, getEducation, Experience, Education } from '../lib/sanity.queries';
+import { getExperience, getEducation, Experience, Education, type Language } from '../lib/sanity.queries';
 import styles from './ExperienceTimeline.module.css';
 
 function formatDate(dateStr: string | undefined | null): string {
@@ -64,10 +64,10 @@ function EducationEntry({ entry }: { entry: Education }) {
   );
 }
 
-export default async function ExperienceTimeline() {
+export default async function ExperienceTimeline({ locale = 'es' }: { locale?: string }) {
   const [experience, education] = await Promise.all([
-    getExperience(),
-    getEducation(),
+    getExperience(locale as Language),
+    getEducation(locale as Language),
   ]);
 
   return (

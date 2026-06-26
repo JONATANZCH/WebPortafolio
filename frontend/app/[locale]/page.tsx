@@ -1,10 +1,6 @@
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import {
   getAbout,
-  getProjects,
-  getExperience,
-  getEducation,
-  getTestimonials,
   getBlogPosts,
   type Language,
 } from '@/lib/sanity.queries';
@@ -29,27 +25,10 @@ export default async function Home(props: PageProps) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
 
-  // Fetch all data server-side in parallel with language parameter
-  const [about, projects, experience, education, testimonials, blogPosts] =
-    await Promise.all([
-      getAbout(locale),
-      getProjects(locale),
-      getExperience(locale),
-      getEducation(locale),
-      getTestimonials(locale),
-      getBlogPosts(locale),
-    ]);
-
-  // Pass the pre-fetched data to components that accept it
-  // (ProjectsGrid, ExperienceTimeline, TestimonialsCarousel fetch their own
-  //  data internally as async server components; we still call the fetches
-  //  here so they are deduped by Next.js fetch cache and land in the same
-  //  render pass — no duplicate network requests.)
-  void about;
-  void projects;
-  void experience;
-  void education;
-  void testimonials;
+  const [about, blogPosts] = await Promise.all([
+    getAbout(locale),
+    getBlogPosts(locale),
+  ]);
 
   const recentPosts = blogPosts.slice(0, 3);
 
@@ -60,11 +39,11 @@ export default async function Home(props: PageProps) {
       <main>
         <Hero about={about} />
 
-        <ProjectsGrid />
+        <ProjectsGrid locale={locale} />
 
-        <ExperienceTimeline />
+        <ExperienceTimeline locale={locale} />
 
-        <TestimonialsCarousel />
+        <TestimonialsCarousel locale={locale} />
 
         {/* Blog preview section */}
         {recentPosts.length > 0 && (

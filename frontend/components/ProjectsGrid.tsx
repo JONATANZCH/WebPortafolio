@@ -1,4 +1,4 @@
-import { getProjects } from '../lib/sanity.queries';
+import { getProjects, type Language } from '../lib/sanity.queries';
 import ProjectCard from './ProjectCard';
 import styles from './ProjectsGrid.module.css';
 
@@ -7,8 +7,8 @@ import styles from './ProjectsGrid.module.css';
 //  - Slots 1-4: up to 4 regular cards, 2×2 grid on the right
 //  - Slot 5+: "+more" card occupying the last slot if there are more than 5 projects
 
-export default async function ProjectsGrid() {
-  const projects = await getProjects();
+export default async function ProjectsGrid({ locale = 'es' }: { locale?: string }) {
+  const projects = await getProjects(locale as Language);
 
   const featured = projects[0] ?? null;
   const regular = projects.slice(1, 5);
