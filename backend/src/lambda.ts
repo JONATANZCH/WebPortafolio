@@ -15,7 +15,7 @@ async function bootstrapApp(): Promise<ReturnType<typeof serverless>> {
   app.use(helmet());
 
   const allowedOrigins = process.env.FRONTEND_URL
-    ? [process.env.FRONTEND_URL]
+    ? process.env.FRONTEND_URL.split(',').map((o) => o.trim()).filter(Boolean)
     : ['http://localhost:3000'];
 
   app.enableCors({
@@ -40,6 +40,8 @@ async function bootstrapApp(): Promise<ReturnType<typeof serverless>> {
   await app.init();
 
   const expressApp = app.getHttpAdapter().getInstance();
+  // Behind API Gateway: use the real client IP (needed for rate limiting)
+  expressApp.set('trust proxy', 1);
   cachedHandler = serverless(expressApp);
   return cachedHandler;
 }

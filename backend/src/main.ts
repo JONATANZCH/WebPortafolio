@@ -5,6 +5,7 @@ import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
 
   // Security: Helmet for HTTP headers
   app.use(helmet());
@@ -12,8 +13,11 @@ async function bootstrap() {
   // CORS configuration based on environment
   const allowedOrigins =
     process.env.NODE_ENV === 'production'
-      ? [process.env.FRONTEND_URL || 'https://yourdomain.com']
-      : ['http://localhost:3000', 'http://localhost:3000'];
+      ? (process.env.FRONTEND_URL || 'https://jonatanzarate.dev')
+          .split(',')
+          .map((o) => o.trim())
+          .filter(Boolean)
+      : ['http://localhost:3000'];
 
   app.enableCors({
     origin: allowedOrigins,
@@ -29,7 +33,6 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-      transformOptions: { enableImplicitConversion: true },
     }),
   );
 

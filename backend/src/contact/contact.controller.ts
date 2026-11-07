@@ -15,6 +15,11 @@ export class ContactController {
     @Ip() ip: string,
     @Headers('accept-language') acceptLanguage?: string,
   ): Promise<ContactResponseDto> {
+    // Honeypot hit: pretend success so bots get no signal, store nothing
+    if (dto.website) {
+      return { success: true, messageId: 'ok' };
+    }
+
     // Language priority: dto.language > accept-language header > default (es)
     const language = this.resolveLanguage(dto.language, acceptLanguage);
     return this.contactService.createContact(dto, ip, language);

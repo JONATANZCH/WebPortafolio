@@ -18,7 +18,12 @@ dotenv.config({ path: '.env.local' });
       // Explicitly disable synchronize in production — only allow in development
       synchronize: process.env.NODE_ENV === 'development',
       logging: process.env.NODE_ENV === 'development',
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      // Verify the server certificate in production. Escape hatch (not recommended):
+      // set DATABASE_SSL_INSECURE=true for a host that uses a self-signed certificate.
+      ssl:
+        process.env.NODE_ENV === 'production'
+          ? { rejectUnauthorized: process.env.DATABASE_SSL_INSECURE !== 'true' }
+          : false,
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
     }),

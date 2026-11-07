@@ -6,14 +6,16 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import axios from 'axios';
 import { ContactMessage } from './contact.entity.js';
 import { ContactResponseDto, CreateContactDto, Language } from './contact.dto.js';
 import { I18nService } from '../i18n/i18n.service.js';
+import { createEmailProvider } from '../email/email.factory.js';
+import type { EmailProvider } from '../email/email.provider.js';
 
 @Injectable()
 export class ContactService implements OnModuleInit {
   private readonly logger = new Logger(ContactService.name);
+  private emailProvider!: EmailProvider;
 
   constructor(
     @InjectRepository(ContactMessage)
@@ -22,28 +24,30 @@ export class ContactService implements OnModuleInit {
   ) {}
 
   onModuleInit() {
-    const missing: string[] = [];
-    if (!process.env.SENDGRID_API_KEY) missing.push('SENDGRID_API_KEY');
+    const { provider, missing } = createEmailProvider();
     if (!process.env.CONTACT_EMAIL_TO) missing.push('CONTACT_EMAIL_TO');
     if (!process.env.CONTACT_FROM_EMAIL) missing.push('CONTACT_FROM_EMAIL');
 
-    if (missing.length > 0) {
+    if (missing.length > 0 || !provider) {
       const msg = `Missing required environment variables: ${missing.join(', ')}`;
       this.logger.error(msg);
       throw new Error(msg);
     }
+
+    this.emailProvider = provider;
+    this.logger.log(`Email provider: ${provider.name}`);
   }
 
   /**
    * Persists the message to the database and dispatches a notification email
-   * via the SendGrid v3 Mail Send API.
+   * through the configured email provider (Resend or SendGrid).
    */
   async createContact(
     dto: CreateContactDto,
     ip?: string,
     language: Language = 'es',
   ): Promise<ContactResponseDto> {
-    this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, email: ${dto.email}, language: ${language}`);
+    this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, language: ${language}`);
     // 1. Persist to database
     let saved: ContactMessage;
     try {
@@ -86,36 +90,18 @@ export class ContactService implements OnModuleInit {
    * Sends a notification email via SendGrid's Mail Send v3 endpoint.
    */
   private async sendEmail(message: ContactMessage, language: Language = 'es'): Promise<void> {
-    const apiKey = process.env.SENDGRID_API_KEY!;
-    const toEmail = process.env.CONTACT_EMAIL_TO!;
-    const fromEmail = process.env.CONTACT_FROM_EMAIL!;
-
     const html = this.buildEmailHtml(message, language);
     const subjectPrefix = this.i18nService.getEmailMessage('SUBJECT_PREFIX', language);
 
-    await axios.post(
-      'https://api.sendgrid.com/v3/mail/send',
-      {
-        personalizations: [
-          {
-            to: [{ email: toEmail }],
-            subject: `${subjectPrefix} ${message.subject}`,
-          },
-        ],
-        from: { email: fromEmail, name: 'Portfolio Contact Form' },
-        reply_to: { email: message.email, name: message.name },
-        content: [{ type: 'text/html', value: html }],
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        timeout: 8_000,
-      },
-    );
+    await this.emailProvider.send({
+      from: { email: process.env.CONTACT_FROM_EMAIL!, name: 'Portfolio Contact Form' },
+      to: process.env.CONTACT_EMAIL_TO!,
+      replyTo: { email: message.email, name: message.name },
+      subject: `${subjectPrefix} ${message.subject}`.replace(/[\r\n]+/g, ' '),
+      html,
+    });
 
-    this.logger.log(`Email sent for message ${message.id} (language: ${language})`);
+    this.logger.log(`Email sent for message ${message.id} via ${this.emailProvider.name} (language: ${language})`);
   }
 
   /**

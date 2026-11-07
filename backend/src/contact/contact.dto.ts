@@ -36,6 +36,12 @@ export class CreateContactDto {
   @IsOptional()
   @IsString()
   language?: Language;
+
+  /** Honeypot: real users never fill this hidden field; bots usually do. */
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  website?: string;
 }
 
 export class ContactResponseDto {

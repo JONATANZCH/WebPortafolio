@@ -4,7 +4,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs22.x
   region: us-east-1
   stage: ${opt:stage, 'prod'}
   memorySize: 256
@@ -14,7 +14,9 @@ provider:
     NODE_ENV: production
     DATABASE_URL: ${env:DATABASE_URL, ssm:/jz-portfolio/DATABASE_URL}
     SENDGRID_API_KEY: ${env:SENDGRID_API_KEY, ssm:/jz-portfolio/SENDGRID_API_KEY}
-    CONTACT_TO_EMAIL: ${env:CONTACT_TO_EMAIL, 'jonatanzch@gmail.com'}
+    CONTACT_EMAIL_TO: ${env:CONTACT_EMAIL_TO, 'jonatanzch@gmail.com'}
+    # Comma-separated list of allowed browser origins (production site, Netlify URL)
+    FRONTEND_URL: ${env:FRONTEND_URL, 'https://jonatanzarate.dev,https://www.jonatanzarate.dev'}
     CONTACT_FROM_EMAIL: ${env:CONTACT_FROM_EMAIL, 'no-reply@jonatanzarate.dev'}
 
   # CORS: allow requests from the Netlify-hosted frontend
