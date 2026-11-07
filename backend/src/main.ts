@@ -8,7 +8,9 @@ async function bootstrap() {
   app.getHttpAdapter().getInstance().set('trust proxy', 1);
 
   // Security: Helmet for HTTP headers
-  app.use(helmet());
+  // CORP cross-origin: lets the browser accept the no-cors pre-warm request to /health.
+  // Reads of the API still require the CORS allow-list below.
+  app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 
   // CORS configuration based on environment
   const allowedOrigins =
