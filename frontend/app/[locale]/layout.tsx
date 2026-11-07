@@ -17,8 +17,11 @@ export const metadata: Metadata = {
     template: '%s | David Jonatan Zapeta Chavez',
   },
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   description:
     'Ingeniería backend, cloud e IA generativa con más de 5 años de experiencia. Diseño APIs, microservicios, plataformas cloud, seguridad y soluciones de IA en AWS y Azure listas para producción.',
