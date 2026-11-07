@@ -86,6 +86,7 @@ export default defineType({
         }),
         defineField({name: 'business', title: 'Working with the business', type: 'text', rows: 4}),
         defineField({name: 'leadership', title: 'Leadership', type: 'text', rows: 4}),
+        defineField({name: 'practices', title: 'Methodology and patterns applied', type: 'array', of: [{type: 'string'}]}),
         defineField({name: 'results', title: 'Results', type: 'array', of: [{type: 'string'}]}),
       ],
     }),
