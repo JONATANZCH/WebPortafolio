@@ -46,11 +46,11 @@ function EducationEntry({ entry }: { entry: Education }) {
   );
 }
 
-export default async function ExperienceTimeline({ locale = 'es' }: { locale?: string }) {
+export default async function ExperienceTimeline({ locale = 'es', withEducation = false }: { locale?: string; withEducation?: boolean }) {
   const t = await getTranslations({ locale, namespace: 'experience' });
   const [experience, education] = await Promise.all([
     getExperience(locale as Language),
-    getEducation(locale as Language),
+    withEducation ? getEducation(locale as Language) : Promise.resolve([] as Education[]),
   ]);
 
   return (

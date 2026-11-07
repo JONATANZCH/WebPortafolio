@@ -6,17 +6,21 @@ import styles from './BlogCard.module.css';
 
 // ── Helpers ────────────────────────────────────────────────────
 
-function formatDate(dateString: string): string {
-  return new Intl.DateTimeFormat('es-MX', {
+function formatDate(dateString: string, lang: string): string {
+  return new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'es-MX', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   }).format(new Date(dateString));
 }
 
-function getExcerpt(body: unknown[] | undefined): string {
+function getExcerpt(body: unknown[] | undefined, lang: string): string {
+  const fallback =
+    lang === 'en'
+      ? 'Read the full article to learn more about this topic.'
+      : 'Lee el artículo completo para saber más sobre este tema.';
   if (!body || body.length === 0) {
-    return 'Lee el artículo completo para saber más sobre este tema.';
+    return fallback;
   }
 
   for (const block of body) {
@@ -46,7 +50,7 @@ function getExcerpt(body: unknown[] | undefined): string {
     }
   }
 
-  return 'Lee el artículo completo para saber más sobre este tema.';
+  return fallback;
 }
 
 // ── Sub-components ─────────────────────────────────────────────
@@ -90,11 +94,12 @@ interface BlogCardProps {
 
 export default function BlogCard({ post }: BlogCardProps) {
   const date = post.publishedAt ?? post._createdAt;
-  const excerpt = getExcerpt(post.body);
+  const excerpt = getExcerpt(post.body, post.language);
+  const base = `/${post.language}/blog/${post.slug.current}`;
 
   return (
     <article className={styles.card}>
-      <Link href={`/blog/${post.slug.current}`} className={styles.imageLink} tabIndex={-1} aria-hidden="true">
+      <Link href={base} className={styles.imageLink} tabIndex={-1} aria-hidden="true">
         <CardImage post={post} />
       </Link>
 
@@ -103,7 +108,7 @@ export default function BlogCard({ post }: BlogCardProps) {
           <CategoryPills categories={post.categories} />
         )}
 
-        <Link href={`/blog/${post.slug.current}`} className={styles.titleLink}>
+        <Link href={base} className={styles.titleLink}>
           <h2 className={styles.title}>{post.title}</h2>
         </Link>
 
@@ -111,7 +116,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
         <footer className={styles.footer}>
           <time className={styles.date} dateTime={date}>
-            {formatDate(date)}
+            {formatDate(date, post.language)}
           </time>
           {post.author?.name && (
             <span className={styles.author}>{post.author.name}</span>

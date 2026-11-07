@@ -104,8 +104,8 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main className={styles.page}>
       <div className={styles.container}>
         {/* Back link */}
-        <nav className={styles.backNav} aria-label="Navegación">
-          <Link href="/blog" className={styles.backLink}>
+        <nav className={styles.backNav} aria-label={language === 'en' ? 'Navigation' : 'Navegación'}>
+          <Link href={`/${locale}/blog`} className={styles.backLink}>
             &larr; Blog
           </Link>
         </nav>
@@ -164,20 +164,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Prev / Next navigation */}
         {(prevPost || nextPost) && (
-          <nav className={styles.postNav} aria-label="Navegación entre artículos">
+          <nav className={styles.postNav} aria-label={language === 'en' ? 'Article navigation' : 'Navegación entre artículos'}>
             <div className={styles.postNavInner}>
               <div className={styles.postNavPrev}>
                 {prevPost && (
-                  <Link href={`/blog/${prevPost.slug.current}`} className={styles.postNavLink}>
-                    <span className={styles.postNavLabel}>&larr; Anterior</span>
+                  <Link href={`/${locale}/blog/${prevPost.slug.current}`} className={styles.postNavLink}>
+                    <span className={styles.postNavLabel}>&larr; {language === 'en' ? 'Previous' : 'Anterior'}</span>
                     <span className={styles.postNavTitle}>{prevPost.title}</span>
                   </Link>
                 )}
               </div>
               <div className={styles.postNavNext}>
                 {nextPost && (
-                  <Link href={`/blog/${nextPost.slug.current}`} className={styles.postNavLink}>
-                    <span className={styles.postNavLabel}>Siguiente &rarr;</span>
+                  <Link href={`/${locale}/blog/${nextPost.slug.current}`} className={styles.postNavLink}>
+                    <span className={styles.postNavLabel}>{language === 'en' ? 'Next' : 'Siguiente'} &rarr;</span>
                     <span className={styles.postNavTitle}>{nextPost.title}</span>
                   </Link>
                 )}

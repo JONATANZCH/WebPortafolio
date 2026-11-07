@@ -1,0 +1,38 @@
+.page { padding-top: 3rem; }
+.container { max-width: 880px; margin-inline: auto; padding: 0 1.5rem 4rem; }
+.back { display: inline-block; margin-bottom: 2rem; font-size: 0.9rem; font-weight: 500; color: var(--muted); }
+.back:hover { color: var(--primary); }
+
+.hero { display: flex; gap: 2rem; align-items: center; margin-bottom: 2.5rem; }
+.photo { width: 144px; height: 144px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; }
+.title { margin-bottom: 0.75rem; }
+.lead { font-size: 1.125rem; max-width: 52ch; }
+
+.story { display: grid; gap: 1rem; max-width: 68ch; font-size: 1.0625rem; margin-bottom: 3.5rem; }
+.story p { color: var(--text); line-height: 1.75; }
+
+.block { padding-top: 2.5rem; border-top: 1px solid var(--border); margin-bottom: 2.5rem; }
+.block h2 { margin-bottom: 1.5rem; }
+
+.principles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.principle { padding: 1.25rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+.principle h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
+.principle p { font-size: 0.9rem; }
+
+.certs { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.cert { padding: 1.1rem 1.25rem; border: 1px solid var(--border); border-radius: 12px; }
+.cert h3 { font-size: 1rem; margin-bottom: 0.15rem; }
+.cert p { font-size: 0.9rem; }
+.note { margin-top: 1.25rem; font-size: 0.9rem; }
+.link { color: var(--primary); font-weight: 600; }
+.link:hover { text-decoration: underline; }
+
+.cta { text-align: left; padding: 2rem; border-radius: 16px; background: var(--text); }
+.cta h2 { color: #fff; margin-bottom: 1rem; font-size: 1.5rem; }
+.button { display: inline-block; padding: 0.7rem 1.25rem; border-radius: 10px; background: var(--primary); color: var(--primary-ink); font-weight: 600; }
+.button:hover { color: var(--primary-ink); background: #3a5eff; }
+
+@media (max-width: 640px) {
+  .hero { flex-direction: column; align-items: flex-start; }
+  .principles { grid-template-columns: 1fr; }
+}

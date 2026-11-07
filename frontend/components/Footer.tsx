@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { type About } from '@/lib/sanity.queries';
 import styles from './Footer.module.css';
 
@@ -11,9 +11,10 @@ interface FooterProps {
 
 export default function Footer({ about }: FooterProps) {
   const t = useTranslations();
-  const github = about?.github ?? 'https://github.com/jonatanzch';
-  const linkedin = about?.linkedin ?? 'https://linkedin.com/in/jonatanzarate';
-  const twitter = about?.twitter ?? 'https://twitter.com/jonatanzch';
+  const locale = useLocale();
+  const github = 'https://github.com/jonatanzch';
+  const linkedin = 'https://www.linkedin.com/in/jonatanzch-web-developer/';
+  const twitter = 'https://x.com/DavidJo39067918';
 
   return (
     <footer className={styles.footer}>
@@ -22,8 +23,9 @@ export default function Footer({ about }: FooterProps) {
 
         <div className={styles.right}>
           <nav className={styles.navLinks} aria-label="Footer navigation">
-            <Link href="/blog" className={styles.navLink}>{t('common.blog')}</Link>
-            <Link href="/#contacto" className={styles.navLink}>{t('common.contact')}</Link>
+            <Link href={`/${locale}/about`} className={styles.navLink}>{t('common.about')}</Link>
+            <Link href={`/${locale}/blog`} className={styles.navLink}>{t('common.blog')}</Link>
+            <Link href={`/${locale}#contacto`} className={styles.navLink}>{t('common.contact')}</Link>
           </nav>
 
           <div className={styles.socialLinks}>
@@ -55,7 +57,7 @@ export default function Footer({ about }: FooterProps) {
               href={twitter}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter / X"
+              aria-label="X"
               className={styles.socialLink}
             >
               <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">

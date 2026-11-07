@@ -5,7 +5,7 @@ import Hero from '@/components/Hero';
 import Capabilities from '@/components/Capabilities';
 import Process from '@/components/Process';
 import ProjectsGrid from '@/components/ProjectsGrid';
-import ExperienceTimeline from '@/components/ExperienceTimeline';
+import AboutTeaser from '@/components/AboutTeaser';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ContactBrief from '@/components/ContactBrief';
 import Footer from '@/components/Footer';
@@ -35,7 +35,7 @@ export default async function Home(props: PageProps) {
         <Capabilities />
         <ProjectsGrid locale={locale} />
         <Process locale={locale} />
-        <ExperienceTimeline locale={locale} />
+        <AboutTeaser locale={locale} />
         <TestimonialsCarousel locale={locale} />
 
         {recentPosts.length > 0 && (

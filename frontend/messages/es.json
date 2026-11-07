@@ -6,40 +6,143 @@
     "contact": "Contacto",
     "capabilities": "Capacidades",
     "experience": "Trayectoria",
-    "available": "Disponible para nuevos proyectos"
+    "available": "Disponible para nuevos proyectos",
+    "about": "Sobre David"
   },
   "hero": {
-    "role": "Ingeniería backend, cloud e IA generativa",
-    "title": "Plataformas backend e IA que llegan a producción y se pueden mantener.",
-    "lead": "Soy David Jonatan Zapeta Chavez. Con más de 8 años de experiencia, diseño APIs, microservicios y automatización en AWS y Azure, y trabajo codo a codo con producto y negocio para convertir requisitos en sistemas seguros, medibles y fáciles de evolucionar.",
+    "role": "Ingeniería backend · Cloud · IA generativa · DevSecOps",
+    "title": "Backend, cloud e IA generativa listos para producción: seguros, escalables y mantenibles.",
+    "lead": "Soy David Jonatan Zapeta Chavez, ingeniero con más de 5 años de experiencia diseñando APIs, microservicios, plataformas cloud y soluciones de IA en AWS y Azure. Trabajo con equipos de producto y negocio para convertir requisitos en sistemas seguros, medibles y fáciles de evolucionar.",
     "cta_projects": "Ver casos de estudio",
     "cta_contact": "Plantear un reto",
     "cta_brief": "Plantear un reto",
     "facts": [
-      { "label": "Experiencia", "value": "8+ años" },
-      { "label": "Enfoque", "value": "Backend · Cloud · IA" },
-      { "label": "Ubicación", "value": "CDMX · Remoto" },
-      { "label": "Idiomas", "value": "Español nativo · Inglés B2" }
+      {
+        "label": "Experiencia",
+        "value": "Más de 5 años"
+      },
+      {
+        "label": "Enfoque",
+        "value": "Backend · Cloud · IA · Seguridad"
+      },
+      {
+        "label": "Ubicación",
+        "value": "CDMX · Remoto"
+      },
+      {
+        "label": "Idiomas",
+        "value": "Español nativo · Inglés B2"
+      }
     ],
     "diagram": {
       "title": "Arquitectura de referencia",
-      "hint": "Selecciona un componente para ver qué resuelvo ahí.",
+      "hint": "Sigue el recorrido de una petición y selecciona cada componente.",
       "tools": "Herramientas",
       "nodes": {
-        "client": { "label": "Clientes", "sub": "Web y móvil", "text": "Interfaces que consumen contratos de API estables y versionados, para que web y móvil evolucionen sin romperse entre sí.", "tools": ["React", "Next.js", "React Native", "TypeScript"] },
-        "gateway": { "label": "Acceso", "sub": "Identidad y API", "text": "Identidad delegada, control de acceso por rol y límites de uso. La seguridad se diseña desde el primer endpoint, no al final.", "tools": ["OAuth2", "JWT", "Auth0", "REST", "GraphQL"] },
-        "services": { "label": "Servicios", "sub": "Dominio", "text": "Módulos con POO y SOLID: el dominio no depende de la infraestructura, así que se prueba aislado y cambiar un proveedor no obliga a reescribir la lógica de negocio.", "tools": ["NestJS", "Node.js", "FastAPI", "Clean Architecture", "DDD"] },
-        "events": { "label": "Eventos", "sub": "Mensajería", "text": "Procesamiento asíncrono con reintentos idempotentes, colas de mensajes fallidos (DLQ) y circuit breakers para que una falla no se propague.", "tools": ["SQS/SNS", "Kafka", "RabbitMQ", "DLQ"] },
-        "data": { "label": "Datos", "sub": "Persistencia", "text": "Modelos relacionales y NoSQL, consultas e índices optimizados, migraciones, respaldos y planes de recuperación ante desastres.", "tools": ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis"] },
-        "ai": { "label": "IA", "sub": "RAG y agentes", "text": "Búsqueda semántica sobre conocimiento propio, con guardrails y evaluaciones para detectar respuestas fuera de alcance antes de que lleguen al usuario.", "tools": ["RAG", "LangChain", "LangGraph", "Embeddings", "Bases vectoriales"] },
-        "platform": { "label": "Plataforma", "sub": "Cloud y entrega", "text": "Infraestructura como código y pipelines CI/CD con controles de seguridad que bloquean despliegues con vulnerabilidades.", "tools": ["Terraform", "Docker", "Kubernetes", "AWS", "Azure", "GitLab CI/CD"] },
-        "observability": { "label": "Observabilidad", "sub": "Operación", "text": "Métricas, trazas y alertas para resolver incidentes de forma proactiva, con señales que el equipo y el negocio entienden.", "tools": ["Grafana", "CloudWatch", "DataDog", "OpenTelemetry", "Prometheus"] }
+        "client": {
+          "label": "Clientes",
+          "sub": "Web y móvil",
+          "text": "Aplicaciones web (Next.js con SSR/ISR) y móviles que consumen un contrato versionado, OpenAPI o GraphQL. Las pruebas de contrato y la compatibilidad hacia atrás permiten desplegar cliente y servidor de forma independiente.",
+          "tools": [
+            "Next.js",
+            "React",
+            "React Native",
+            "TypeScript",
+            "OpenAPI"
+          ]
+        },
+        "gateway": {
+          "label": "Acceso",
+          "sub": "Identidad y borde",
+          "text": "Punto de entrada con OAuth2/OIDC, validación de JWT, límites de uso y protección contra abuso. La autorización gruesa se resuelve en el borde y la de dominio dentro de cada servicio, con mínimo privilegio.",
+          "tools": [
+            "OAuth2",
+            "OIDC",
+            "Auth0",
+            "JWT",
+            "Rate limiting"
+          ]
+        },
+        "services": {
+          "label": "Servicios",
+          "sub": "Dominio",
+          "text": "Arquitectura hexagonal en NestJS: casos de uso y puertos en el dominio, adaptadores para persistencia y mensajería. Contextos acotados con DDD, inversión de dependencias y pruebas de dominio sin infraestructura levantada.",
+          "tools": [
+            "NestJS",
+            "FastAPI",
+            "Hexagonal",
+            "DDD",
+            "SOLID"
+          ]
+        },
+        "events": {
+          "label": "Eventos",
+          "sub": "Mensajería",
+          "text": "Comunicación asíncrona entre contextos con productores idempotentes, patrón outbox, reintentos con backoff exponencial, colas de mensajes fallidos y circuit breakers que contienen la falla de una dependencia.",
+          "tools": [
+            "SQS/SNS",
+            "Kafka",
+            "RabbitMQ",
+            "DLQ",
+            "Outbox"
+          ]
+        },
+        "data": {
+          "label": "Datos",
+          "sub": "Persistencia",
+          "text": "Persistencia según el patrón de acceso: PostgreSQL como fuente transaccional con índices, particionado y migraciones versionadas; Redis para caché; MongoDB para documentos. Respaldos con recuperación a un punto en el tiempo y restauraciones probadas.",
+          "tools": [
+            "PostgreSQL",
+            "MongoDB",
+            "Redis",
+            "SQL Server",
+            "PITR"
+          ]
+        },
+        "ai": {
+          "label": "IA",
+          "sub": "RAG y agentes",
+          "text": "Pipeline RAG: ingestión y segmentación de documentos, embeddings, búsqueda semántica en base vectorial, guardrails de entrada y salida, y evaluación continua de relevancia y fidelidad a las fuentes antes de liberar cambios.",
+          "tools": [
+            "RAG",
+            "LangChain",
+            "LangGraph",
+            "Embeddings",
+            "Guardrails",
+            "Evals"
+          ]
+        },
+        "platform": {
+          "label": "Plataforma",
+          "sub": "Cloud y entrega",
+          "text": "Infraestructura como código con Terraform, imágenes de contenedor mínimas y despliegue en ECS, Lambda o Kubernetes. Los pipelines ejecutan SAST, análisis de dependencias e imágenes, y bloquean el paso a producción ante vulnerabilidades.",
+          "tools": [
+            "Terraform",
+            "Docker",
+            "Kubernetes",
+            "AWS",
+            "Azure",
+            "GitLab CI/CD"
+          ]
+        },
+        "observability": {
+          "label": "Observabilidad",
+          "sub": "Operación",
+          "text": "Métricas, logs y trazas correlacionados con OpenTelemetry. Los SLOs se definen con producto y las alertas se disparan por impacto en el usuario, no por ruido de infraestructura.",
+          "tools": [
+            "OpenTelemetry",
+            "Grafana",
+            "CloudWatch",
+            "DataDog",
+            "SLOs"
+          ]
+        }
       }
     }
   },
   "capabilities": {
     "title": "Capacidades",
-    "subtitle": "Cuatro frentes en los que puedo sumar a tu equipo. Elige uno para ver cómo lo abordo.",
+    "subtitle": "Cinco frentes donde puedo sumar a tu equipo. Elige uno para ver qué entrego y cómo lo abordo.",
     "deliver": "Qué entrego",
     "approach": "Cómo lo abordo",
     "tools": "Herramientas",
@@ -47,34 +150,135 @@
       {
         "id": "backend",
         "title": "Arquitectura backend y APIs",
-        "summary": "Servicios y APIs que se entienden, se prueban y soportan el crecimiento del producto.",
-        "deliver": ["Diseño de APIs REST y GraphQL con contratos versionados", "Servicios modulares en NestJS o FastAPI con pruebas automatizadas", "Modelo de datos relacional o NoSQL y estrategia de migraciones", "Autenticación y autorización (JWT, OAuth2, Auth0)"],
-        "approach": ["Separo dominio, casos de uso e infraestructura aplicando POO y SOLID", "Defino los contratos antes de implementar, junto con quien los consume", "Documento las decisiones de arquitectura para que el equipo pueda mantenerlas"],
-        "tools": ["NestJS", "Node.js", "FastAPI", "GraphQL", "PostgreSQL", "MongoDB", "Redis"]
+        "summary": "Servicios que el equipo entiende, prueba y puede hacer crecer sin reescribirlos.",
+        "deliver": [
+          "APIs REST y GraphQL con contratos versionados (OpenAPI) y pruebas de contrato",
+          "Servicios modulares en NestJS o FastAPI con arquitectura hexagonal, y DDD donde el dominio lo justifica",
+          "Modelado relacional y NoSQL, índices, migraciones versionadas y estrategia de caché",
+          "Procesamiento por eventos con idempotencia, reintentos, DLQ y circuit breakers"
+        ],
+        "approach": [
+          "Separo dominio, casos de uso e infraestructura con POO y SOLID para probar la lógica sin levantar infraestructura",
+          "Acuerdo el contrato con quien lo consume antes de escribir código",
+          "Registro cada decisión relevante como ADR, con alternativas y consecuencias"
+        ],
+        "tools": [
+          "NestJS",
+          "Node.js",
+          "TypeScript",
+          "FastAPI",
+          "GraphQL",
+          "OpenAPI",
+          "PostgreSQL",
+          "MongoDB",
+          "Redis",
+          "Kafka",
+          "SQS/SNS"
+        ]
       },
       {
         "id": "ai",
-        "title": "IA generativa y RAG",
-        "summary": "Funcionalidades de IA con límites claros, medibles y listas para operar.",
-        "deliver": ["Pipelines de embeddings y búsqueda semántica en bases vectoriales", "Flujos RAG y agentes con LangChain o LangGraph", "Guardrails de entrada y salida, y evaluaciones de calidad", "Observabilidad de costos, latencia y calidad de respuesta"],
-        "approach": ["Parto del caso de uso y de cómo se medirá el éxito, no del modelo", "Mantengo a una persona en el circuito donde el riesgo lo exige", "Evalúo antes de liberar y vigilo después en producción"],
-        "tools": ["RAG", "LangChain", "LangGraph", "Semantic Kernel", "OpenAI API", "Embeddings", "Guardrails"]
+        "title": "IA generativa y RAG en producción",
+        "summary": "Funcionalidades de IA con calidad medible, costos controlados y límites explícitos.",
+        "deliver": [
+          "Pipelines de ingestión, embeddings y búsqueda semántica sobre bases vectoriales",
+          "Flujos RAG y agentes con LangChain, LangGraph o Semantic Kernel",
+          "Guardrails de entrada y salida, y evaluaciones automáticas de relevancia y fidelidad a las fuentes",
+          "Trazabilidad de costo por consulta, latencia y calidad de respuesta (LLMOps)"
+        ],
+        "approach": [
+          "Defino el caso de uso y la métrica de éxito antes de elegir el modelo",
+          "Mantengo revisión humana donde el riesgo lo exige y protejo los datos sensibles antes de enviarlos a un modelo",
+          "Evalúo cada cambio de prompt, modelo o datos antes de liberarlo y lo vigilo en producción"
+        ],
+        "tools": [
+          "RAG",
+          "LangChain",
+          "LangGraph",
+          "Semantic Kernel",
+          "OpenAI API",
+          "Embeddings",
+          "Guardrails",
+          "Evals"
+        ]
       },
       {
         "id": "cloud",
-        "title": "Cloud, DevOps y plataforma",
-        "summary": "Infraestructura reproducible y entregas frecuentes sin sacrificar seguridad.",
-        "deliver": ["Infraestructura como código con Terraform en AWS o Azure", "Pipelines CI/CD con análisis estático y bloqueo por vulnerabilidades", "Contenedores con Docker y orquestación cuando el caso lo justifica", "Dashboards y alertas con Grafana, CloudWatch o DataDog"],
-        "approach": ["Automatizo lo repetible y dejo todo versionado y revisable", "Pongo controles de seguridad dentro del pipeline, no después", "Defino qué señales importan antes de instrumentar"],
-        "tools": ["Terraform", "AWS", "Azure", "Docker", "Kubernetes", "GitLab CI/CD", "GitHub Actions", "Grafana"]
+        "title": "Cloud, plataforma y confiabilidad",
+        "summary": "Infraestructura reproducible, entregas frecuentes y una operación que se puede medir.",
+        "deliver": [
+          "Infraestructura como código con Terraform en AWS (ECS, Lambda, SQS/SNS) y Azure",
+          "Pipelines CI/CD en GitLab o GitHub Actions con despliegues por entorno y rollback",
+          "Contenedores con Docker y Kubernetes cuando el caso lo justifica",
+          "Observabilidad con Grafana, CloudWatch o DataDog: métricas, trazas, alertas y SLOs"
+        ],
+        "approach": [
+          "Todo cambio de infraestructura pasa por código, revisión y pipeline",
+          "Defino SLOs con producto y alerto por impacto en el usuario, no por ruido",
+          "Reviso el costo desde el diseño (FinOps) para que la plataforma escale sin sorpresas"
+        ],
+        "tools": [
+          "Terraform",
+          "AWS",
+          "Azure",
+          "Docker",
+          "Kubernetes",
+          "GitLab CI/CD",
+          "GitHub Actions",
+          "Grafana",
+          "DataDog",
+          "OpenTelemetry"
+        ]
+      },
+      {
+        "id": "security",
+        "title": "Seguridad y DevSecOps",
+        "summary": "Seguridad integrada en el diseño y en el pipeline, no añadida al final.",
+        "deliver": [
+          "Autenticación y autorización con OAuth2/OIDC, JWT y Auth0, con roles y permisos de mínimo privilegio",
+          "Pipelines que bloquean despliegues con vulnerabilidades: análisis estático (SAST), dependencias e imágenes",
+          "Gestión de secretos, cifrado en tránsito y en reposo, y endurecimiento de APIs según OWASP API Security",
+          "Modelado de amenazas y revisión de arquitectura para sistemas con datos sensibles"
+        ],
+        "approach": [
+          "Aplico mínimo privilegio en usuarios, servicios y pipelines",
+          "Automatizo los controles para que corran en cada cambio y no solo en auditorías",
+          "Traduzco los riesgos a impacto de negocio para priorizar qué corregir primero"
+        ],
+        "tools": [
+          "OAuth2",
+          "OIDC",
+          "JWT",
+          "Auth0",
+          "OWASP",
+          "SAST",
+          "Gestión de secretos",
+          "IAM",
+          "TLS"
+        ]
       },
       {
         "id": "leadership",
         "title": "Liderazgo técnico y alineación con negocio",
-        "summary": "Decisiones técnicas explicadas en el idioma del negocio, y equipos que avanzan en la misma dirección.",
-        "deliver": ["Discovery técnico: alcance, riesgos, dependencias y supuestos", "Propuestas con alternativas, costos y trade-offs documentados", "Planes de entrega por etapas con prioridades acordadas", "Revisión de código y lineamientos de calidad para el equipo"],
-        "approach": ["Traduzco requisitos de negocio en alcance medible y riesgos explícitos", "Presento opciones con su impacto, en lugar de una única respuesta", "Facilito acuerdos entre producto, ingeniería y operaciones"],
-        "tools": ["ADR", "Code review", "Roadmaps técnicos", "Mentoría", "Documentación"]
+        "summary": "Decisiones técnicas explicadas en términos de negocio, y equipos que avanzan en la misma dirección.",
+        "deliver": [
+          "Descubrimiento técnico: alcance, riesgos, dependencias y supuestos por escrito",
+          "Propuestas con alternativas, costo y trade-offs, listas para decidir",
+          "Planes de entrega por etapas con prioridades acordadas con producto",
+          "Revisión de código, lineamientos de calidad y mentoría para el equipo"
+        ],
+        "approach": [
+          "Traduzco requisitos de negocio a alcance medible y riesgos explícitos",
+          "Presento opciones con su impacto en lugar de una única respuesta",
+          "Facilito acuerdos entre producto, ingeniería y operación, y dejo la decisión documentada"
+        ],
+        "tools": [
+          "ADR",
+          "Roadmaps técnicos",
+          "Code review",
+          "Mentoría",
+          "Documentación"
+        ]
       }
     ]
   },
@@ -82,17 +286,35 @@
     "title": "Cómo trabajo",
     "subtitle": "Un proceso corto y transparente, ajustable al tamaño del reto.",
     "steps": [
-      { "title": "Diagnóstico", "text": "Entiendo el contexto, las restricciones y qué significa éxito. Salgo con alcance, riesgos y supuestos por escrito." },
-      { "title": "Diseño", "text": "Propongo una arquitectura con alternativas y trade-offs. Se decide en conjunto y queda registrada." },
-      { "title": "Entrega incremental", "text": "Libero por etapas, con pruebas y pipelines desde la primera. Cada entrega se puede demostrar y revertir." },
-      { "title": "Operación y traspaso", "text": "Dejo observabilidad, documentación y prácticas que tu equipo puede sostener sin depender de mí." }
+      {
+        "title": "Diagnóstico",
+        "text": "Entiendo el contexto, las restricciones y qué significa éxito. Salgo con alcance, riesgos y supuestos por escrito."
+      },
+      {
+        "title": "Diseño",
+        "text": "Propongo una arquitectura con alternativas y trade-offs. Se decide en conjunto y queda registrada."
+      },
+      {
+        "title": "Entrega incremental",
+        "text": "Libero por etapas, con pruebas y pipelines desde la primera. Cada entrega se puede demostrar y revertir."
+      },
+      {
+        "title": "Operación y traspaso",
+        "text": "Dejo observabilidad, documentación y prácticas que tu equipo puede sostener sin depender de mí."
+      }
     ]
   },
   "projects": {
     "title": "Casos de estudio",
     "subtitle": "Plataformas en producción: qué reto había, qué decisiones se tomaron y con qué herramientas.",
     "filter_label": "Filtrar por área",
-    "filters": { "all": "Todos", "frontend": "Frontend", "backend": "Backend", "cloud": "Cloud y DevOps", "ai": "IA" },
+    "filters": {
+      "all": "Todos",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "cloud": "Cloud y DevOps",
+      "ai": "IA"
+    },
     "read": "Leer caso de estudio",
     "visit": "Ver sitio",
     "empty": "No hay casos en esta área todavía.",
@@ -116,9 +338,23 @@
       "q1_hint": "Puedes elegir más de una.",
       "q2": "¿En qué etapa está?",
       "q3": "¿Para cuándo lo necesitas?",
-      "topics": ["Diseñar una API o plataforma backend", "Integrar IA generativa (RAG)", "Automatizar infraestructura y CI/CD", "Escalar o estabilizar un sistema", "Liderar la parte técnica de un proyecto"],
-      "stages": ["Es una idea", "Está en desarrollo", "Ya está en producción"],
-      "timeframes": ["Lo antes posible", "En 1 a 3 meses", "Todavía exploro"],
+      "topics": [
+        "Diseñar una API o plataforma backend",
+        "Integrar IA generativa (RAG)",
+        "Automatizar infraestructura y CI/CD",
+        "Escalar o estabilizar un sistema",
+        "Liderar la parte técnica de un proyecto"
+      ],
+      "stages": [
+        "Es una idea",
+        "Está en desarrollo",
+        "Ya está en producción"
+      ],
+      "timeframes": [
+        "Lo antes posible",
+        "En 1 a 3 meses",
+        "Todavía exploro"
+      ],
       "preview": "Vista previa de tu mensaje",
       "empty": "Elige al menos un tema para armar tu mensaje.",
       "subject": "Reto técnico",
@@ -161,5 +397,59 @@
     "label": "Idioma",
     "spanish": "Español",
     "english": "English"
+  },
+  "about": {
+    "title": "Sobre David Zapeta",
+    "lead": "Ingeniero backend, cloud e IA generativa en Ciudad de México. Diseño y opero las plataformas que sostienen productos reales.",
+    "story": [
+      "Empecé en 2018 en banca digital, optimizando consultas, modelos de datos y procesos de respaldo y recuperación. Ahí aprendí que un sistema confiable depende de datos bien modelados y de una operación disciplinada.",
+      "Después pasé al desarrollo full-stack y backend con enfoque DevOps: APIs REST y GraphQL, interfaces con React y Vue, pipelines en GitLab CI/CD y patrones de resiliencia como DLQs y circuit breakers.",
+      "Hoy diseño microservicios en NestJS y FastAPI, infraestructura con Terraform en AWS y Azure, y funcionalidades de IA generativa con RAG, guardrails y observabilidad."
+    ],
+    "principles_title": "Cómo pienso la ingeniería",
+    "principles": [
+      {
+        "title": "El diseño se decide con el equipo",
+        "text": "Presento alternativas con sus trade-offs y dejo la decisión documentada, para que se pueda revisar y mejorar."
+      },
+      {
+        "title": "La seguridad no es una fase",
+        "text": "Los controles viven en el diseño y en el pipeline, y se ejecutan en cada cambio."
+      },
+      {
+        "title": "Lo que no se mide no se opera",
+        "text": "Defino qué señales importan antes de instrumentar, y alerto por impacto en el usuario."
+      },
+      {
+        "title": "El sistema es del equipo",
+        "text": "Dejo documentación, pruebas y prácticas para que nadie dependa de una sola persona."
+      }
+    ],
+    "trajectory": "Trayectoria",
+    "certs_title": "Certificaciones",
+    "linkedin_note": "El detalle de mi formación y recomendaciones está en LinkedIn.",
+    "linkedin_cta": "Ver perfil en LinkedIn",
+    "cta_title": "¿Hablamos de tu proyecto?",
+    "cta": "Plantear un reto",
+    "back": "← Inicio"
+  },
+  "teaser": {
+    "title": "Quién está detrás",
+    "text": "Soy David Zapeta, ingeniero backend, cloud e IA generativa. Mi trabajo parte de los datos y la operación confiable, y hoy se centra en plataformas seguras, escalables y mantenibles.",
+    "steps": [
+      {
+        "year": "2018",
+        "text": "Datos en banca digital"
+      },
+      {
+        "year": "2021",
+        "text": "Full-stack y backend-DevOps"
+      },
+      {
+        "year": "2024",
+        "text": "Backend, cloud e IA generativa"
+      }
+    ],
+    "cta": "Conocer más sobre David"
   }
 }

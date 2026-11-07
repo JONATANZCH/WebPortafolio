@@ -9,7 +9,6 @@ import styles from './Navigation.module.css';
 const SECTIONS = [
   { id: 'capacidades', key: 'capabilities' },
   { id: 'proyectos', key: 'projects' },
-  { id: 'experiencia', key: 'experience' },
 ] as const;
 
 export default function Navigation() {
@@ -71,6 +70,11 @@ export default function Navigation() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link href={`/${locale}/about`} className={styles.link}>
+              {t('about')}
+            </Link>
+          </li>
           <li>
             <Link href={`/${locale}/blog`} className={styles.link}>
               {t('blog')}

@@ -32,19 +32,21 @@ export default async function BlogPage(props: BlogPageProps) {
       <main className={styles.page}>
       <div className={styles.container}>
         <nav className={styles.backNav}>
-          <Link href="/" className={styles.backLink}>← Inicio</Link>
+          <Link href={`/${locale}`} className={styles.backLink}>{locale === 'en' ? '← Home' : '← Inicio'}</Link>
         </nav>
         <header className={styles.header}>
-          <h1 className={styles.heading}>Artículos</h1>
+          <h1 className={styles.heading}>{locale === 'en' ? 'Articles' : 'Artículos'}</h1>
           <p className={styles.subheading}>
-            Reflexiones técnicas, aprendizajes y pensamientos sobre ingeniería de software.
+            {locale === 'en'
+              ? 'Technical reflections, lessons learned and thoughts on software engineering.'
+              : 'Reflexiones técnicas, aprendizajes y pensamientos sobre ingeniería de software.'}
           </p>
         </header>
 
         {posts.length === 0 ? (
           <div className={styles.empty}>
             <p className={styles.emptyText}>
-              Aún no hay artículos publicados. ¡Vuelve pronto!
+              {locale === 'en' ? 'No articles published yet. Check back soon.' : 'Aún no hay artículos publicados. Vuelve pronto.'}
             </p>
           </div>
         ) : (

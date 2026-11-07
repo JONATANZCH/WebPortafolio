@@ -20,7 +20,6 @@ const LABELS = {
     results: 'Resultados',
     stack: 'Stack',
     live: 'Ver proyecto',
-    code: 'Código',
   },
   en: {
     back: '← Projects',
@@ -32,7 +31,6 @@ const LABELS = {
     results: 'Results',
     stack: 'Stack',
     live: 'View project',
-    code: 'Code',
   },
 } as const;
 
@@ -85,11 +83,6 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
             {project.liveUrl && (
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
                 {l.live} ↗
-              </a>
-            )}
-            {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.linkBtnGhost}>
-                {l.code} ↗
               </a>
             )}
           </div>

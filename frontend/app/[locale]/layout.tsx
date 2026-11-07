@@ -21,8 +21,13 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   description:
-    'Ingeniería backend, cloud e IA generativa con 8+ años de experiencia. Diseño APIs, microservicios y automatización en AWS y Azure para llevar productos a producción.',
+    'Ingeniería backend, cloud e IA generativa con más de 5 años de experiencia. Diseño APIs, microservicios, plataformas cloud, seguridad y soluciones de IA en AWS y Azure listas para producción.',
   keywords: [
+    'ingeniero backend',
+    'ia generativa',
+    'rag',
+    'devsecops',
+    'arquitectura de microservicios',
     'cloud engineer',
     'devops',
     'backend developer',
