@@ -5,6 +5,9 @@ const COVERS = new Set([
   'libertad-autonomia-trabajo',
   'blockchain-para-desarrolladores',
   'sobreviviendo-microgestion',
+  'odd-vs-sdd-cuanta-ceremonia',
+  'guia-ceremonia-niveles',
+  'patrones-de-diseno-invisibles',
 ]);
 
 /** Illustration shipped in /public/blog for a post slug, if there is one. */

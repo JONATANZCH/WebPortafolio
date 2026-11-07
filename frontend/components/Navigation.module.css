@@ -46,27 +46,24 @@
 
 .author {
   display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.25rem 0.75rem 0.25rem 0.25rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg);
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 6px;
   color: var(--text);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.author:hover { border-color: var(--primary); color: var(--text); box-shadow: 0 6px 18px -10px rgba(31, 75, 255, 0.55); }
-.avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
-.authorText { display: grid; line-height: 1.15; overflow: hidden; }
-.authorName { font-weight: 650; font-size: 0.875rem; letter-spacing: -0.01em; }
+.author:hover { color: var(--text); }
+.authorName { white-space: nowrap; font-weight: 650; font-size: 0.95rem; letter-spacing: -0.01em; }
 .authorHint {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--primary);
-  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
   opacity: 0;
-  transition: max-height 0.2s ease, opacity 0.2s ease;
+  transition: max-width 0.25s ease, opacity 0.2s ease;
 }
-.author:hover .authorHint, .author:focus-visible .authorHint { max-height: 1rem; opacity: 1; }
+.author:hover .authorHint, .author:focus-visible .authorHint { max-width: 6rem; opacity: 1; }
 
 .links { display: flex; gap: 0.25rem; list-style: none; }
 .link {
@@ -95,6 +92,12 @@
 
 @media (max-width: 860px) {
   .links { display: none; }
-  .authorText { display: none; }
-  .author { padding: 0.25rem; }
+  .authorHint { display: none; }
+}
+
+@media (max-width: 560px) {
+  .nav { gap: 0.5rem; padding: 0.6rem 1rem; }
+  .author { display: none; }
+  .rightSide { gap: 0.5rem; }
+  .cta { padding: 0.45rem 0.8rem; }
 }

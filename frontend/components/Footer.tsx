@@ -9,7 +9,9 @@ interface FooterProps {
   about: About | null;
 }
 
-export default function Footer({ about }: FooterProps) {
+// `about` is kept in the props for callers that already pass it.
+export default function Footer(props: FooterProps) {
+  void props;
   const t = useTranslations();
   const locale = useLocale();
   const github = 'https://github.com/jonatanzch';

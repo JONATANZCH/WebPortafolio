@@ -51,13 +51,8 @@ const PATH: NodeId[] = ['client', 'gateway', 'services', 'data', 'events', 'ai',
 export default function ArchitectureDiagram() {
   const t = useTranslations('hero.diagram');
   const [active, setActive] = useState<NodeId>('services');
-  const [motion, setMotion] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
 
   useEffect(() => {
     if (!playing) return;
@@ -127,15 +122,13 @@ export default function ArchitectureDiagram() {
           );
         })}
 
-        {motion && (
-          <circle r="4" className={styles.packet}>
+        <circle r="4" className={styles.packet}>
             <animateMotion
               dur="4.5s"
               repeatCount="indefinite"
               path={`M ${center('client').x} ${y} L ${center('gateway').x} ${y} L ${center('services').x} ${y} L ${center('data').x} ${y}`}
             />
           </circle>
-        )}
 
         {NODES.map((n) => {
           const on = n.id === active;

@@ -118,6 +118,7 @@ export default function CommandPalette() {
           <path d="M20 20l-3.5-3.5" />
         </svg>
         <kbd className={styles.kbd}>Ctrl K</kbd>
+        <span className={styles.menuLabel}>{tp('menu')}</span>
       </button>
 
       {open && (

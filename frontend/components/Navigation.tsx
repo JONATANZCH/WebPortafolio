@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -72,11 +71,8 @@ export default function Navigation() {
             dz
           </Link>
           <Link href={`/${locale}/about`} className={styles.author} title={t('about_me')}>
-            <Image src="/david-zapeta.jpg" alt="" width={32} height={32} className={styles.avatar} />
-            <span className={styles.authorText}>
-              <span className={styles.authorName}>David Zapeta</span>
-              <span className={styles.authorHint}>{t('about_me')} →</span>
-            </span>
+            <span className={styles.authorName}>David Zapeta</span>
+            <span className={styles.authorHint}>{t('about_me')} →</span>
           </Link>
         </div>
 

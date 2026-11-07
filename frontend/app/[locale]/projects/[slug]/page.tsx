@@ -17,8 +17,11 @@ const LABELS = {
     decisions: 'Decisiones técnicas',
     business: 'Trabajo con negocio',
     leadership: 'Liderazgo',
+    practices: 'Metodología y patrones aplicados',
     results: 'Resultados',
     stack: 'Stack',
+    prev: 'Caso anterior',
+    next: 'Siguiente caso',
     live: 'Ver proyecto',
   },
   en: {
@@ -28,8 +31,11 @@ const LABELS = {
     decisions: 'Technical decisions',
     business: 'Working with the business',
     leadership: 'Leadership',
+    practices: 'Methodology and patterns applied',
     results: 'Results',
     stack: 'Stack',
+    prev: 'Previous case',
+    next: 'Next case',
     live: 'View project',
   },
 } as const;
@@ -63,8 +69,15 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   setRequestLocale(locale);
   const l = LABELS[(locale as Language) === 'en' ? 'en' : 'es'];
 
-  const project = await getProjectBySlug(slug, locale as Language);
+  const [project, allProjects] = await Promise.all([
+    getProjectBySlug(slug, locale as Language),
+    getProjects(locale as Language),
+  ]);
   if (!project) notFound();
+  const navProjects = allProjects.filter((p) => p.slug);
+  const idx = navProjects.findIndex((p) => p.slug!.current === slug);
+  const prev = idx > 0 ? navProjects[idx - 1] : null;
+  const next = idx !== -1 && idx < navProjects.length - 1 ? navProjects[idx + 1] : null;
   const cs = project.caseStudy;
 
   return (
@@ -130,6 +143,19 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
           </section>
         )}
 
+        {cs?.practices && cs.practices.length > 0 && (
+          <section className={styles.block}>
+            <h2 className={styles.h2}>{l.practices}</h2>
+            <ul className={styles.chips} role="list">
+              {cs.practices.map((p) => (
+                <li key={p} className={styles.chip}>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         {cs?.business && (
           <section className={styles.block}>
             <h2 className={styles.h2}>{l.business}</h2>
@@ -166,6 +192,27 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
               ))}
             </ul>
           </section>
+        )}
+
+        {(prev || next) && (
+          <nav className={styles.caseNav} aria-label="Case studies">
+            <div>
+              {prev && (
+                <Link href={`/${locale}/projects/${prev.slug!.current}`} className={styles.caseNavLink}>
+                  <span className={styles.caseNavLabel}>← {l.prev}</span>
+                  <span className={styles.caseNavTitle}>{prev.title}</span>
+                </Link>
+              )}
+            </div>
+            <div className={styles.caseNavRight}>
+              {next && (
+                <Link href={`/${locale}/projects/${next.slug!.current}`} className={styles.caseNavLink}>
+                  <span className={styles.caseNavLabel}>{l.next} →</span>
+                  <span className={styles.caseNavTitle}>{next.title}</span>
+                </Link>
+              )}
+            </div>
+          </nav>
         )}
       </div>
     </main>

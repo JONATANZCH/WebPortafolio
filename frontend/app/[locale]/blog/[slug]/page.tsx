@@ -24,6 +24,17 @@ interface PageProps {
 // Helpers
 // ============================================================
 
+function readingMinutes(body: unknown[] | undefined): number {
+  const text = (body ?? [])
+    .map((b) => {
+      const blk = b as { _type?: string; children?: Array<{ text?: string }> };
+      return blk._type === 'block' ? (blk.children ?? []).map((c) => c.text ?? '').join('') : '';
+    })
+    .join(' ');
+  const words = text.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 function formatDate(dateString: string, locale: Language): string {
   const localeStr = locale === 'es' ? 'es-MX' : 'en-US';
   return new Intl.DateTimeFormat(localeStr, {
@@ -37,7 +48,7 @@ function formatDate(dateString: string, locale: Language): string {
 // Static generation
 // ============================================================
 
-export const dynamicParams = false;
+export const dynamicParams = true; // new Sanity posts render on demand (no rebuild needed)
 
 export async function generateStaticParams() {
   try {
@@ -150,13 +161,15 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Meta */}
             <div className={styles.meta}>
               <Link href={`/${locale}/about`} className={styles.bylineLink}>
-                <Image src="/david-zapeta.jpg" alt="" width={28} height={28} className={styles.bylineAvatar} />
+                <Image src="/david-zapeta.jpg" unoptimized alt="" width={28} height={28} className={styles.bylineAvatar} />
                 <span className={styles.author}>David Zapeta</span>
               </Link>
               <span className={styles.metaDivider} aria-hidden="true">·</span>
               <time className={styles.date} dateTime={publishedDate}>
                 {formatDate(publishedDate, language)}
               </time>
+              <span className={styles.metaDivider} aria-hidden="true">·</span>
+              <span>{readingMinutes(post.body)} min {language === 'en' ? 'read' : 'de lectura'}</span>
             </div>
           </header>
 

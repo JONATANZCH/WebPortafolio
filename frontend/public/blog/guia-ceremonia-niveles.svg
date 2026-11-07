@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F7FF"/><stop offset="1" stop-color="#E2F5F8"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1F4BFF" stroke-opacity=".07"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+
+  <!-- three levels of ceremony -->
+  <g>
+    <rect x="50" y="230" width="150" height="90" rx="10" fill="#fff" stroke="#0B1B33" stroke-width="2.5"/>
+    <rect x="245" y="170" width="150" height="150" rx="10" fill="#fff" stroke="#1F4BFF" stroke-width="2.5"/>
+    <rect x="440" y="100" width="150" height="220" rx="10" fill="#0B1B33"/>
+  </g>
+  <g font-family="ui-monospace,Menlo,monospace" font-weight="600">
+    <text x="68" y="258" font-size="13" fill="#1F4BFF">level 0</text>
+    <text x="263" y="198" font-size="13" fill="#1F4BFF">level 1</text>
+    <text x="458" y="128" font-size="13" fill="#00A3C4">level 2</text>
+  </g>
+  <!-- contents: commit / mini spec / full spec -->
+  <g stroke-linecap="round" stroke-width="5">
+    <path d="M68 280h60" stroke="#1F4BFF"/><path d="M68 296h38" stroke="#6b7a96"/>
+    <path d="M263 222h90" stroke="#1F4BFF"/><path d="M263 238h110" stroke="#6b7a96"/><path d="M263 254h70" stroke="#6b7a96"/><path d="M263 270h100" stroke="#00A3C4"/><path d="M263 286h60" stroke="#6b7a96"/>
+    <path d="M458 150h90" stroke="#00A3C4"/><path d="M458 168h112" stroke="#9fb0cc"/><path d="M458 186h70" stroke="#9fb0cc"/><path d="M458 204h104" stroke="#1F4BFF"/><path d="M458 222h84" stroke="#9fb0cc"/><path d="M458 240h108" stroke="#9fb0cc"/><path d="M458 258h64" stroke="#00A3C4"/><path d="M458 276h96" stroke="#9fb0cc"/>
+  </g>
+  <!-- risk arrow climbing -->
+  <path d="M120 215C210 180 330 130 430 85" fill="none" stroke="#F59E0B" stroke-width="3" stroke-dasharray="7 8"/>
+  <path d="M418 80l16 2-8 14" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(50 60)" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#526078">
+    <text x="0" y="0">risk · scope · lifetime</text>
+  </g>
+</svg>

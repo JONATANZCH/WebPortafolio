@@ -62,3 +62,5 @@
 .play:hover { background: var(--primary); color: var(--primary-ink); }
 .step { font-family: var(--font-mono); font-weight: 400; font-size: 0.72rem; opacity: 0.85; }
 .caption { align-items: center; }
+
+@media (prefers-reduced-motion: reduce) { .packet { display: none; } }

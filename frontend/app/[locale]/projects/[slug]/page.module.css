@@ -21,3 +21,11 @@
 .results { padding-left: 1.25rem; margin: 0; }
 .results li { margin-bottom: 0.5rem; }
 @media (max-width: 560px) { .decision { grid-template-columns: 2rem 1fr; } }
+
+.caseNav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.caseNavRight { text-align: right; }
+.caseNavLink { display: grid; gap: 0.25rem; padding: 1rem 1.25rem; border: 1px solid var(--border); border-radius: 12px; transition: border-color 0.15s ease; }
+.caseNavLink:hover { border-color: var(--primary); }
+.caseNavLabel { font-size: 0.8rem; color: var(--muted); }
+.caseNavTitle { font-weight: 650; color: var(--text); letter-spacing: -0.01em; }
+@media (max-width: 560px) { .caseNav { grid-template-columns: 1fr; } .caseNavRight { text-align: left; } }

@@ -26,18 +26,6 @@ const variants = {
   }),
 };
 
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className={styles.stars} aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <span key={i} className={i < rating ? styles.starFilled : styles.starEmpty}>
-          {i < rating ? '★' : '☆'}
-        </span>
-      ))}
-    </div>
-  );
-}
-
 function AuthorAvatar({ testimonial }: { testimonial: Testimonial }) {
   if (testimonial.image) {
     const imageUrl = urlFor(testimonial.image).width(80).height(80).url();

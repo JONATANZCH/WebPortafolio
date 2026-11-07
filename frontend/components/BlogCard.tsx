@@ -135,7 +135,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             {formatDate(date, post.language)}
           </time>
           <span className={styles.author}>
-            <Image src="/david-zapeta.jpg" alt="" width={20} height={20} className={styles.avatar} />
+            <Image src="/david-zapeta.jpg" unoptimized alt="" width={20} height={20} className={styles.avatar} />
             David Zapeta
           </span>
         </footer>

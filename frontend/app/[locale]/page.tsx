@@ -8,6 +8,7 @@ import ProjectsGrid from '@/components/ProjectsGrid';
 import AboutTeaser from '@/components/AboutTeaser';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ContactBrief from '@/components/ContactBrief';
+import DirectContact from '@/components/DirectContact';
 import Footer from '@/components/Footer';
 import BlogCard from '@/components/BlogCard';
 import Link from 'next/link';
@@ -34,7 +35,7 @@ export default async function Home(props: PageProps) {
         <Hero />
         <Capabilities />
         <ProjectsGrid locale={locale} />
-        <Process locale={locale} />
+        <Process />
         <AboutTeaser locale={locale} />
         <TestimonialsCarousel locale={locale} />
 
@@ -64,6 +65,7 @@ export default async function Home(props: PageProps) {
               <h2 className={styles.contactHeading}>{t('contact.title')}</h2>
               <p>{t('contact.subtitle')}</p>
             </header>
+            <DirectContact locale={locale} />
             <ContactBrief locale={locale} />
           </div>
         </section>

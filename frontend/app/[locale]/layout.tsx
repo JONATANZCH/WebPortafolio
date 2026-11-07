@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { locales, type Locale } from '@/i18n.config';
+import { locales } from '@/i18n.config';
 import '@/app/globals.css';
 import PageLoader from '@/components/PageLoader';
+import BackToTop from '@/components/BackToTop';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ interface LocaleLayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    default: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
+    default: 'David Jonatan Zapeta Chavez | Backend, Cloud & AI Engineer',
     template: '%s | David Jonatan Zapeta Chavez',
   },
   icons: {
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     locale: 'es_MX',
     url: 'https://jonatanzarate.dev',
     siteName: 'David Jonatan Zapeta Chavez',
-    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
+    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & AI Engineer',
     description:
       'Ingeniería backend, cloud e IA generativa. APIs, microservicios, RAG e infraestructura como código en AWS y Azure.',
     images: [
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
+    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & AI Engineer',
     description:
       'Cloud & DevOps Engineer. Microservicios, Terraform, AWS/Azure. Desde CDMX.',
     images: ['/og-image.png'],
@@ -107,6 +108,7 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
           <Suspense fallback={<PageLoader />}>
             {props.children}
           </Suspense>
+          <BackToTop />
         </NextIntlClientProvider>
       </body>
     </html>

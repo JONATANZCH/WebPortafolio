@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { type Language } from '@/lib/sanity.queries';
 import styles from './ContactForm.module.css';
@@ -36,7 +36,7 @@ interface ToastState {
 // RFC 5322 simplified (good enough for most cases)
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function createValidator(t: any) {
+function createValidator(t: (key: string) => string) {
   return function validateField(field: keyof FormValues, value: string): string | undefined {
     switch (field) {
       case 'name':
@@ -113,17 +113,28 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
   const validateAll = createValidateAll(validateField);
 
   const [values, setValues] = useState<FormValues>(INITIAL_VALUES);
+  const [website, setWebsite] = useState(''); // honeypot
+  const warmed = useRef(false);
+
+  /* Free hosting tiers put the API to sleep when idle: wake it up on first interaction. */
+  const warmUp = useCallback(() => {
+    if (warmed.current) return;
+    warmed.current = true;
+    fetch(`${API_URL}/health`, { mode: 'no-cors' }).catch(() => undefined);
+  }, []);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<ToastState>({ visible: false, type: 'success', message: '' });
 
-  /* Apply a prefilled subject/message (from the brief builder) */
-  useEffect(() => {
+  /* Apply a prefilled subject/message (from the brief builder) when the prop changes */
+  const [appliedPrefill, setAppliedPrefill] = useState(prefill);
+  if (prefill !== appliedPrefill) {
+    setAppliedPrefill(prefill);
     if (prefill) {
       setValues((prev) => ({ ...prev, subject: prefill.subject, message: prefill.message }));
     }
-  }, [prefill]);
+  }
 
   /* Show a toast and auto-dismiss after 4 s */
   const showToast = useCallback((type: 'success' | 'error', message: string) => {
@@ -171,7 +182,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           'Content-Type': 'application/json',
           'Accept-Language': locale,
         },
-        body: JSON.stringify({ ...values, language: locale }),
+        body: JSON.stringify({ ...values, website, language: locale }),
       });
 
       if (!res.ok) throw new Error('Server responded with an error.');
@@ -189,7 +200,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
 
   return (
     <>
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form className={styles.form} onSubmit={handleSubmit} onFocus={warmUp} method="post" noValidate>
         {/* Name */}
         <div className={styles.field}>
           <label htmlFor="name" className={styles.label}>
@@ -197,6 +208,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           </label>
           <input
             id="name"
+            maxLength={120}
             name="name"
             type="text"
             value={values.name}
@@ -219,6 +231,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           </label>
           <input
             id="email"
+            maxLength={254}
             name="email"
             type="email"
             value={values.email}
@@ -241,6 +254,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           </label>
           <input
             id="subject"
+            maxLength={200}
             name="subject"
             type="text"
             value={values.subject}
@@ -262,6 +276,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           </label>
           <textarea
             id="message"
+            maxLength={5000}
             name="message"
             value={values.message}
             onChange={handleChange}
@@ -274,6 +289,20 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           {touched.message && errors.message && (
             <p className={styles.errorMsg} role="alert">{errors.message}</p>
           )}
+        </div>
+
+        {/* Honeypot: hidden from people, tempting for bots */}
+        <div className={styles.hp} aria-hidden="true">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
         </div>
 
         <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>

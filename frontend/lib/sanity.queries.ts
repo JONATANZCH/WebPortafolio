@@ -40,6 +40,7 @@ export interface CaseStudy {
   decisions?: Array<{ title: string; body: string; principles?: string[] }>;
   business?: string;
   leadership?: string;
+  practices?: string[];
   results?: string[];
 }
 

@@ -8,7 +8,7 @@ export default async function AuthorCard({ locale }: { locale: string }) {
 
   return (
     <aside className={styles.card} aria-label={t('written_by')}>
-      <Image src="/david-zapeta.jpg" alt="David Jonatan Zapeta Chavez" width={72} height={72} className={styles.photo} />
+      <Image src="/david-zapeta.jpg" unoptimized alt="David Jonatan Zapeta Chavez" width={72} height={72} className={styles.photo} />
       <div className={styles.text}>
         <span className={styles.label}>{t('written_by')}</span>
         <strong className={styles.name}>David Zapeta</strong>

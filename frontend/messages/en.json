@@ -18,13 +18,14 @@
       "pages": "Pages",
       "actions": "Actions",
       "language": "Cambiar a Español",
-      "hint": "↑↓ to move · Enter to open · Esc to close"
+      "hint": "↑↓ to move · Enter to open · Esc to close",
+      "menu": "Menu"
     }
   },
   "hero": {
-    "role": "Backend · Cloud · Generative AI · DevSecOps engineering",
+    "role": "Available for new projects",
     "title": "Production-ready backend, cloud and generative AI: secure, scalable and maintainable.",
-    "lead": "I'm David Jonatan Zapeta Chavez, an engineer with 5+ years of experience designing APIs, microservices, cloud platforms and AI solutions on AWS and Azure. I work with product and business teams to turn requirements into secure, measurable systems that are easy to evolve.",
+    "lead": "I design and build the APIs, cloud infrastructure and generative AI features your product needs to grow: security by design, frequent releases and operations you can measure.",
     "cta_projects": "View case studies",
     "cta_contact": "Share a challenge",
     "cta_brief": "Share a challenge",
@@ -34,16 +35,12 @@
         "value": "5+ years"
       },
       {
-        "label": "Focus",
-        "value": "Backend · Cloud · AI · Security"
-      },
-      {
-        "label": "Location",
-        "value": "Mexico City · Remote"
+        "label": "Availability",
+        "value": "Remote from Mexico City"
       },
       {
         "label": "Languages",
-        "value": "Spanish native · English B2"
+        "value": "Spanish and English"
       }
     ],
     "diagram": {
@@ -157,7 +154,7 @@
   },
   "capabilities": {
     "title": "Capabilities",
-    "subtitle": "Five areas where I can support your team. Pick one to see what I deliver and how I approach it.",
+    "subtitle": "Six areas where I can support your team. Pick one to see what I deliver and how I approach it.",
     "deliver": "What I deliver",
     "approach": "How I approach it",
     "tools": "Tools",
@@ -273,6 +270,32 @@
         ]
       },
       {
+        "id": "blockchain",
+        "title": "Blockchain and smart contract development",
+        "summary": "Smart contracts and web3 applications with security first, because what is deployed on-chain cannot be fixed afterwards.",
+        "deliver": [
+          "Smart contracts in Solidity for EVM-compatible networks",
+          "Unit and integration tests with Hardhat or Foundry, including edge-case tests",
+          "Integration with web apps and backends through ethers.js or viem",
+          "Review of common vulnerabilities: reentrancy, access control and fund handling"
+        ],
+        "approach": [
+          "I put on-chain only what needs to be trusted and verifiable, and keep the rest off-chain to reduce cost and risk",
+          "I start from audited contracts such as OpenZeppelin's instead of reinventing the standards",
+          "I deploy to test networks first and treat every deployment as irreversible"
+        ],
+        "tools": [
+          "Solidity",
+          "Ethereum",
+          "EVM",
+          "Hardhat",
+          "Foundry",
+          "ethers.js",
+          "OpenZeppelin",
+          "Smart contracts"
+        ]
+      },
+      {
         "id": "leadership",
         "title": "Technical leadership and business alignment",
         "summary": "Technical decisions explained in business terms, and teams moving in the same direction.",
@@ -304,21 +327,50 @@
     "steps": [
       {
         "title": "Discovery",
-        "text": "I understand the context, constraints and what success means. I leave with scope, risks and assumptions in writing."
+        "text": "I understand the context, constraints and what success means. I leave with scope, risks and assumptions in writing.",
+        "practices": [
+          "m5",
+          "m2"
+        ]
       },
       {
         "title": "Design",
-        "text": "I propose an architecture with alternatives and trade-offs. We decide together and the decision is recorded."
+        "text": "I propose an architecture with alternatives and trade-offs. We decide together and the decision is recorded.",
+        "practices": [
+          "m0",
+          "m3",
+          "p0",
+          "p1",
+          "p7",
+          "p8",
+          "p9"
+        ]
       },
       {
         "title": "Incremental delivery",
-        "text": "I ship in stages, with tests and pipelines from the first one. Every release can be demonstrated and rolled back."
+        "text": "I ship in stages, with tests and pipelines from the first one. Every release can be demonstrated and rolled back.",
+        "practices": [
+          "m1",
+          "m4",
+          "p2",
+          "p3",
+          "p4",
+          "p5"
+        ]
       },
       {
         "title": "Operation and handover",
-        "text": "I leave observability, documentation and practices your team can sustain without depending on me."
+        "text": "I leave observability, documentation and practices your team can sustain without depending on me.",
+        "practices": [
+          "p6",
+          "p10",
+          "p11"
+        ]
       }
-    ]
+    ],
+    "practices_label": "Methodologies and patterns I use in this step",
+    "hint": "Tap one to see how I apply it.",
+    "practice": "How I practice it"
   },
   "projects": {
     "title": "Case studies",
@@ -406,6 +458,12 @@
       "subject_min": "Subject must be at least 3 characters.",
       "message_required": "Enter your message.",
       "message_min": "Message must be at least 10 characters."
+    },
+    "direct": {
+      "title": "Prefer to talk directly?",
+      "email": "Email me at",
+      "calendly": "Book a 30-minute call",
+      "hint": "I reply within 2 business days."
     }
   },
   "footer": {
@@ -424,7 +482,7 @@
   },
   "about": {
     "title": "About David Zapeta",
-    "lead": "Backend, cloud and generative AI engineer based in Mexico City. I design and operate the platforms behind real products.",
+    "lead": "I'm David Jonatan Zapeta Chavez, an engineer with 5+ years designing APIs, microservices, cloud platforms and AI solutions on AWS and Azure. I like working close to product and business, so what gets built solves a real problem.",
     "story": [
       "I started in 2018 in digital banking, optimizing queries, data models, and backup and recovery processes. That is where I learned that a reliable system depends on well-modeled data and disciplined operations.",
       "I then moved into full-stack and backend development with a DevOps mindset: REST and GraphQL APIs, React and Vue interfaces, GitLab CI/CD pipelines and resilience patterns such as DLQs and circuit breakers.",
@@ -455,11 +513,29 @@
     "linkedin_cta": "View LinkedIn profile",
     "cta_title": "Shall we talk about your project?",
     "cta": "Share a challenge",
-    "back": "← Home"
+    "back": "← Home",
+    "facts": [
+      {
+        "label": "Experience",
+        "value": "5+ years"
+      },
+      {
+        "label": "Focus",
+        "value": "Backend · Cloud · AI · Security"
+      },
+      {
+        "label": "Location",
+        "value": "Mexico City · Remote"
+      },
+      {
+        "label": "Languages",
+        "value": "Spanish native · English B2"
+      }
+    ]
   },
   "teaser": {
     "title": "Who is behind this",
-    "text": "I'm David Zapeta, a backend, cloud and generative AI engineer. My work starts from data and reliable operations, and today focuses on secure, scalable, maintainable platforms.",
+    "text": "I'm David Zapeta. I started in data and digital banking, and today I build backend, cloud and AI for products that are already in production.",
     "steps": [
       {
         "year": "2018",
@@ -475,5 +551,136 @@
       }
     ],
     "cta": "Learn more about David"
+  },
+  "methodology": {
+    "title": "Methodology and design patterns",
+    "subtitle": "How decisions are made and software is built before writing code: clear specifications, tests and patterns that keep the system understandable.",
+    "tab_methods": "Methodologies",
+    "tab_patterns": "Design patterns",
+    "practice": "How I practice it",
+    "groups": {
+      "creational": "Creational",
+      "structural": "Structural",
+      "behavioral": "Behavioral",
+      "architectural": "Architecture and resilience"
+    },
+    "methods": [
+      {
+        "name": "Spec-Driven Development",
+        "text": "I write the specification before the code: API contract, acceptance criteria and design decisions. The spec is the source of truth, it is validated in CI and it also guides work with AI assistants.",
+        "practice": [
+          "OpenAPI contract or GraphQL schema reviewed with its consumers",
+          "Acceptance criteria in Given/When/Then format",
+          "Contract tests that fail when the code drifts from the specification"
+        ]
+      },
+      {
+        "name": "Test-Driven Development",
+        "text": "Red, green, refactor on domain logic. Unit tests are fast because the domain does not depend on infrastructure.",
+        "practice": [
+          "Domain unit tests with no database or network",
+          "Integration tests only for adapters",
+          "A pipeline that blocks the change if a test fails"
+        ]
+      },
+      {
+        "name": "Domain-Driven Design",
+        "text": "I build a shared language with the business and reflect it in code: bounded contexts, aggregates and explicit rules in the model.",
+        "practice": [
+          "A glossary shared with product and operations",
+          "One context per team or responsibility, with contracts between them",
+          "Business rules in the domain, not in controllers"
+        ]
+      },
+      {
+        "name": "Hexagonal architecture",
+        "text": "Ports and adapters: the domain defines what it needs and infrastructure plugs in from outside. Switching a provider does not force a rewrite of the logic.",
+        "practice": [
+          "Use cases that depend on interfaces",
+          "Adapters for the database, queues and external services",
+          "Dependency injection to compose the system"
+        ]
+      },
+      {
+        "name": "Continuous integration and delivery",
+        "text": "Small, frequent changes, with a pipeline that tests, analyzes and deploys per environment, and allows rolling back.",
+        "practice": [
+          "Tests, static analysis and dependency scanning on every change",
+          "Per-environment deployment with approvals",
+          "A documented and tested rollback"
+        ]
+      },
+      {
+        "name": "Documented decisions (ADR)",
+        "text": "Every significant decision is recorded with its context, the alternatives considered and the consequences, so it can be reviewed over time.",
+        "practice": [
+          "A short record per decision, versioned with the code",
+          "Explicit alternatives and trade-offs",
+          "Team review before implementing"
+        ]
+      }
+    ],
+    "patterns": [
+      {
+        "name": "Strategy",
+        "group": "behavioral",
+        "text": "Encapsulates interchangeable rules behind a common interface. I use it to quote different products through the same flow, without huge conditionals."
+      },
+      {
+        "name": "Adapter",
+        "group": "structural",
+        "text": "Isolates an external or legacy system behind an interface of your own, so it can be integrated without polluting the domain."
+      },
+      {
+        "name": "Factory",
+        "group": "creational",
+        "text": "Centralizes object creation according to context, so the rest of the code does not know the concrete classes."
+      },
+      {
+        "name": "Builder",
+        "group": "creational",
+        "text": "Builds complex objects step by step. Useful for queries, prompts or messages with many options."
+      },
+      {
+        "name": "Decorator",
+        "group": "structural",
+        "text": "Adds behavior, such as logging, caching, retries or metrics, without modifying the original class."
+      },
+      {
+        "name": "Facade",
+        "group": "structural",
+        "text": "Exposes a simple interface over several subsystems, for example an application service that orchestrates several modules."
+      },
+      {
+        "name": "Observer",
+        "group": "behavioral",
+        "text": "Notifies changes to whoever is interested without coupling sender and receiver. It is the basis of domain events."
+      },
+      {
+        "name": "Repository",
+        "group": "architectural",
+        "text": "Abstracts persistence as a domain collection. It allows testing without a database and swapping the engine."
+      },
+      {
+        "name": "CQRS",
+        "group": "architectural",
+        "text": "Separates reads from writes when they have different modeling and scaling needs."
+      },
+      {
+        "name": "Saga",
+        "group": "architectural",
+        "text": "Coordinates distributed operations with steps and compensations, without global locks across services."
+      },
+      {
+        "name": "Outbox",
+        "group": "architectural",
+        "text": "Stores the event in the same transaction as the data and publishes it afterwards, so messages are neither lost nor duplicated."
+      },
+      {
+        "name": "Circuit Breaker",
+        "group": "architectural",
+        "text": "Cuts calls to a failing dependency so the error does not spread, and probes it again periodically."
+      }
+    ]
   }
 }

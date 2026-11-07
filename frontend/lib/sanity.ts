@@ -37,7 +37,7 @@ export async function sanityFetch<T = unknown>({
   revalidate = 60,
   tags = [],
 }: SanityFetchOptions): Promise<T> {
-  const fetchOptions: Record<string, any> = {};
+  const fetchOptions: { cache?: RequestCache; next?: { revalidate: number; tags?: string[] } } = {};
 
   if (revalidate === false) {
     fetchOptions.cache = 'no-store';

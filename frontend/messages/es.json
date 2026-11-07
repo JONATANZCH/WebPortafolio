@@ -18,13 +18,14 @@
       "pages": "Páginas",
       "actions": "Acciones",
       "language": "Cambiar a English",
-      "hint": "↑↓ para moverte · Enter para abrir · Esc para cerrar"
+      "hint": "↑↓ para moverte · Enter para abrir · Esc para cerrar",
+      "menu": "Menú"
     }
   },
   "hero": {
-    "role": "Ingeniería backend · Cloud · IA generativa · DevSecOps",
+    "role": "Disponible para nuevos proyectos",
     "title": "Backend, cloud e IA generativa listos para producción: seguros, escalables y mantenibles.",
-    "lead": "Soy David Jonatan Zapeta Chavez, ingeniero con más de 5 años de experiencia diseñando APIs, microservicios, plataformas cloud y soluciones de IA en AWS y Azure. Trabajo con equipos de producto y negocio para convertir requisitos en sistemas seguros, medibles y fáciles de evolucionar.",
+    "lead": "Diseño y construyo las APIs, la infraestructura cloud y las funcionalidades de IA generativa que tu producto necesita para crecer: seguridad desde el diseño, entregas frecuentes y una operación que se puede medir.",
     "cta_projects": "Ver casos de estudio",
     "cta_contact": "Plantear un reto",
     "cta_brief": "Plantear un reto",
@@ -34,16 +35,12 @@
         "value": "Más de 5 años"
       },
       {
-        "label": "Enfoque",
-        "value": "Backend · Cloud · IA · Seguridad"
-      },
-      {
-        "label": "Ubicación",
-        "value": "CDMX · Remoto"
+        "label": "Modalidad",
+        "value": "Remoto desde CDMX"
       },
       {
         "label": "Idiomas",
-        "value": "Español nativo · Inglés B2"
+        "value": "Español e inglés"
       }
     ],
     "diagram": {
@@ -157,7 +154,7 @@
   },
   "capabilities": {
     "title": "Capacidades",
-    "subtitle": "Cinco frentes donde puedo sumar a tu equipo. Elige uno para ver qué entrego y cómo lo abordo.",
+    "subtitle": "Seis frentes donde puedo sumar a tu equipo. Elige uno para ver qué entrego y cómo lo abordo.",
     "deliver": "Qué entrego",
     "approach": "Cómo lo abordo",
     "tools": "Herramientas",
@@ -273,6 +270,32 @@
         ]
       },
       {
+        "id": "blockchain",
+        "title": "Programación blockchain y smart contracts",
+        "summary": "Contratos inteligentes y aplicaciones web3 con la seguridad como prioridad, porque lo desplegado en la cadena no se puede corregir después.",
+        "deliver": [
+          "Smart contracts en Solidity para redes compatibles con EVM",
+          "Pruebas unitarias y de integración con Hardhat o Foundry, incluidas pruebas de casos límite",
+          "Integración con aplicaciones web y backend mediante ethers.js o viem",
+          "Revisión de vulnerabilidades comunes: reentrancia, control de acceso y manejo de fondos"
+        ],
+        "approach": [
+          "Pongo en la cadena solo lo que necesita ser confiable y verificable, y dejo el resto fuera para reducir costo y riesgo",
+          "Parto de contratos auditados como los de OpenZeppelin en lugar de reinventar los estándares",
+          "Despliego primero en redes de prueba y trato cada despliegue como irreversible"
+        ],
+        "tools": [
+          "Solidity",
+          "Ethereum",
+          "EVM",
+          "Hardhat",
+          "Foundry",
+          "ethers.js",
+          "OpenZeppelin",
+          "Smart contracts"
+        ]
+      },
+      {
         "id": "leadership",
         "title": "Liderazgo técnico y alineación con negocio",
         "summary": "Decisiones técnicas explicadas en términos de negocio, y equipos que avanzan en la misma dirección.",
@@ -304,21 +327,50 @@
     "steps": [
       {
         "title": "Diagnóstico",
-        "text": "Entiendo el contexto, las restricciones y qué significa éxito. Salgo con alcance, riesgos y supuestos por escrito."
+        "text": "Entiendo el contexto, las restricciones y qué significa éxito. Salgo con alcance, riesgos y supuestos por escrito.",
+        "practices": [
+          "m5",
+          "m2"
+        ]
       },
       {
         "title": "Diseño",
-        "text": "Propongo una arquitectura con alternativas y trade-offs. Se decide en conjunto y queda registrada."
+        "text": "Propongo una arquitectura con alternativas y trade-offs. Se decide en conjunto y queda registrada.",
+        "practices": [
+          "m0",
+          "m3",
+          "p0",
+          "p1",
+          "p7",
+          "p8",
+          "p9"
+        ]
       },
       {
         "title": "Entrega incremental",
-        "text": "Libero por etapas, con pruebas y pipelines desde la primera. Cada entrega se puede demostrar y revertir."
+        "text": "Libero por etapas, con pruebas y pipelines desde la primera. Cada entrega se puede demostrar y revertir.",
+        "practices": [
+          "m1",
+          "m4",
+          "p2",
+          "p3",
+          "p4",
+          "p5"
+        ]
       },
       {
         "title": "Operación y traspaso",
-        "text": "Dejo observabilidad, documentación y prácticas que tu equipo puede sostener sin depender de mí."
+        "text": "Dejo observabilidad, documentación y prácticas que tu equipo puede sostener sin depender de mí.",
+        "practices": [
+          "p6",
+          "p10",
+          "p11"
+        ]
       }
-    ]
+    ],
+    "practices_label": "Metodologías y patrones que uso en este paso",
+    "hint": "Toca uno para ver cómo lo aplico.",
+    "practice": "Cómo lo practico"
   },
   "projects": {
     "title": "Casos de estudio",
@@ -406,6 +458,12 @@
       "subject_min": "El asunto debe tener al menos 3 caracteres.",
       "message_required": "Escribe tu mensaje.",
       "message_min": "El mensaje debe tener al menos 10 caracteres."
+    },
+    "direct": {
+      "title": "¿Prefieres hablar directo?",
+      "email": "Escríbeme a",
+      "calendly": "Agendar una llamada de 30 minutos",
+      "hint": "Respondo en un máximo de 2 días hábiles."
     }
   },
   "footer": {
@@ -424,7 +482,7 @@
   },
   "about": {
     "title": "Sobre David Zapeta",
-    "lead": "Ingeniero backend, cloud e IA generativa en Ciudad de México. Diseño y opero las plataformas que sostienen productos reales.",
+    "lead": "Soy David Jonatan Zapeta Chavez, ingeniero con más de 5 años diseñando APIs, microservicios, plataformas cloud y soluciones de IA en AWS y Azure. Me gusta trabajar cerca de producto y negocio, para que lo que se construye resuelva un problema real.",
     "story": [
       "Empecé en 2018 en banca digital, optimizando consultas, modelos de datos y procesos de respaldo y recuperación. Ahí aprendí que un sistema confiable depende de datos bien modelados y de una operación disciplinada.",
       "Después pasé al desarrollo full-stack y backend con enfoque DevOps: APIs REST y GraphQL, interfaces con React y Vue, pipelines en GitLab CI/CD y patrones de resiliencia como DLQs y circuit breakers.",
@@ -455,11 +513,30 @@
     "linkedin_cta": "Ver perfil en LinkedIn",
     "cta_title": "¿Hablamos de tu proyecto?",
     "cta": "Plantear un reto",
-    "back": "← Inicio"
+    "back": "← Inicio",
+    "facts": [
+      {
+        "label": "Experiencia",
+        "value": "Más de 5 años"
+      },
+      {
+        "label": "Enfoque",
+        "value": "Backend · Cloud · IA · Seguridad"
+      },
+      {
+        "label": "Ubicación",
+        "value": "CDMX · Remoto"
+      },
+      {
+        "label": "Idiomas",
+        "value": "Español nativo · Inglés B2"
+      }
+    ],
+    "cv_cta": "Descargar CV (PDF)"
   },
   "teaser": {
     "title": "Quién está detrás",
-    "text": "Soy David Zapeta, ingeniero backend, cloud e IA generativa. Mi trabajo parte de los datos y la operación confiable, y hoy se centra en plataformas seguras, escalables y mantenibles.",
+    "text": "Soy David Zapeta. Empecé en datos y banca digital, y hoy construyo backend, cloud e IA para productos que ya están en producción.",
     "steps": [
       {
         "year": "2018",
@@ -475,5 +552,136 @@
       }
     ],
     "cta": "Conocer más sobre David"
+  },
+  "methodology": {
+    "title": "Metodología y patrones de diseño",
+    "subtitle": "Cómo se decide y se construye antes de escribir código: especificaciones claras, pruebas y patrones que mantienen el sistema entendible.",
+    "tab_methods": "Metodologías",
+    "tab_patterns": "Patrones de diseño",
+    "practice": "Cómo lo practico",
+    "groups": {
+      "creational": "Creacional",
+      "structural": "Estructural",
+      "behavioral": "Comportamiento",
+      "architectural": "Arquitectura y resiliencia"
+    },
+    "methods": [
+      {
+        "name": "Spec-Driven Development",
+        "text": "Escribo la especificación antes que el código: contrato de la API, criterios de aceptación y decisiones de diseño. La especificación es la fuente de verdad, se valida en CI y orienta también el trabajo con asistentes de IA.",
+        "practice": [
+          "Contrato OpenAPI o esquema GraphQL revisado con quien lo consume",
+          "Criterios de aceptación en formato Given/When/Then",
+          "Pruebas de contrato que fallan si el código se aparta de la especificación"
+        ]
+      },
+      {
+        "name": "Test-Driven Development",
+        "text": "Ciclo rojo, verde, refactor en la lógica de dominio. Las pruebas unitarias son rápidas porque el dominio no depende de infraestructura.",
+        "practice": [
+          "Pruebas unitarias del dominio sin base de datos ni red",
+          "Pruebas de integración solo para los adaptadores",
+          "Pipeline que bloquea el cambio si una prueba falla"
+        ]
+      },
+      {
+        "name": "Domain-Driven Design",
+        "text": "Construyo un lenguaje común con negocio y lo reflejo en el código: contextos acotados, agregados y reglas explícitas en el modelo.",
+        "practice": [
+          "Glosario compartido con producto y operación",
+          "Un contexto por equipo o responsabilidad, con contratos entre ellos",
+          "Reglas de negocio en el dominio, no en controladores"
+        ]
+      },
+      {
+        "name": "Arquitectura hexagonal",
+        "text": "Puertos y adaptadores: el dominio define lo que necesita y la infraestructura se conecta desde afuera. Cambiar de proveedor no obliga a reescribir la lógica.",
+        "practice": [
+          "Casos de uso que dependen de interfaces",
+          "Adaptadores para base de datos, colas y servicios externos",
+          "Inyección de dependencias para componer el sistema"
+        ]
+      },
+      {
+        "name": "Integración y entrega continuas",
+        "text": "Cambios pequeños y frecuentes, con un pipeline que prueba, analiza y despliega por entorno, y que permite volver atrás.",
+        "practice": [
+          "Pruebas, análisis estático y escaneo de dependencias en cada cambio",
+          "Despliegue por entorno con aprobaciones",
+          "Rollback documentado y probado"
+        ]
+      },
+      {
+        "name": "Decisiones documentadas (ADR)",
+        "text": "Cada decisión relevante queda registrada con su contexto, las alternativas consideradas y las consecuencias, para que se pueda revisar con el tiempo.",
+        "practice": [
+          "Un registro corto por decisión, versionado con el código",
+          "Alternativas y trade-offs explícitos",
+          "Revisión con el equipo antes de implementar"
+        ]
+      }
+    ],
+    "patterns": [
+      {
+        "name": "Strategy",
+        "group": "behavioral",
+        "text": "Encapsula reglas intercambiables detrás de una interfaz común. Lo uso para cotizar productos distintos con el mismo flujo, sin condicionales enormes."
+      },
+      {
+        "name": "Adapter",
+        "group": "structural",
+        "text": "Aísla un sistema externo o heredado detrás de una interfaz propia, para integrarlo sin contaminar el dominio."
+      },
+      {
+        "name": "Factory",
+        "group": "creational",
+        "text": "Centraliza la creación de objetos según el contexto, para que el resto del código no conozca las clases concretas."
+      },
+      {
+        "name": "Builder",
+        "group": "creational",
+        "text": "Construye objetos complejos paso a paso. Útil para consultas, prompts o mensajes con muchas opciones."
+      },
+      {
+        "name": "Decorator",
+        "group": "structural",
+        "text": "Añade comportamiento, como registro, caché, reintentos o métricas, sin modificar la clase original."
+      },
+      {
+        "name": "Facade",
+        "group": "structural",
+        "text": "Expone una interfaz simple sobre varios subsistemas, por ejemplo un servicio de aplicación que orquesta varios módulos."
+      },
+      {
+        "name": "Observer",
+        "group": "behavioral",
+        "text": "Notifica cambios a quien le interese sin acoplar emisor y receptor. Es la base de los eventos de dominio."
+      },
+      {
+        "name": "Repository",
+        "group": "architectural",
+        "text": "Abstrae la persistencia como una colección del dominio. Permite probar sin base de datos y cambiar de motor."
+      },
+      {
+        "name": "CQRS",
+        "group": "architectural",
+        "text": "Separa lecturas y escrituras cuando tienen necesidades distintas de modelo y de escalado."
+      },
+      {
+        "name": "Saga",
+        "group": "architectural",
+        "text": "Coordina operaciones distribuidas con pasos y compensaciones, sin bloqueos globales entre servicios."
+      },
+      {
+        "name": "Outbox",
+        "group": "architectural",
+        "text": "Guarda el evento en la misma transacción que el dato y lo publica después, para no perder ni duplicar mensajes."
+      },
+      {
+        "name": "Circuit Breaker",
+        "group": "architectural",
+        "text": "Corta las llamadas a una dependencia que falla para que el error no se propague, y vuelve a probarla de forma periódica."
+      }
+    ]
   }
 }

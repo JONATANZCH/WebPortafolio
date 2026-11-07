@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F7FF"/><stop offset="1" stop-color="#E7E4FF"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1F4BFF" stroke-opacity=".07"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+
+  <!-- the framework: a solid box that hides its patterns -->
+  <rect x="60" y="50" width="400" height="260" rx="18" fill="#0B1B33"/>
+  <text x="84" y="84" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="600" fill="#9fb0cc">framework</text>
+
+  <!-- patterns inside: faint, dashed, barely visible -->
+  <g font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#6b7a96">
+    <rect x="84" y="108" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="100" y="133">Singleton</text>
+    <rect x="206" y="108" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="226" y="133">Factory</text>
+    <rect x="328" y="108" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="346" y="133">Strategy</text>
+    <rect x="84" y="164" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="100" y="189">Decorator</text>
+    <rect x="206" y="164" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="224" y="189">Observer</text>
+    <rect x="328" y="164" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="346" y="189">Chain</text>
+    <rect x="84" y="220" width="108" height="40" rx="8" fill="none" stroke="#3a4b6b" stroke-dasharray="4 4"/><text x="100" y="245">Repository</text>
+  </g>
+
+  <!-- a magnifier reveals one pattern -->
+  <g transform="translate(330 150)">
+    <circle cx="70" cy="70" r="60" fill="#fff" fill-opacity=".92" stroke="#00A3C4" stroke-width="6"/>
+    <path d="M114 114l46 46" stroke="#00A3C4" stroke-width="10" stroke-linecap="round"/>
+    <rect x="30" y="52" width="80" height="36" rx="8" fill="#EEF3FF" stroke="#1F4BFF" stroke-width="2.5"/>
+    <text x="70" y="75" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="13" font-weight="700" fill="#1F4BFF">Strategy</text>
+  </g>
+
+  <!-- code lines -->
+  <g stroke-linecap="round" stroke-width="5">
+    <path d="M500 70h90" stroke="#1F4BFF"/><path d="M500 88h60" stroke="#9fb0cc"/><path d="M500 106h76" stroke="#00A3C4"/><path d="M500 124h48" stroke="#9fb0cc"/>
+  </g>
+</svg>
