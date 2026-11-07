@@ -58,6 +58,8 @@ export default function Process() {
                 type="button"
                 className={`${styles.step} ${i === stepIndex ? styles.stepOn : ''}`}
                 aria-pressed={i === stepIndex}
+                data-umami-event="process-step"
+                data-umami-event-step={i + 1}
                 onClick={() => {
                   setStepIndex(i);
                   setOpen(null);
@@ -84,6 +86,8 @@ export default function Process() {
                   type="button"
                   className={`${styles.chip} ${open === it.ref ? styles.chipOn : ''}`}
                   aria-pressed={open === it.ref}
+                  data-umami-event="practice-open"
+                  data-umami-event-practice={it.name}
                   onClick={() => setOpen(open === it.ref ? null : it.ref)}
                 >
                   {it.name}

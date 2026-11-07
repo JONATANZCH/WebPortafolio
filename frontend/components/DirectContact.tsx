@@ -14,13 +14,13 @@ export default async function DirectContact({ locale }: { locale: string }) {
       <h3 className={styles.title}>{t('title')}</h3>
       <div className={styles.row}>
         {CALENDLY_URL && (
-          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={styles.primary}>
+          <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" className={styles.primary} data-umami-event="calendly-click">
             {t('calendly')} ↗
           </a>
         )}
         <p className={styles.mail}>
           {t('email')}{' '}
-          <a href={`mailto:${EMAIL}`} className={styles.link}>
+          <a href={`mailto:${EMAIL}`} className={styles.link} data-umami-event="email-click">
             {EMAIL}
           </a>{' '}
           <CopyEmail email={EMAIL} />

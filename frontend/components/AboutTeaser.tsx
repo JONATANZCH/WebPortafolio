@@ -30,7 +30,7 @@ export default async function AboutTeaser({ locale }: { locale: string }) {
               </li>
             ))}
           </ol>
-          <Link href={`/${locale}/about`} className={styles.cta}>
+          <Link href={`/${locale}/about`} className={styles.cta} data-umami-event="about-open" data-umami-event-from="teaser">
             {t('cta')} →
           </Link>
         </div>

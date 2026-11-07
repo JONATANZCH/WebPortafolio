@@ -490,7 +490,8 @@
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
       "email": "Email"
-    }
+    },
+    "analytics": "Anonymous analytics, no cookies and no personal data."
   },
   "language_switcher": {
     "label": "Language",

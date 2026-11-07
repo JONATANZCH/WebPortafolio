@@ -21,7 +21,11 @@ export default function Footer(props: FooterProps) {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <p className={styles.tagline}>{t('footer.description')} © 2026 David Jonatan Zapeta Chavez</p>
+        <p className={styles.tagline}>
+          {t('footer.description')} © 2026 David Jonatan Zapeta Chavez
+          <br />
+          <small>{t('footer.analytics')}</small>
+        </p>
 
         <div className={styles.right}>
           <nav className={styles.navLinks} aria-label="Footer navigation">

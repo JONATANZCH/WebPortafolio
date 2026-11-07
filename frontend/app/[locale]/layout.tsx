@@ -6,6 +6,9 @@ import { locales } from '@/i18n.config';
 import '@/app/globals.css';
 import PageLoader from '@/components/PageLoader';
 import BackToTop from '@/components/BackToTop';
+import Analytics from '@/components/Analytics';
+import Script from 'next/script';
+import { UMAMI_DOMAINS, UMAMI_WEBSITE_ID } from '@/lib/analytics';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -109,6 +112,16 @@ export default async function LocaleLayout(props: LocaleLayoutProps) {
             {props.children}
           </Suspense>
           <BackToTop />
+          <Analytics />
+          {process.env.NODE_ENV === 'production' && (
+            <Script
+              src="https://cloud.umami.is/script.js"
+              strategy="afterInteractive"
+              data-website-id={UMAMI_WEBSITE_ID}
+              data-domains={UMAMI_DOMAINS}
+              data-do-not-track="true"
+            />
+          )}
         </NextIntlClientProvider>
       </body>
     </html>

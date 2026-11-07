@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { type Language } from '@/lib/sanity.queries';
+import { track } from '@/lib/analytics';
 import { SafeMessageTrace, type MessageTraceData } from './MessageTrace';
 import styles from './ContactForm.module.css';
 
@@ -121,6 +122,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
   const warmUp = useCallback(() => {
     if (warmed.current) return;
     warmed.current = true;
+    track('contact-start');
     fetch(`${API_URL}/health`, { mode: 'no-cors' }).catch(() => undefined);
   }, []);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -194,6 +196,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
       const body = (await res.json().catch(() => null)) as { messageId?: string | number; trace?: MessageTraceData } | null;
       setTrace(body?.trace ? { ...body.trace, roundTripMs: Math.round(performance.now() - startedAt), messageId: body.messageId } : null);
 
+      track('contact-sent', { language: locale });
       showToast('success', t('contact.form.success'));
       setValues(INITIAL_VALUES);
       setErrors({});

@@ -14,7 +14,7 @@ export default async function AuthorCard({ locale }: { locale: string }) {
         <strong className={styles.name}>David Zapeta</strong>
         <span className={styles.role}>{t('author_role')}</span>
       </div>
-      <Link href={`/${locale}/about`} className={styles.cta}>
+      <Link href={`/${locale}/about`} className={styles.cta} data-umami-event="about-open" data-umami-event-from="author-card">
         {t('author_cta')} →
       </Link>
     </aside>

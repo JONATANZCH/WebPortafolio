@@ -55,6 +55,7 @@ export default async function AboutPage({ params }: PageProps) {
               {locale === 'es' && (
                 <a
                   href="/CV-David-Zapeta.pdf"
+                  data-umami-event="cv-download"
                   download="CV David Jonatan Zapeta.pdf"
                   className={styles.cv}
                 >
@@ -118,7 +119,7 @@ export default async function AboutPage({ params }: PageProps) {
 
           <section className={styles.cta}>
             <h2>{t('cta_title')}</h2>
-            <Link href={`/${locale}#contacto`} className={styles.button}>
+            <Link href={`/${locale}#contacto`} className={styles.button} data-umami-event="cta-contact" data-umami-event-from="about">
               {t('cta')}
             </Link>
           </section>

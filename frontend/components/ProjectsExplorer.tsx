@@ -67,6 +67,8 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
               type="button"
               className={`${styles.filter} ${filter === key ? styles.filterOn : ''}`}
               aria-pressed={filter === key}
+              data-umami-event="cases-filter"
+              data-umami-event-area={key}
               onClick={() => setFilter(key)}
               disabled={counts[key] === 0}
             >
@@ -98,7 +100,13 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
                 <li key={p._id} className={styles.card}>
                   <div className={styles.cardMain}>
                     <h3 className={styles.cardTitle}>
-                      {href ? <Link href={href}>{p.title}</Link> : p.title}
+                      {href ? (
+                        <Link href={href} data-umami-event="case-open" data-umami-event-case={p.slug?.current} data-umami-event-from="title">
+                          {p.title}
+                        </Link>
+                      ) : (
+                        p.title
+                      )}
                     </h3>
                     <p className={styles.cardText}>{p.caseStudy?.summary ?? p.description}</p>
 
@@ -122,6 +130,9 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
                             type="button"
                             className={`${styles.chip} ${tool?.toLowerCase() === s.toLowerCase() ? styles.chipOn : ''}`}
                             aria-pressed={tool?.toLowerCase() === s.toLowerCase()}
+                            data-umami-event="tool-filter"
+                            data-umami-event-tool={s}
+                            data-umami-event-from="cases"
                             onClick={() => setTool(tool?.toLowerCase() === s.toLowerCase() ? null : s)}
                           >
                             {s}
@@ -131,12 +142,12 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
                     </ul>
                     <div className={styles.actions}>
                       {href && (
-                        <Link href={href} className={styles.primary}>
+                        <Link href={href} className={styles.primary} data-umami-event="case-open" data-umami-event-case={p.slug?.current} data-umami-event-from="button">
                           {t('read')}
                         </Link>
                       )}
                       {p.liveUrl && (
-                        <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.secondary}>
+                        <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.secondary} data-umami-event="case-visit" data-umami-event-case={p.slug?.current}>
                           {t('visit')} ↗
                         </a>
                       )}

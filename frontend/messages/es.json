@@ -490,7 +490,8 @@
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
       "email": "Correo"
-    }
+    },
+    "analytics": "Medición anónima, sin cookies ni datos personales."
   },
   "language_switcher": {
     "label": "Idioma",

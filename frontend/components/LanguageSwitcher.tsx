@@ -21,6 +21,8 @@ export default function LanguageSwitcher() {
     <div className={styles.switcher}>
       <button
         onClick={() => toggleLocale('es')}
+        data-umami-event="language-switch"
+        data-umami-event-to="es"
         className={`${styles.button} ${locale === 'es' ? styles.active : ''}`}
         aria-label="Cambiar a español"
       >
@@ -28,6 +30,8 @@ export default function LanguageSwitcher() {
       </button>
       <button
         onClick={() => toggleLocale('en')}
+        data-umami-event="language-switch"
+        data-umami-event-to="en"
         className={`${styles.button} ${locale === 'en' ? styles.active : ''}`}
         aria-label="Switch to English"
       >

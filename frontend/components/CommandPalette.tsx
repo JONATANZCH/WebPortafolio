@@ -109,6 +109,7 @@ export default function CommandPalette() {
         ref={triggerRef}
         type="button"
         className={styles.trigger}
+        data-umami-event="palette-open"
         onClick={() => setOpen(true)}
         aria-label={tp('open')}
         aria-haspopup="dialog"

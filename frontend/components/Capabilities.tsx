@@ -53,6 +53,8 @@ export default function Capabilities() {
                 aria-controls={`panel-${item.id}`}
                 tabIndex={i === index ? 0 : -1}
                 className={`${styles.tab} ${i === index ? styles.tabActive : ''}`}
+                data-umami-event="capability-tab"
+                data-umami-event-capability={item.id}
                 onClick={() => setIndex(i)}
               >
                 <span className={styles.tabTitle}>{item.title}</span>
@@ -89,7 +91,7 @@ export default function Capabilities() {
             <ul className={styles.tools} role="list" aria-label={t('tools')}>
               {current.tools.map((tool) => (
                 <li key={tool}>
-                  <button type="button" className={styles.tool} onClick={() => pickTool(tool)}>
+                  <button type="button" className={styles.tool} onClick={() => pickTool(tool)} data-umami-event="tool-filter" data-umami-event-tool={tool} data-umami-event-from="capabilities">
                     {tool}
                   </button>
                 </li>

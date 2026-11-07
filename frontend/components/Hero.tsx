@@ -24,10 +24,10 @@ export default function Hero() {
           <p className={styles.lead}>{t('lead')}</p>
 
           <div className={styles.actions}>
-            <a href={`/${locale}#contacto`} className={styles.btnPrimary}>
+            <a href={`/${locale}#contacto`} className={styles.btnPrimary} data-umami-event="cta-contact" data-umami-event-from="hero">
               {t('cta_contact')}
             </a>
-            <a href={`/${locale}#proyectos`} className={styles.btnGhost}>
+            <a href={`/${locale}#proyectos`} className={styles.btnGhost} data-umami-event="cta-cases" data-umami-event-from="hero">
               {t('cta_projects')}
             </a>
           </div>

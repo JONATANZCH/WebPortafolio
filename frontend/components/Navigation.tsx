@@ -70,7 +70,7 @@ export default function Navigation() {
           >
             dz
           </Link>
-          <Link href={`/${locale}/about`} className={styles.author} title={t('about_me')}>
+          <Link href={`/${locale}/about`} className={styles.author} title={t('about_me')} data-umami-event="about-open" data-umami-event-from="nav">
             <span className={styles.authorName}>David Zapeta</span>
             <span className={styles.authorHint}>{t('about_me')} →</span>
           </Link>
@@ -101,7 +101,7 @@ export default function Navigation() {
         <div className={styles.rightSide}>
           <CommandPalette />
           <LanguageSwitcher />
-          <Link href={`/${locale}#contacto`} className={styles.cta}>
+          <Link href={`/${locale}#contacto`} className={styles.cta} data-umami-event="cta-contact" data-umami-event-from="nav">
             {t('contact')}
           </Link>
         </div>

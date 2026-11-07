@@ -19,7 +19,7 @@ export default function CopyEmail({ email }: { email: string }) {
   };
 
   return (
-    <button type="button" className={styles.copy} onClick={copy} aria-live="polite">
+    <button type="button" data-umami-event="email-copy" className={styles.copy} onClick={copy} aria-live="polite">
       {copied ? (es ? 'Copiado ✓' : 'Copied ✓') : es ? 'Copiar correo' : 'Copy email'}
     </button>
   );
