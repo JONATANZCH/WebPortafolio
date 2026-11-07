@@ -469,6 +469,18 @@
       "email": "Escríbeme a",
       "calendly": "Agendar una llamada de 30 minutos",
       "hint": "Respondo en un máximo de 2 días hábiles."
+    },
+    "trace": {
+      "title": "Así viajó tu mensaje",
+      "network": "Tu navegador → la API",
+      "validation": "Validación y límite de frecuencia",
+      "database": "Guardado en la base de datos",
+      "email": "Aviso por correo",
+      "email_failed": "pendiente de reintento",
+      "total": "Total",
+      "saved": "Tu mensaje quedó guardado aunque el aviso por correo falló; lo revisaré igual.",
+      "cold": "El servidor gratuito estaba despertando, por eso tardó más de lo normal.",
+      "note": "Tiempos reales medidos por mi backend (NestJS en Render) y por tu navegador."
     }
   },
   "footer": {

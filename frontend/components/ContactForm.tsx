@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { type Language } from '@/lib/sanity.queries';
+import MessageTrace, { type MessageTraceData } from './MessageTrace';
 import styles from './ContactForm.module.css';
 
 /* ------------------------------------------------------------------ */
@@ -125,6 +126,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [trace, setTrace] = useState<MessageTraceData | null>(null);
   const [toast, setToast] = useState<ToastState>({ visible: false, type: 'success', message: '' });
 
   /* Apply a prefilled subject/message (from the brief builder) when the prop changes */
@@ -176,6 +178,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
 
     setIsSubmitting(true);
     try {
+      const startedAt = performance.now();
       const res = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
@@ -186,6 +189,10 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
       });
 
       if (!res.ok) throw new Error('Server responded with an error.');
+
+      // The API reports real server timings; the browser adds the full round trip.
+      const body = (await res.json().catch(() => null)) as { messageId?: string; trace?: MessageTraceData } | null;
+      setTrace(body?.trace ? { ...body.trace, roundTripMs: Math.round(performance.now() - startedAt), messageId: body.messageId } : null);
 
       showToast('success', t('contact.form.success'));
       setValues(INITIAL_VALUES);
@@ -309,6 +316,8 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
           {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
         </button>
       </form>
+
+      {trace && <MessageTrace trace={trace} />}
 
       <Toast toast={toast} />
     </>

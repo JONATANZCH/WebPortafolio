@@ -1,0 +1,45 @@
+.trace {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid color-mix(in srgb, #14b86a 40%, var(--border));
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f3fcf7 0%, var(--bg) 100%);
+}
+.title { font-size: 1rem; margin-bottom: 0.9rem; }
+.list { list-style: none; display: grid; gap: 0.6rem; }
+
+.row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateY(6px);
+  animation: rowIn 0.35s ease forwards;
+}
+@keyframes rowIn { to { opacity: 1; transform: none; } }
+
+.mark { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #14b86a; color: #fff; font-size: 0.7rem; font-weight: 700; }
+.warn { background: #f59e0b; }
+.label { display: grid; font-size: 0.875rem; color: var(--text); line-height: 1.25; }
+.detail { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
+
+.bar { height: 6px; border-radius: 4px; background: var(--surface-strong); overflow: hidden; }
+.fill { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--primary); transform-origin: left; animation: grow 0.5s ease backwards; }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.ms { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text); min-width: 4.2rem; text-align: right; }
+
+.total { margin-top: 0.9rem; padding-top: 0.75rem; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text); opacity: 0; animation: rowIn 0.35s ease forwards; }
+.id { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.note { margin-top: 0.4rem; font-size: 0.8rem; color: #8a5a00; }
+.footnote { margin-top: 0.5rem; font-size: 0.75rem; color: var(--muted); }
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 22px minmax(0, 1fr) auto; }
+  .bar { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .row, .total { opacity: 1; transform: none; animation: none; }
+  .fill { animation: none; }
+}

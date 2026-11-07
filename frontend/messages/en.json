@@ -469,6 +469,18 @@
       "email": "Email me at",
       "calendly": "Book a 30-minute call",
       "hint": "I reply within 2 business days."
+    },
+    "trace": {
+      "title": "How your message travelled",
+      "network": "Your browser → the API",
+      "validation": "Validation and rate limit",
+      "database": "Saved to the database",
+      "email": "Email notification",
+      "email_failed": "queued for retry",
+      "total": "Total",
+      "saved": "Your message was saved even though the email notification failed; I will still read it.",
+      "cold": "The free server was waking up, which is why it took longer than usual.",
+      "note": "Real timings measured by my backend (NestJS on Render) and by your browser."
     }
   },
   "footer": {
