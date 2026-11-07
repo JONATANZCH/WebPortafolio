@@ -7,7 +7,19 @@
     "capabilities": "Capacidades",
     "experience": "Trayectoria",
     "available": "Disponible para nuevos proyectos",
-    "about": "Sobre David"
+    "about": "Sobre David",
+    "about_me": "Sobre mí",
+    "home_top": "Inicio",
+    "palette": {
+      "open": "Buscar y navegar",
+      "placeholder": "Ir a una sección, página o cambiar idioma…",
+      "empty": "Sin resultados.",
+      "sections": "Secciones",
+      "pages": "Páginas",
+      "actions": "Acciones",
+      "language": "Cambiar a English",
+      "hint": "↑↓ para moverte · Enter para abrir · Esc para cerrar"
+    }
   },
   "hero": {
     "role": "Ingeniería backend · Cloud · IA generativa · DevSecOps",
@@ -137,7 +149,10 @@
             "SLOs"
           ]
         }
-      }
+      },
+      "play": "Reproducir recorrido",
+      "stop": "Detener",
+      "step": "Paso {n} de {total}"
     }
   },
   "capabilities": {
@@ -280,7 +295,8 @@
           "Documentación"
         ]
       }
-    ]
+    ],
+    "tools_hint": "Toca una herramienta para ver los casos de estudio donde la he usado."
   },
   "process": {
     "title": "Cómo trabajo",
@@ -318,7 +334,10 @@
     "read": "Leer caso de estudio",
     "visit": "Ver sitio",
     "empty": "No hay casos en esta área todavía.",
-    "decisions": "Decisiones clave"
+    "decisions": "Decisiones clave",
+    "tool_filter": "Herramienta",
+    "clear": "Quitar filtro",
+    "empty_tool": "Ningún caso de estudio usa {tool} todavía."
   },
   "experience": {
     "title": "Trayectoria",
@@ -328,7 +347,12 @@
   },
   "blog": {
     "title": "Últimos artículos",
-    "see_all": "Ver todos"
+    "see_all": "Ver todos",
+    "author_role": "Ingeniero backend, cloud e IA generativa",
+    "author_cta": "Sobre David",
+    "written_by": "Escrito por",
+    "index_title": "Artículos",
+    "index_lead": "Reflexiones técnicas y aprendizajes sobre ingeniería de software."
   },
   "contact": {
     "title": "Plantea tu reto",

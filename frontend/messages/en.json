@@ -7,7 +7,19 @@
     "capabilities": "Capabilities",
     "experience": "Experience",
     "available": "Available for new projects",
-    "about": "About David"
+    "about": "About David",
+    "about_me": "About me",
+    "home_top": "Home",
+    "palette": {
+      "open": "Search and navigate",
+      "placeholder": "Jump to a section, page or switch language…",
+      "empty": "No results.",
+      "sections": "Sections",
+      "pages": "Pages",
+      "actions": "Actions",
+      "language": "Cambiar a Español",
+      "hint": "↑↓ to move · Enter to open · Esc to close"
+    }
   },
   "hero": {
     "role": "Backend · Cloud · Generative AI · DevSecOps engineering",
@@ -137,7 +149,10 @@
             "SLOs"
           ]
         }
-      }
+      },
+      "play": "Play request path",
+      "stop": "Stop",
+      "step": "Step {n} of {total}"
     }
   },
   "capabilities": {
@@ -280,7 +295,8 @@
           "Documentation"
         ]
       }
-    ]
+    ],
+    "tools_hint": "Tap a tool to see the case studies where I've used it."
   },
   "process": {
     "title": "How I work",
@@ -318,7 +334,10 @@
     "read": "Read case study",
     "visit": "Visit site",
     "empty": "No case studies in this area yet.",
-    "decisions": "Key decisions"
+    "decisions": "Key decisions",
+    "tool_filter": "Tool",
+    "clear": "Clear filter",
+    "empty_tool": "No case study uses {tool} yet."
   },
   "experience": {
     "title": "Experience",
@@ -328,7 +347,12 @@
   },
   "blog": {
     "title": "Latest articles",
-    "see_all": "View all"
+    "see_all": "View all",
+    "author_role": "Backend, cloud and generative AI engineer",
+    "author_cta": "About David",
+    "written_by": "Written by",
+    "index_title": "Articles",
+    "index_lead": "Technical reflections and lessons learned in software engineering."
   },
   "contact": {
     "title": "Share your challenge",

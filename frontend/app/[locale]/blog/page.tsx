@@ -4,6 +4,7 @@ import { getBlogPosts, type Language } from '@/lib/sanity.queries';
 import { setRequestLocale } from 'next-intl/server';
 import { locales } from '@/i18n.config';
 import BlogCard from '@/components/BlogCard';
+import AuthorCard from '@/components/AuthorCard';
 import Navigation from '@/components/Navigation';
 import styles from './page.module.css';
 
@@ -42,6 +43,10 @@ export default async function BlogPage(props: BlogPageProps) {
               : 'Reflexiones técnicas, aprendizajes y pensamientos sobre ingeniería de software.'}
           </p>
         </header>
+
+        <div style={{ marginBottom: '2.5rem' }}>
+          <AuthorCard locale={locale} />
+        </div>
 
         {posts.length === 0 ? (
           <div className={styles.empty}>

@@ -19,6 +19,11 @@ export default function Capabilities() {
   const [index, setIndex] = useState(0);
   const current = items[index];
 
+  const pickTool = (tool: string) => {
+    window.dispatchEvent(new CustomEvent('portfolio:tool', { detail: { tool } }));
+    document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
       e.preventDefault();
@@ -83,11 +88,14 @@ export default function Capabilities() {
             </div>
             <ul className={styles.tools} role="list" aria-label={t('tools')}>
               {current.tools.map((tool) => (
-                <li key={tool} className={styles.tool}>
-                  {tool}
+                <li key={tool}>
+                  <button type="button" className={styles.tool} onClick={() => pickTool(tool)}>
+                    {tool}
+                  </button>
                 </li>
               ))}
             </ul>
+            <p className={styles.toolsHint}>{t('tools_hint')}</p>
           </div>
         </div>
       </div>

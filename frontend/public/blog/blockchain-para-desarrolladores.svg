@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F7FF"/><stop offset="1" stop-color="#E6ECFF"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1F4BFF" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+  <g font-family="ui-monospace,Menlo,monospace">
+    <g>
+      <rect x="28" y="110" width="124" height="140" rx="12" fill="#fff" stroke="#0B1B33" stroke-width="2.5"/>
+      <text x="44" y="138" font-size="12" font-weight="600" fill="#1F4BFF">block 0</text>
+      <text x="44" y="168" font-size="11" fill="#526078">prev 0000…</text><text x="44" y="190" font-size="11" fill="#526078">data</text><text x="44" y="226" font-size="11" fill="#0B1B33">hash a3f9…</text>
+    </g>
+    <g>
+      <rect x="182" y="110" width="124" height="140" rx="12" fill="#fff" stroke="#0B1B33" stroke-width="2.5"/>
+      <text x="198" y="138" font-size="12" font-weight="600" fill="#1F4BFF">block 1</text>
+      <text x="198" y="168" font-size="11" fill="#526078">prev a3f9…</text><text x="198" y="190" font-size="11" fill="#526078">data</text><text x="198" y="226" font-size="11" fill="#0B1B33">hash 7be2…</text>
+    </g>
+    <g>
+      <rect x="336" y="110" width="124" height="140" rx="12" fill="#fff" stroke="#0B1B33" stroke-width="2.5"/>
+      <text x="352" y="138" font-size="12" font-weight="600" fill="#1F4BFF">block 2</text>
+      <text x="352" y="168" font-size="11" fill="#526078">prev 7be2…</text><text x="352" y="190" font-size="11" fill="#526078">data</text><text x="352" y="226" font-size="11" fill="#0B1B33">hash c04d…</text>
+    </g>
+    <g>
+      <rect x="490" y="110" width="124" height="140" rx="12" fill="#0B1B33"/>
+      <text x="506" y="138" font-size="12" font-weight="600" fill="#00A3C4">block 3</text>
+      <text x="506" y="168" font-size="11" fill="#9fb0cc">prev c04d…</text><text x="506" y="190" font-size="11" fill="#9fb0cc">data</text><text x="506" y="226" font-size="11" fill="#fff">hash 19ac…</text>
+    </g>
+  </g>
+  <g stroke="#1F4BFF" stroke-width="3" fill="none"><path d="M152 180h30M306 180h30M460 180h30"/></g>
+  <g fill="#1F4BFF"><circle cx="167" cy="180" r="5"/><circle cx="321" cy="180" r="5"/><circle cx="475" cy="180" r="5"/></g>
+</svg>

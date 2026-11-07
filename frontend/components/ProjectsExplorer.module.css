@@ -49,7 +49,12 @@
 
 .cardSide { display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
 .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; }
-.chip { font-family: var(--font-mono); font-size: 0.72rem; background: var(--surface); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 6px; color: var(--text); }
+.chip { font-family: var(--font-mono); font-size: 0.72rem; background: var(--surface); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 6px; color: var(--text); cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease; }
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chipOn { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
+.chipOn:hover { color: var(--primary-ink); }
+.toolBar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; padding: 0.6rem 1rem; border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent); background: color-mix(in srgb, var(--primary) 6%, white); border-radius: 10px; font-size: 0.9rem; color: var(--text); }
+.clear { border: 0; background: transparent; color: var(--primary); font: inherit; font-weight: 600; cursor: pointer; }
 
 .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .primary, .secondary { padding: 0.55rem 1rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; transition: background 0.15s ease, border-color 0.15s ease; }

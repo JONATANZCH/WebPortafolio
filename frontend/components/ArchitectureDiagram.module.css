@@ -42,3 +42,23 @@
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
 }
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--primary);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 7%, white);
+  color: var(--primary);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.play:hover { background: var(--primary); color: var(--primary-ink); }
+.step { font-family: var(--font-mono); font-weight: 400; font-size: 0.72rem; opacity: 0.85; }
+.caption { align-items: center; }

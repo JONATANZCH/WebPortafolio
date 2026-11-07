@@ -43,7 +43,9 @@
 .list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--primary); }
 
 .tools { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
-.tool { font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 6px; color: var(--text); }
+.tool { font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 6px; color: var(--text); cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease; }
+.tool:hover { border-color: var(--primary); color: var(--primary); background: color-mix(in srgb, var(--primary) 6%, white); }
+.toolsHint { margin-top: 0.75rem; font-size: 0.8rem; }
 
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; }

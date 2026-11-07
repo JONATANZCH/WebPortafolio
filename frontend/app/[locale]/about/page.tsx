@@ -41,7 +41,7 @@ export default async function AboutPage({ params }: PageProps) {
 
           <header className={styles.hero}>
             <Image
-              src="/profile-photo.jpg"
+              src="/david-zapeta.jpg"
               alt="David Jonatan Zapeta Chavez"
               width={144}
               height={144}

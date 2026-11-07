@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import type { Project } from '@/lib/sanity.queries';
@@ -25,11 +25,26 @@ function areasOf(project: Project): Area[] {
 export default function ProjectsExplorer({ projects }: { projects: Project[] }) {
   const t = useTranslations('projects');
   const [filter, setFilter] = useState<'all' | Area>('all');
+  const [tool, setTool] = useState<string | null>(null);
 
-  const visible = useMemo(
-    () => (filter === 'all' ? projects : projects.filter((p) => areasOf(p).includes(filter))),
-    [projects, filter],
-  );
+  useEffect(() => {
+    const onTool = (e: Event) => {
+      const next = (e as CustomEvent<{ tool: string }>).detail?.tool;
+      if (next) {
+        setTool(next);
+        setFilter('all');
+      }
+    };
+    window.addEventListener('portfolio:tool', onTool);
+    return () => window.removeEventListener('portfolio:tool', onTool);
+  }, []);
+
+  const visible = useMemo(() => {
+    const byArea = filter === 'all' ? projects : projects.filter((p) => areasOf(p).includes(filter));
+    if (!tool) return byArea;
+    const q = tool.toLowerCase();
+    return byArea.filter((p) => (p.stack ?? []).some((s) => s.toLowerCase() === q));
+  }, [projects, filter, tool]);
 
   const counts = useMemo(() => {
     const c: Record<string, number> = { all: projects.length };
@@ -61,8 +76,19 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
           ))}
         </div>
 
+        {tool && (
+          <p className={styles.toolBar}>
+            <span>
+              {t('tool_filter')}: <strong>{tool}</strong>
+            </span>
+            <button type="button" className={styles.clear} onClick={() => setTool(null)}>
+              {t('clear')} ×
+            </button>
+          </p>
+        )}
+
         {visible.length === 0 ? (
-          <p className={styles.empty}>{t('empty')}</p>
+          <p className={styles.empty}>{tool ? t('empty_tool', { tool }) : t('empty')}</p>
         ) : (
           <ul className={styles.list} role="list">
             {visible.map((p) => {
@@ -91,8 +117,15 @@ export default function ProjectsExplorer({ projects }: { projects: Project[] }) 
                   <div className={styles.cardSide}>
                     <ul className={styles.chips} role="list">
                       {(p.stack ?? []).map((s) => (
-                        <li key={s} className={styles.chip}>
-                          {s}
+                        <li key={s}>
+                          <button
+                            type="button"
+                            className={`${styles.chip} ${tool?.toLowerCase() === s.toLowerCase() ? styles.chipOn : ''}`}
+                            aria-pressed={tool?.toLowerCase() === s.toLowerCase()}
+                            onClick={() => setTool(tool?.toLowerCase() === s.toLowerCase() ? null : s)}
+                          >
+                            {s}
+                          </button>
                         </li>
                       ))}
                     </ul>

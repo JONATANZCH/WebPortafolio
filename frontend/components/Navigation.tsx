@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
+import CommandPalette from './CommandPalette';
 import styles from './Navigation.module.css';
 
 const SECTIONS = [
@@ -14,6 +17,8 @@ const SECTIONS = [
 export default function Navigation() {
   const t = useTranslations('common');
   const locale = useLocale();
+  const pathname = usePathname();
+  const isHome = pathname === `/${locale}`;
   const [active, setActive] = useState<string>('');
   const [progress, setProgress] = useState(0);
 
@@ -45,44 +50,60 @@ export default function Navigation() {
     };
   }, []);
 
+  const toTop = (e: React.MouseEvent) => {
+    if (isHome) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className={styles.header}>
-      <div
-        className={styles.progress}
-        style={{ transform: `scaleX(${progress})` }}
-        aria-hidden="true"
-      />
+      <div className={styles.progress} style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
       <nav className={styles.nav} aria-label="Principal">
-        <Link href={`/${locale}`} className={styles.logo} aria-label="David Jonatan Zapeta — inicio">
-          <span className={styles.logoMark} aria-hidden="true">dz</span>
-          <span className={styles.logoText}>David Zapeta</span>
-        </Link>
+        <div className={styles.brand}>
+          <Link
+            href={`/${locale}`}
+            onClick={toTop}
+            className={styles.logoMark}
+            aria-label={isHome ? 'Volver arriba' : t('home_top')}
+            title={t('home_top')}
+          >
+            dz
+          </Link>
+          <Link href={`/${locale}/about`} className={styles.author} title={t('about_me')}>
+            <Image src="/david-zapeta.jpg" alt="" width={32} height={32} className={styles.avatar} />
+            <span className={styles.authorText}>
+              <span className={styles.authorName}>David Zapeta</span>
+              <span className={styles.authorHint}>{t('about_me')} →</span>
+            </span>
+          </Link>
+        </div>
 
         <ul className={styles.links} role="list">
           {SECTIONS.map((s) => (
             <li key={s.id}>
               <Link
                 href={`/${locale}#${s.id}`}
-                className={`${styles.link} ${active === s.id ? styles.linkActive : ''}`}
-                aria-current={active === s.id ? 'true' : undefined}
+                className={`${styles.link} ${isHome && active === s.id ? styles.linkActive : ''}`}
+                aria-current={isHome && active === s.id ? 'true' : undefined}
               >
                 {t(s.key)}
               </Link>
             </li>
           ))}
           <li>
-            <Link href={`/${locale}/about`} className={styles.link}>
-              {t('about')}
-            </Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/blog`} className={styles.link}>
+            <Link
+              href={`/${locale}/blog`}
+              className={`${styles.link} ${pathname.startsWith(`/${locale}/blog`) ? styles.linkActive : ''}`}
+            >
               {t('blog')}
             </Link>
           </li>
         </ul>
 
         <div className={styles.rightSide}>
+          <CommandPalette />
           <LanguageSwitcher />
           <Link href={`/${locale}#contacto`} className={styles.cta}>
             {t('contact')}

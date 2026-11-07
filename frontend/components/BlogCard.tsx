@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BlogPost } from '../lib/sanity.queries';
 import { urlFor } from '../lib/sanity';
+import { coverFor } from '../lib/blogCover';
 import styles from './BlogCard.module.css';
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -71,6 +72,21 @@ function CardImage({ post }: { post: BlogPost }) {
     );
   }
 
+  const cover = coverFor(post.slug?.current);
+  if (cover) {
+    return (
+      <div className={styles.imageWrapper}>
+        <Image
+          src={cover}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className={styles.image}
+        />
+      </div>
+    );
+  }
+
   return <div className={styles.imagePlaceholder} aria-hidden="true" />;
 }
 
@@ -118,9 +134,10 @@ export default function BlogCard({ post }: BlogCardProps) {
           <time className={styles.date} dateTime={date}>
             {formatDate(date, post.language)}
           </time>
-          {post.author?.name && (
-            <span className={styles.author}>{post.author.name}</span>
-          )}
+          <span className={styles.author}>
+            <Image src="/david-zapeta.jpg" alt="" width={20} height={20} className={styles.avatar} />
+            David Zapeta
+          </span>
         </footer>
       </div>
     </article>

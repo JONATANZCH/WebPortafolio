@@ -12,7 +12,7 @@ export default async function AboutTeaser({ locale }: { locale: string }) {
       <div className={styles.inner}>
         <div className={styles.photo}>
           <Image
-            src="/profile-photo.jpg"
+            src="/david-zapeta.jpg"
             alt="David Jonatan Zapeta Chavez"
             width={160}
             height={160}

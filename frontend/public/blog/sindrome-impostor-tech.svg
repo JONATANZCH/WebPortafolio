@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F7FF"/><stop offset="1" stop-color="#E9E4FF"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1F4BFF" stroke-opacity=".07"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+  <g fill="none" stroke="#1F4BFF" stroke-opacity=".45" stroke-width="2" stroke-dasharray="6 7">
+    <circle cx="260" cy="132" r="52"/>
+    <path d="M150 330c0-72 50-112 110-112s110 40 110 112"/>
+  </g>
+  <circle cx="330" cy="122" r="52" fill="#0B1B33"/>
+  <path d="M220 340c0-76 50-120 110-120s110 44 110 120z" fill="#0B1B33"/>
+  <path d="M290 112c0-12 18-22 40-22s40 10 40 22v14c0 14-18 26-40 26s-40-12-40-26z" fill="#fff"/>
+  <path d="M306 118h20M334 118h20" stroke="#0B1B33" stroke-width="3" stroke-linecap="round"/>
+  <path d="M312 138q18 8 36 0" fill="none" stroke="#0B1B33" stroke-width="3" stroke-linecap="round"/>
+  <g font-family="Geist,system-ui,sans-serif" font-weight="700" fill="#1F4BFF">
+    <circle cx="460" cy="90" r="26" fill="#fff" stroke="#1F4BFF" stroke-width="2"/><text x="460" y="101" text-anchor="middle" font-size="30">?</text>
+    <circle cx="500" cy="170" r="18" fill="#fff" stroke="#00A3C4" stroke-width="2"/><text x="500" y="178" text-anchor="middle" font-size="22" fill="#00A3C4">?</text>
+    <circle cx="140" cy="100" r="20" fill="#fff" stroke="#1F4BFF" stroke-width="2"/><text x="140" y="109" text-anchor="middle" font-size="24">?</text>
+  </g>
+</svg>

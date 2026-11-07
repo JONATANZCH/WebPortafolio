@@ -6,6 +6,10 @@ import { PortableText } from '@portabletext/react';
 import { getBlogPostBySlug, getBlogPosts, type Language } from '@/lib/sanity.queries';
 import { setRequestLocale } from 'next-intl/server';
 import { urlFor } from '@/lib/sanity';
+import { coverFor } from '@/lib/blogCover';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import AuthorCard from '@/components/AuthorCard';
 import styles from './page.module.css';
 
 // ============================================================
@@ -98,9 +102,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   // Cover image URL
   const coverImageUrl = post.mainImage
     ? urlFor(post.mainImage).width(1200).height(630).url()
-    : null;
+    : coverFor(slug);
 
   return (
+    <>
+    <Navigation />
     <main className={styles.page}>
       <div className={styles.container}>
         {/* Back link */}
@@ -112,6 +118,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {/* Article */}
         <article>
+          {/* Cover image */}
+          {coverImageUrl && (
+            <div className={styles.coverImageWrapper}>
+              <Image
+                src={coverImageUrl}
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 840px"
+                className={styles.coverImage}
+              />
+            </div>
+          )}
+
           {/* Hero */}
           <header className={styles.hero}>
             {/* Categories */}
@@ -129,29 +149,16 @@ export default async function BlogPostPage({ params }: PageProps) {
 
             {/* Meta */}
             <div className={styles.meta}>
-              {post.author?.name && (
-                <span className={styles.author}>{post.author.name}</span>
-              )}
-              {post.author?.name && <span className={styles.metaDivider} aria-hidden="true">·</span>}
+              <Link href={`/${locale}/about`} className={styles.bylineLink}>
+                <Image src="/david-zapeta.jpg" alt="" width={28} height={28} className={styles.bylineAvatar} />
+                <span className={styles.author}>David Zapeta</span>
+              </Link>
+              <span className={styles.metaDivider} aria-hidden="true">·</span>
               <time className={styles.date} dateTime={publishedDate}>
                 {formatDate(publishedDate, language)}
               </time>
             </div>
           </header>
-
-          {/* Cover image */}
-          {coverImageUrl && (
-            <div className={styles.coverImageWrapper}>
-              <Image
-                src={coverImageUrl}
-                alt={`Imagen de portada: ${post.title}`}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 840px"
-                className={styles.coverImage}
-              />
-            </div>
-          )}
 
           {/* Body */}
           {post.body && post.body.length > 0 && (
@@ -161,6 +168,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           )}
         </article>
+
+        <div className={styles.authorBlock}>
+          <AuthorCard locale={locale} />
+        </div>
 
         {/* Prev / Next navigation */}
         {(prevPost || nextPost) && (
@@ -187,5 +198,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         )}
       </div>
     </main>
+    <Footer about={null} />
+    </>
   );
 }

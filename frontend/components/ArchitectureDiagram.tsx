@@ -46,14 +46,49 @@ const center = (id: NodeId) => {
   return { x: n.x + W / 2, y: n.y + H / 2 };
 };
 
+const PATH: NodeId[] = ['client', 'gateway', 'services', 'data', 'events', 'ai', 'platform', 'observability'];
+
 export default function ArchitectureDiagram() {
   const t = useTranslations('hero.diagram');
   const [active, setActive] = useState<NodeId>('services');
   const [motion, setMotion] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     setMotion(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = window.setInterval(() => {
+      setStep((s) => {
+        const next = s + 1;
+        if (next >= PATH.length) {
+          setPlaying(false);
+          return s;
+        }
+        setActive(PATH[next]);
+        return next;
+      });
+    }, 2600);
+    return () => window.clearInterval(id);
+  }, [playing]);
+
+  const togglePlay = () => {
+    if (playing) {
+      setPlaying(false);
+    } else {
+      setStep(0);
+      setActive(PATH[0]);
+      setPlaying(true);
+    }
+  };
+
+  const select = (id: NodeId) => {
+    setPlaying(false);
+    setActive(id);
+  };
 
   const tools = t.raw(`nodes.${active}.tools`) as string[];
   const y = center('client').y;
@@ -63,6 +98,11 @@ export default function ArchitectureDiagram() {
       <figcaption className={styles.caption}>
         <span className={styles.captionTitle}>{t('title')}</span>
         <span className={styles.captionHint}>{t('hint')}</span>
+        <button type="button" className={styles.play} onClick={togglePlay} aria-pressed={playing}>
+          <span aria-hidden="true">{playing ? '■' : '▶'}</span>
+          {playing ? t('stop') : t('play')}
+          {playing && <span className={styles.step}>{t('step', { n: step + 1, total: PATH.length })}</span>}
+        </button>
       </figcaption>
 
       <svg
@@ -107,13 +147,13 @@ export default function ArchitectureDiagram() {
               aria-pressed={on}
               aria-label={`${t(`nodes.${n.id}.label`)} — ${t(`nodes.${n.id}.sub`)}`}
               className={`${styles.node} ${on ? styles.nodeOn : ''}`}
-              onClick={() => setActive(n.id)}
-              onMouseEnter={() => setActive(n.id)}
-              onFocus={() => setActive(n.id)}
+              onClick={() => select(n.id)}
+              onMouseEnter={() => !playing && setActive(n.id)}
+              onFocus={() => !playing && setActive(n.id)}
               onKeyDown={(ev) => {
                 if (ev.key === 'Enter' || ev.key === ' ') {
                   ev.preventDefault();
-                  setActive(n.id);
+                  select(n.id);
                 }
               }}
             >

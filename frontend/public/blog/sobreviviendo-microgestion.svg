@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F7FF"/><stop offset="1" stop-color="#FFF0DC"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#1F4BFF" stroke-opacity=".07"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <rect width="640" height="360" fill="url(#grid)"/>
+  <rect x="60" y="50" width="420" height="260" rx="14" fill="#0B1B33"/>
+  <g fill="#fff"><circle cx="86" cy="76" r="5" fill="#ff6b6b"/><circle cx="104" cy="76" r="5" fill="#ffd166"/><circle cx="122" cy="76" r="5" fill="#2fd38b"/></g>
+  <g stroke-linecap="round" stroke-width="8">
+    <path d="M90 118h120" stroke="#1F4BFF"/><path d="M226 118h70" stroke="#6b7a96"/>
+    <path d="M110 148h160" stroke="#00A3C4"/><path d="M110 178h90" stroke="#6b7a96"/><path d="M214 178h120" stroke="#1F4BFF"/>
+    <path d="M110 208h140" stroke="#6b7a96"/><path d="M90 238h80" stroke="#00A3C4"/><path d="M184 238h100" stroke="#6b7a96"/><path d="M90 268h50" stroke="#1F4BFF"/>
+  </g>
+  <g fill="#F59E0B"><rect x="352" y="140" width="104" height="26" rx="6"/><rect x="352" y="200" width="104" height="26" rx="6"/><rect x="352" y="260" width="104" height="26" rx="6"/></g>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="12" font-weight="600" fill="#0B1B33"><text x="364" y="157">why?</text><text x="364" y="217">change it</text><text x="364" y="277">again</text></g>
+  <g transform="translate(430 70)" fill="none" stroke="#0B1B33" stroke-width="9" stroke-linecap="round">
+    <circle cx="70" cy="70" r="52" fill="#fff" fill-opacity=".75"/><path d="M108 108l56 56"/>
+  </g>
+  <g fill="none" stroke="#1F4BFF" stroke-width="5" stroke-linecap="round"><path d="M472 118h56M472 138h36"/></g>
+</svg>
