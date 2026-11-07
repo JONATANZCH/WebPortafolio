@@ -15,6 +15,6 @@ export const config = {
     // Set a cookie to remember the previous locale for all requests that have a locale prefix
     '/(es|en)/:path*',
     // Also match request paths without a trailing slash
-    '/((?!_next|_vercel|.*\\..*).*)',
+    '/((?!_next|_vercel|cv$|.*\\..*).*)',
   ],
 };

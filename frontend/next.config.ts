@@ -13,6 +13,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // The CV is served by app/cv/route.ts from /private; make sure it ships with the function.
+  outputFileTracingIncludes: { '/cv': ['./private/**'] },
+  async redirects() {
+    // Old public URL of the CV keeps working, and now goes through the counter.
+    return [{ source: '/CV-David-Zapeta.pdf', destination: '/cv?c=old-link', permanent: false }];
+  },
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },

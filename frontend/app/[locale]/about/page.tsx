@@ -54,7 +54,7 @@ export default async function AboutPage({ params }: PageProps) {
               <p className={styles.lead}>{t('lead')}</p>
               {locale === 'es' && (
                 <a
-                  href="/CV-David-Zapeta.pdf"
+                  href="/cv?c=sitio"
                   data-umami-event="cv-download"
                   download="CV David Jonatan Zapeta.pdf"
                   className={styles.cv}
