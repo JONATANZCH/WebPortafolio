@@ -5,21 +5,23 @@ import { type About } from '@/lib/sanity.queries';
 import styles from './Hero.module.css';
 
 const TECH_STACK = [
+  'Java',
+  'Spring Boot',
+  'Node.js',
+  'NestJS',
+  'Python',
   'TypeScript',
   'React',
   'Next.js',
-  'Node.js',
-  'NestJS',
   'PostgreSQL',
-  'TypeORM',
-  'Tailwind CSS',
   'Docker',
   'AWS',
-  'Git',
+  'Azure',
+  'Terraform',
   'GraphQL',
   'REST APIs',
-  'Sanity CMS',
-  'Vercel',
+  'RAG / LangChain',
+  'CI/CD',
 ];
 
 const MARQUEE_ITEMS = [...TECH_STACK, ...TECH_STACK];
