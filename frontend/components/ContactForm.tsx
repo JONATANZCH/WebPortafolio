@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { type Language } from '@/lib/sanity.queries';
 import styles from './ContactForm.module.css';
@@ -104,9 +104,10 @@ const INITIAL_VALUES: FormValues = {
 
 interface ContactFormProps {
   locale: Language;
+  prefill?: { subject: string; message: string } | null;
 }
 
-export default function ContactForm({ locale }: ContactFormProps) {
+export default function ContactForm({ locale, prefill }: ContactFormProps) {
   const t = useTranslations();
   const validateField = createValidator(t);
   const validateAll = createValidateAll(validateField);
@@ -116,6 +117,13 @@ export default function ContactForm({ locale }: ContactFormProps) {
   const [touched, setTouched] = useState<Partial<Record<keyof FormValues, boolean>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<ToastState>({ visible: false, type: 'success', message: '' });
+
+  /* Apply a prefilled subject/message (from the brief builder) */
+  useEffect(() => {
+    if (prefill) {
+      setValues((prev) => ({ ...prev, subject: prefill.subject, message: prefill.message }));
+    }
+  }, [prefill]);
 
   /* Show a toast and auto-dismiss after 4 s */
   const showToast = useCallback((type: 'success' | 'error', message: string) => {

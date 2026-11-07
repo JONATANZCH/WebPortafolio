@@ -1,97 +1,82 @@
-import { getExperience, getEducation, Experience, Education, type Language } from '../lib/sanity.queries';
+import { getTranslations } from 'next-intl/server';
+import { getExperience, getEducation, type Experience, type Education, type Language } from '../lib/sanity.queries';
 import styles from './ExperienceTimeline.module.css';
 
-function formatDate(dateStr: string | undefined | null): string {
-  if (!dateStr) return 'Presente';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('es-MX', { month: 'short', year: 'numeric' });
+function fmt(dateStr: string | undefined | null, locale: string): string {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString(locale === 'en' ? 'en-US' : 'es-MX', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
 }
 
-function formatDateRange(startDate?: string, endDate?: string | null): string {
-  const start = formatDate(startDate);
-  const end = endDate ? formatDate(endDate) : 'Presente';
-  return `${start} — ${end}`;
-}
-
-function ExperienceEntry({ entry }: { entry: Experience }) {
+function ExperienceEntry({ entry, locale, present }: { entry: Experience; locale: string; present: string }) {
+  const start = fmt(entry.startDate, locale);
+  const end = entry.endDate ? fmt(entry.endDate, locale) : present;
   return (
-    <div className={styles.timelineItem}>
-      <div className={styles.connectorWrapper} aria-hidden="true">
-        <div className={styles.dot} />
+    <li className={styles.item}>
+      <div className={styles.when}>
+        <span className={styles.dates}>{start} – {end}</span>
+        {!entry.endDate && <span className={styles.now} aria-hidden="true" />}
       </div>
-      <div className={styles.card}>
-        <p className={styles.role}>{entry.role}</p>
-        <p className={styles.organization}>{entry.company}</p>
-        <p className={styles.dates}>
-          {formatDateRange(entry.startDate, entry.endDate)}
-        </p>
-        {entry.description && (
-          <p className={styles.description}>{entry.description}</p>
-        )}
+      <div className={styles.body}>
+        <h3 className={styles.role}>{entry.role}</h3>
+        <p className={styles.company}>{entry.company}</p>
+        {entry.description && <p className={styles.description}>{entry.description}</p>}
         {entry.skills && entry.skills.length > 0 && (
-          <ul className={styles.responsibilities}>
-            {entry.skills.map((item, i) => (
-              <li key={i}>{item}</li>
+          <ul className={styles.chips} role="list">
+            {entry.skills.map((s) => (
+              <li key={s} className={styles.chip}>{s}</li>
             ))}
           </ul>
         )}
       </div>
-    </div>
+    </li>
   );
 }
 
 function EducationEntry({ entry }: { entry: Education }) {
-  const degreeField = [entry.degree, entry.field].filter(Boolean).join(' en ');
-
   return (
-    <div className={styles.timelineItem}>
-      <div className={styles.connectorWrapper} aria-hidden="true">
-        <div className={styles.dot} />
-      </div>
-      <div className={styles.card}>
-        {degreeField && <p className={styles.role}>{degreeField}</p>}
-        <p className={styles.organization}>{entry.school}</p>
-        {entry.graduationDate && (
-          <p className={styles.dates}>
-            {formatDate(entry.graduationDate)}
-          </p>
-        )}
-        {entry.description && (
-          <p className={styles.description}>{entry.description}</p>
-        )}
-      </div>
-    </div>
+    <li className={styles.eduItem}>
+      <h3 className={styles.eduTitle}>{[entry.degree, entry.field].filter(Boolean).join(' · ')}</h3>
+      <p className={styles.company}>{entry.school}</p>
+      {entry.description && <p className={styles.description}>{entry.description}</p>}
+    </li>
   );
 }
 
 export default async function ExperienceTimeline({ locale = 'es' }: { locale?: string }) {
+  const t = await getTranslations({ locale, namespace: 'experience' });
   const [experience, education] = await Promise.all([
     getExperience(locale as Language),
     getEducation(locale as Language),
   ]);
 
   return (
-    <section id="experiencia" className={styles.section}>
+    <section id="experiencia" className={styles.section} aria-labelledby="exp-title">
       <div className={styles.container}>
-        <h2 className={styles.sectionHeading}>Experiencia</h2>
-        <div className={styles.timeline}>
-          {experience.map((entry) => (
-            <ExperienceEntry key={entry._id} entry={entry} />
-          ))}
-          {experience.length === 0 && (
-            <p className={styles.empty}>No hay experiencia disponible.</p>
-          )}
-        </div>
+        <h2 id="exp-title" className={styles.heading}>{t('title')}</h2>
+        {experience.length === 0 ? (
+          <p className={styles.empty}>{t('empty')}</p>
+        ) : (
+          <ol className={styles.timeline}>
+            {experience.map((e) => (
+              <ExperienceEntry key={e._id} entry={e} locale={locale} present={t('present')} />
+            ))}
+          </ol>
+        )}
 
-        <h2 className={styles.sectionHeading}>Educación</h2>
-        <div className={styles.timeline}>
-          {education.map((entry) => (
-            <EducationEntry key={entry._id} entry={entry} />
-          ))}
-          {education.length === 0 && (
-            <p className={styles.empty}>No hay educación disponible.</p>
-          )}
-        </div>
+        {education.length > 0 && (
+          <>
+            <h2 className={`${styles.heading} ${styles.headingSecond}`}>{t('education')}</h2>
+            <ul className={styles.eduList}>
+              {education.map((e) => (
+                <EducationEntry key={e._id} entry={e} />
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </section>
   );

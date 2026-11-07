@@ -1,16 +1,13 @@
-import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import {
-  getAbout,
-  getBlogPosts,
-  type Language,
-} from '@/lib/sanity.queries';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { getAbout, getBlogPosts, type Language } from '@/lib/sanity.queries';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
+import Capabilities from '@/components/Capabilities';
+import Process from '@/components/Process';
 import ProjectsGrid from '@/components/ProjectsGrid';
-import Expertise from '@/components/Expertise';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import ContactForm from '@/components/ContactForm';
+import ContactBrief from '@/components/ContactBrief';
 import Footer from '@/components/Footer';
 import BlogCard from '@/components/BlogCard';
 import Link from 'next/link';
@@ -26,11 +23,7 @@ export default async function Home(props: PageProps) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
 
-  const [about, blogPosts] = await Promise.all([
-    getAbout(locale),
-    getBlogPosts(locale),
-  ]);
-
+  const [about, blogPosts] = await Promise.all([getAbout(locale), getBlogPosts(locale)]);
   const recentPosts = blogPosts.slice(0, 3);
 
   return (
@@ -38,23 +31,19 @@ export default async function Home(props: PageProps) {
       <Navigation />
 
       <main>
-        <Hero about={about} />
-
-        <Expertise locale={locale} />
-
+        <Hero />
+        <Capabilities />
         <ProjectsGrid locale={locale} />
-
+        <Process locale={locale} />
         <ExperienceTimeline locale={locale} />
-
         <TestimonialsCarousel locale={locale} />
 
-        {/* Blog preview section */}
         {recentPosts.length > 0 && (
           <section id="blog" className={styles.blogPreview}>
             <div className={styles.blogInner}>
               <div className={styles.blogHeader}>
                 <h2 className={styles.blogHeading}>{t('blog.title')}</h2>
-                <Link href="/blog" className={styles.blogSeeAll}>
+                <Link href={`/${locale}/blog`} className={styles.blogSeeAll}>
                   {t('blog.see_all')} →
                 </Link>
               </div>
@@ -68,14 +57,14 @@ export default async function Home(props: PageProps) {
             </div>
           </section>
         )}
-        {/* Contact section */}
+
         <section id="contacto" className={styles.contactSection}>
           <div className={styles.contactInner}>
-            <h2 className={styles.contactHeading}>{t('contact.title')}</h2>
-            <p className={styles.contactSubheading}>
-              {t('contact.subtitle')}
-            </p>
-            <ContactForm locale={locale} />
+            <header className={styles.contactHeader}>
+              <h2 className={styles.contactHeading}>{t('contact.title')}</h2>
+              <p>{t('contact.subtitle')}</p>
+            </header>
+            <ContactBrief locale={locale} />
           </div>
         </section>
       </main>

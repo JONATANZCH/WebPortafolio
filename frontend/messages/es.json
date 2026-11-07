@@ -1,76 +1,160 @@
 {
   "common": {
     "home": "Inicio",
-    "projects": "Proyectos",
+    "projects": "Casos de estudio",
     "blog": "Blog",
     "contact": "Contacto",
-    "available": "Disponible"
+    "capabilities": "Capacidades",
+    "experience": "Trayectoria",
+    "available": "Disponible para nuevos proyectos"
   },
-  "expertise": {
-    "title": "Cómo trabajo",
-    "subtitle": "Código que se mantiene, decisiones que se explican y equipos que avanzan.",
-    "items": {
-      "oop": {
-        "title": "POO y principios SOLID",
-        "body": "Diseño por responsabilidades, inversión de dependencias y límites claros entre dominio e infraestructura para que el código sea fácil de probar y cambiar."
-      },
-      "nest": {
-        "title": "Node.js y NestJS",
-        "body": "APIs REST y GraphQL modulares, con inyección de dependencias, validación, autenticación (JWT/OAuth2) y pruebas automatizadas."
-      },
-      "rag": {
-        "title": "IA generativa y RAG",
-        "body": "Pipelines de embeddings y búsqueda semántica en bases vectoriales, con guardrails, evaluaciones y observabilidad para llevarlos a producción."
-      },
-      "business": {
-        "title": "Negociación con negocio",
-        "body": "Traduzco requerimientos a alcance, riesgos y trade-offs medibles; acuerdo prioridades y fechas realistas antes de escribir código."
-      },
-      "leadership": {
-        "title": "Liderazgo técnico",
-        "body": "Guío decisiones de arquitectura, hago code review constructivo y dejo documentación y pipelines que el equipo puede mantener."
+  "hero": {
+    "role": "Ingeniería backend, cloud e IA generativa",
+    "title": "Plataformas backend e IA que llegan a producción y se pueden mantener.",
+    "lead": "Soy David Jonatan Zapeta Chavez. Con más de 8 años de experiencia, diseño APIs, microservicios y automatización en AWS y Azure, y trabajo codo a codo con producto y negocio para convertir requisitos en sistemas seguros, medibles y fáciles de evolucionar.",
+    "cta_projects": "Ver casos de estudio",
+    "cta_contact": "Plantear un reto",
+    "cta_brief": "Plantear un reto",
+    "facts": [
+      { "label": "Experiencia", "value": "8+ años" },
+      { "label": "Enfoque", "value": "Backend · Cloud · IA" },
+      { "label": "Ubicación", "value": "CDMX · Remoto" },
+      { "label": "Idiomas", "value": "Español nativo · Inglés B2" }
+    ],
+    "diagram": {
+      "title": "Arquitectura de referencia",
+      "hint": "Selecciona un componente para ver qué resuelvo ahí.",
+      "tools": "Herramientas",
+      "nodes": {
+        "client": { "label": "Clientes", "sub": "Web y móvil", "text": "Interfaces que consumen contratos de API estables y versionados, para que web y móvil evolucionen sin romperse entre sí.", "tools": ["React", "Next.js", "React Native", "TypeScript"] },
+        "gateway": { "label": "Acceso", "sub": "Identidad y API", "text": "Identidad delegada, control de acceso por rol y límites de uso. La seguridad se diseña desde el primer endpoint, no al final.", "tools": ["OAuth2", "JWT", "Auth0", "REST", "GraphQL"] },
+        "services": { "label": "Servicios", "sub": "Dominio", "text": "Módulos con POO y SOLID: el dominio no depende de la infraestructura, así que se prueba aislado y cambiar un proveedor no obliga a reescribir la lógica de negocio.", "tools": ["NestJS", "Node.js", "FastAPI", "Clean Architecture", "DDD"] },
+        "events": { "label": "Eventos", "sub": "Mensajería", "text": "Procesamiento asíncrono con reintentos idempotentes, colas de mensajes fallidos (DLQ) y circuit breakers para que una falla no se propague.", "tools": ["SQS/SNS", "Kafka", "RabbitMQ", "DLQ"] },
+        "data": { "label": "Datos", "sub": "Persistencia", "text": "Modelos relacionales y NoSQL, consultas e índices optimizados, migraciones, respaldos y planes de recuperación ante desastres.", "tools": ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Redis"] },
+        "ai": { "label": "IA", "sub": "RAG y agentes", "text": "Búsqueda semántica sobre conocimiento propio, con guardrails y evaluaciones para detectar respuestas fuera de alcance antes de que lleguen al usuario.", "tools": ["RAG", "LangChain", "LangGraph", "Embeddings", "Bases vectoriales"] },
+        "platform": { "label": "Plataforma", "sub": "Cloud y entrega", "text": "Infraestructura como código y pipelines CI/CD con controles de seguridad que bloquean despliegues con vulnerabilidades.", "tools": ["Terraform", "Docker", "Kubernetes", "AWS", "Azure", "GitLab CI/CD"] },
+        "observability": { "label": "Observabilidad", "sub": "Operación", "text": "Métricas, trazas y alertas para resolver incidentes de forma proactiva, con señales que el equipo y el negocio entienden.", "tools": ["Grafana", "CloudWatch", "DataDog", "OpenTelemetry", "Prometheus"] }
       }
     }
   },
-  "hero": {
-    "cta_projects": "Ver proyectos",
-    "cta_contact": "Contáctame"
+  "capabilities": {
+    "title": "Capacidades",
+    "subtitle": "Cuatro frentes en los que puedo sumar a tu equipo. Elige uno para ver cómo lo abordo.",
+    "deliver": "Qué entrego",
+    "approach": "Cómo lo abordo",
+    "tools": "Herramientas",
+    "items": [
+      {
+        "id": "backend",
+        "title": "Arquitectura backend y APIs",
+        "summary": "Servicios y APIs que se entienden, se prueban y soportan el crecimiento del producto.",
+        "deliver": ["Diseño de APIs REST y GraphQL con contratos versionados", "Servicios modulares en NestJS o FastAPI con pruebas automatizadas", "Modelo de datos relacional o NoSQL y estrategia de migraciones", "Autenticación y autorización (JWT, OAuth2, Auth0)"],
+        "approach": ["Separo dominio, casos de uso e infraestructura aplicando POO y SOLID", "Defino los contratos antes de implementar, junto con quien los consume", "Documento las decisiones de arquitectura para que el equipo pueda mantenerlas"],
+        "tools": ["NestJS", "Node.js", "FastAPI", "GraphQL", "PostgreSQL", "MongoDB", "Redis"]
+      },
+      {
+        "id": "ai",
+        "title": "IA generativa y RAG",
+        "summary": "Funcionalidades de IA con límites claros, medibles y listas para operar.",
+        "deliver": ["Pipelines de embeddings y búsqueda semántica en bases vectoriales", "Flujos RAG y agentes con LangChain o LangGraph", "Guardrails de entrada y salida, y evaluaciones de calidad", "Observabilidad de costos, latencia y calidad de respuesta"],
+        "approach": ["Parto del caso de uso y de cómo se medirá el éxito, no del modelo", "Mantengo a una persona en el circuito donde el riesgo lo exige", "Evalúo antes de liberar y vigilo después en producción"],
+        "tools": ["RAG", "LangChain", "LangGraph", "Semantic Kernel", "OpenAI API", "Embeddings", "Guardrails"]
+      },
+      {
+        "id": "cloud",
+        "title": "Cloud, DevOps y plataforma",
+        "summary": "Infraestructura reproducible y entregas frecuentes sin sacrificar seguridad.",
+        "deliver": ["Infraestructura como código con Terraform en AWS o Azure", "Pipelines CI/CD con análisis estático y bloqueo por vulnerabilidades", "Contenedores con Docker y orquestación cuando el caso lo justifica", "Dashboards y alertas con Grafana, CloudWatch o DataDog"],
+        "approach": ["Automatizo lo repetible y dejo todo versionado y revisable", "Pongo controles de seguridad dentro del pipeline, no después", "Defino qué señales importan antes de instrumentar"],
+        "tools": ["Terraform", "AWS", "Azure", "Docker", "Kubernetes", "GitLab CI/CD", "GitHub Actions", "Grafana"]
+      },
+      {
+        "id": "leadership",
+        "title": "Liderazgo técnico y alineación con negocio",
+        "summary": "Decisiones técnicas explicadas en el idioma del negocio, y equipos que avanzan en la misma dirección.",
+        "deliver": ["Discovery técnico: alcance, riesgos, dependencias y supuestos", "Propuestas con alternativas, costos y trade-offs documentados", "Planes de entrega por etapas con prioridades acordadas", "Revisión de código y lineamientos de calidad para el equipo"],
+        "approach": ["Traduzco requisitos de negocio en alcance medible y riesgos explícitos", "Presento opciones con su impacto, en lugar de una única respuesta", "Facilito acuerdos entre producto, ingeniería y operaciones"],
+        "tools": ["ADR", "Code review", "Roadmaps técnicos", "Mentoría", "Documentación"]
+      }
+    ]
+  },
+  "process": {
+    "title": "Cómo trabajo",
+    "subtitle": "Un proceso corto y transparente, ajustable al tamaño del reto.",
+    "steps": [
+      { "title": "Diagnóstico", "text": "Entiendo el contexto, las restricciones y qué significa éxito. Salgo con alcance, riesgos y supuestos por escrito." },
+      { "title": "Diseño", "text": "Propongo una arquitectura con alternativas y trade-offs. Se decide en conjunto y queda registrada." },
+      { "title": "Entrega incremental", "text": "Libero por etapas, con pruebas y pipelines desde la primera. Cada entrega se puede demostrar y revertir." },
+      { "title": "Operación y traspaso", "text": "Dejo observabilidad, documentación y prácticas que tu equipo puede sostener sin depender de mí." }
+    ]
+  },
+  "projects": {
+    "title": "Casos de estudio",
+    "subtitle": "Plataformas en producción: qué reto había, qué decisiones se tomaron y con qué herramientas.",
+    "filter_label": "Filtrar por área",
+    "filters": { "all": "Todos", "frontend": "Frontend", "backend": "Backend", "cloud": "Cloud y DevOps", "ai": "IA" },
+    "read": "Leer caso de estudio",
+    "visit": "Ver sitio",
+    "empty": "No hay casos en esta área todavía.",
+    "decisions": "Decisiones clave"
+  },
+  "experience": {
+    "title": "Trayectoria",
+    "education": "Formación y certificaciones",
+    "present": "Actual",
+    "empty": "Sin información disponible."
   },
   "blog": {
     "title": "Últimos artículos",
     "see_all": "Ver todos"
   },
   "contact": {
-    "title": "Contáctame",
-    "subtitle": "¿Tienes un proyecto en mente? Cuéntame sobre él.",
+    "title": "Plantea tu reto",
+    "subtitle": "Cuéntame en qué punto está tu proyecto. Armo el mensaje contigo y respondo con un primer enfoque.",
+    "brief": {
+      "q1": "¿Qué necesitas resolver?",
+      "q1_hint": "Puedes elegir más de una.",
+      "q2": "¿En qué etapa está?",
+      "q3": "¿Para cuándo lo necesitas?",
+      "topics": ["Diseñar una API o plataforma backend", "Integrar IA generativa (RAG)", "Automatizar infraestructura y CI/CD", "Escalar o estabilizar un sistema", "Liderar la parte técnica de un proyecto"],
+      "stages": ["Es una idea", "Está en desarrollo", "Ya está en producción"],
+      "timeframes": ["Lo antes posible", "En 1 a 3 meses", "Todavía exploro"],
+      "preview": "Vista previa de tu mensaje",
+      "empty": "Elige al menos un tema para armar tu mensaje.",
+      "subject": "Reto técnico",
+      "intro": "Hola David, me gustaría platicar sobre lo siguiente:",
+      "topics_line": "Necesito ayuda con",
+      "stage_line": "Etapa del proyecto",
+      "time_line": "Plazo"
+    },
     "form": {
       "name": "Nombre",
-      "email": "Email",
+      "email": "Correo",
       "subject": "Asunto",
       "message": "Mensaje",
-      "submit": "Enviar",
+      "submit": "Enviar mensaje",
       "sending": "Enviando...",
-      "error": "Error al enviar el mensaje. Inténtalo de nuevo.",
-      "success": "¡Mensaje enviado exitosamente!"
+      "error": "No se pudo enviar el mensaje. Revisa tu conexión e inténtalo de nuevo.",
+      "success": "Mensaje enviado. Te respondo en un máximo de 2 días hábiles."
     },
     "validation": {
-      "name_required": "El nombre es requerido.",
+      "name_required": "Escribe tu nombre.",
       "name_min": "El nombre debe tener al menos 2 caracteres.",
-      "email_required": "El email es requerido.",
-      "email_invalid": "Ingresa un correo electrónico válido.",
-      "subject_required": "El asunto es requerido.",
+      "email_required": "Escribe tu correo.",
+      "email_invalid": "Ingresa un correo válido, por ejemplo nombre@empresa.com.",
+      "subject_required": "Escribe un asunto.",
       "subject_min": "El asunto debe tener al menos 3 caracteres.",
-      "message_required": "El mensaje es requerido.",
+      "message_required": "Escribe tu mensaje.",
       "message_min": "El mensaje debe tener al menos 10 caracteres."
     }
   },
   "footer": {
-    "description": "Cloud & DevOps Engineer. Construyendo sistemas resilientes y escalables.",
+    "description": "Ingeniería backend, cloud e IA generativa.",
     "links": {
       "github": "GitHub",
       "linkedin": "LinkedIn",
       "twitter": "Twitter",
-      "email": "Email"
+      "email": "Correo"
     }
   },
   "language_switcher": {

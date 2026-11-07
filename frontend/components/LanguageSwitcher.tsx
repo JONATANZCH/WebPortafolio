@@ -25,15 +25,14 @@ export default function LanguageSwitcher() {
         className={`${styles.button} ${locale === 'es' ? styles.active : ''}`}
         aria-label="Cambiar a español"
       >
-        Español
+        ES
       </button>
-      <span className={styles.divider}>|</span>
       <button
         onClick={() => toggleLocale('en')}
         className={`${styles.button} ${locale === 'en' ? styles.active : ''}`}
         aria-label="Switch to English"
       >
-        English
+        EN
       </button>
     </div>
   );

@@ -1,0 +1,52 @@
+.section { padding: 6rem 1.5rem; }
+.inner { max-width: 1200px; margin-inline: auto; }
+.header { max-width: 640px; margin-bottom: 2.5rem; }
+.header h2 { margin-bottom: 0.6rem; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 2rem; align-items: start; }
+
+.tabs { display: flex; flex-direction: column; gap: 0.5rem; }
+.tab {
+  text-align: left;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  cursor: pointer;
+  font: inherit;
+  display: grid;
+  gap: 0.2rem;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.tab:hover { border-color: var(--text); }
+.tabActive {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 5%, white);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+.tabTitle { font-weight: 650; color: var(--text); font-size: 1rem; }
+.tabSummary { font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
+
+.panel {
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  animation: swap 0.28s ease;
+}
+@keyframes swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+.colTitle { font-size: 0.9rem; margin-bottom: 0.75rem; color: var(--primary); }
+.list { list-style: none; display: grid; gap: 0.65rem; }
+.list li { position: relative; padding-left: 1.1rem; font-size: 0.9375rem; color: var(--text); line-height: 1.55; }
+.list li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 2px; background: var(--primary); }
+
+.tools { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+.tool { font-family: var(--font-mono); font-size: 0.75rem; background: var(--bg); border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 6px; color: var(--text); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .cols { grid-template-columns: 1fr; }
+  .section { padding: 4rem 1.5rem; }
+}

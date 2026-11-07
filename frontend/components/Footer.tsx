@@ -18,7 +18,7 @@ export default function Footer({ about }: FooterProps) {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <p className={styles.tagline}>Made in CDMX · 2026</p>
+        <p className={styles.tagline}>{t('footer.description')} © 2026 David Jonatan Zapeta Chavez</p>
 
         <div className={styles.right}>
           <nav className={styles.navLinks} aria-label="Footer navigation">

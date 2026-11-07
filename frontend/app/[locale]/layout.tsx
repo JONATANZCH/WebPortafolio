@@ -13,7 +13,7 @@ interface LocaleLayoutProps {
 
 export const metadata: Metadata = {
   title: {
-    default: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
+    default: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
     template: '%s | David Jonatan Zapeta Chavez',
   },
   icons: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   description:
-    'Cloud & DevOps Engineer con 5+ años de experiencia. Especialista en microservicios, infraestructura como código y observabilidad. Construyo sistemas resilientes y escalables en Azure/AWS.',
+    'Ingeniería backend, cloud e IA generativa con 8+ años de experiencia. Diseño APIs, microservicios y automatización en AWS y Azure para llevar productos a producción.',
   keywords: [
     'cloud engineer',
     'devops',
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     locale: 'es_MX',
     url: 'https://jonatanzarate.dev',
     siteName: 'David Jonatan Zapeta Chavez',
-    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
+    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
     description:
-      'Cloud & DevOps Engineer con 5+ años construyendo sistemas resilientes en Azure/AWS. Especialista en microservicios, infraestructura como código y observabilidad.',
+      'Ingeniería backend, cloud e IA generativa. APIs, microservicios, RAG e infraestructura como código en AWS y Azure.',
     images: [
       {
         url: '/og-image.png',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'David Jonatan Zapeta Chavez | Cloud & DevOps Engineer',
+    title: 'David Jonatan Zapeta Chavez | Backend, Cloud & IA Engineer',
     description:
       'Cloud & DevOps Engineer. Microservicios, Terraform, AWS/Azure. Desde CDMX.',
     images: ['/og-image.png'],
