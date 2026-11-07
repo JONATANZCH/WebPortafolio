@@ -1,5 +1,6 @@
 'use client';
 
+import { Component, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import styles from './MessageTrace.module.css';
 
@@ -15,7 +16,8 @@ export interface ApiTrace {
 export interface MessageTraceData extends ApiTrace {
   /** Full round trip measured in the browser. */
   roundTripMs: number;
-  messageId?: string;
+  /** The API may return a numeric or a text id depending on the database column type. */
+  messageId?: string | number;
 }
 
 interface Step {
@@ -26,6 +28,7 @@ interface Step {
   detail?: string;
 }
 
+const num = (v: unknown) => (typeof v === 'number' && Number.isFinite(v) ? v : 0);
 const fmt = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${Math.round(ms)} ms`);
 
 /**
@@ -35,17 +38,17 @@ const fmt = (ms: number) => (ms >= 1000 ? `${(ms / 1000).toFixed(1)} s` : `${Mat
 export default function MessageTrace({ trace }: { trace: MessageTraceData }) {
   const t = useTranslations('contact.trace');
 
-  const server = trace.totalMs ?? 0;
-  const roundTrip = Math.max(trace.roundTripMs, server);
+  const server = num(trace.totalMs);
+  const roundTrip = Math.max(num(trace.roundTripMs), server);
   const network = Math.max(0, roundTrip - server);
   const steps: Step[] = [
     { id: 'network', label: t('network'), ms: network, state: 'ok' },
-    { id: 'validation', label: t('validation'), ms: trace.receivedMs ?? 0, state: 'ok' },
-    { id: 'database', label: t('database'), ms: trace.dbMs ?? 0, state: 'ok' },
+    { id: 'validation', label: t('validation'), ms: num(trace.receivedMs), state: 'ok' },
+    { id: 'database', label: t('database'), ms: num(trace.dbMs), state: 'ok' },
     {
       id: 'email',
       label: t('email'),
-      ms: trace.emailMs ?? 0,
+      ms: num(trace.emailMs),
       state: trace.emailStatus === 'failed' ? 'warn' : 'ok',
       detail: trace.emailStatus === 'failed' ? t('email_failed') : trace.provider ? `${trace.provider}` : undefined,
     },
@@ -75,11 +78,29 @@ export default function MessageTrace({ trace }: { trace: MessageTraceData }) {
       </ol>
       <p className={styles.total} style={{ animationDelay: `${steps.length * 260}ms` }}>
         <strong>{t('total')}</strong> {fmt(roundTrip)}
-        {trace.messageId && <span className={styles.id}> · ID {trace.messageId.slice(0, 8)}</span>}
+        {(typeof trace.messageId === 'string' || typeof trace.messageId === 'number') && (
+          <span className={styles.id}> · ID {String(trace.messageId).slice(0, 8)}</span>
+        )}
       </p>
       {trace.emailStatus === 'failed' && <p className={styles.note}>{t('saved')}</p>}
       {cold && <p className={styles.note}>{t('cold')}</p>}
       <p className={styles.footnote}>{t('note')}</p>
     </section>
   );
+}
+
+/**
+ * The trace is a nicety shown after the message was already sent: if it ever fails to
+ * render, it must disappear quietly instead of taking the whole page down.
+ */
+export class SafeMessageTrace extends Component<{ trace: MessageTraceData }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render(): ReactNode {
+    return this.state.failed ? null : <MessageTrace trace={this.props.trace} />;
+  }
 }

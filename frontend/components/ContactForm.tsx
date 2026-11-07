@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { type Language } from '@/lib/sanity.queries';
-import MessageTrace, { type MessageTraceData } from './MessageTrace';
+import { SafeMessageTrace, type MessageTraceData } from './MessageTrace';
 import styles from './ContactForm.module.css';
 
 /* ------------------------------------------------------------------ */
@@ -191,7 +191,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
       if (!res.ok) throw new Error('Server responded with an error.');
 
       // The API reports real server timings; the browser adds the full round trip.
-      const body = (await res.json().catch(() => null)) as { messageId?: string; trace?: MessageTraceData } | null;
+      const body = (await res.json().catch(() => null)) as { messageId?: string | number; trace?: MessageTraceData } | null;
       setTrace(body?.trace ? { ...body.trace, roundTripMs: Math.round(performance.now() - startedAt), messageId: body.messageId } : null);
 
       showToast('success', t('contact.form.success'));
@@ -317,7 +317,7 @@ export default function ContactForm({ locale, prefill }: ContactFormProps) {
         </button>
       </form>
 
-      {trace && <MessageTrace trace={trace} />}
+      {trace && <SafeMessageTrace trace={trace} />}
 
       <Toast toast={toast} />
     </>
