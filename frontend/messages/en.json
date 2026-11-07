@@ -6,6 +6,32 @@
     "contact": "Contact",
     "available": "Available"
   },
+  "expertise": {
+    "title": "How I work",
+    "subtitle": "Maintainable code, decisions that can be explained, and teams that keep moving.",
+    "items": {
+      "oop": {
+        "title": "OOP and SOLID principles",
+        "body": "Responsibility-driven design, dependency inversion and clear boundaries between domain and infrastructure so code is easy to test and change."
+      },
+      "nest": {
+        "title": "Node.js and NestJS",
+        "body": "Modular REST and GraphQL APIs with dependency injection, validation, authentication (JWT/OAuth2) and automated tests."
+      },
+      "rag": {
+        "title": "Generative AI and RAG",
+        "body": "Embedding pipelines and semantic search over vector databases, with guardrails, evaluations and observability to take them to production."
+      },
+      "business": {
+        "title": "Negotiating with the business",
+        "body": "I turn requirements into scope, risks and measurable trade-offs, and agree on priorities and realistic dates before writing code."
+      },
+      "leadership": {
+        "title": "Technical leadership",
+        "body": "I guide architecture decisions, give constructive code reviews and leave documentation and pipelines the team can maintain."
+      }
+    }
+  },
   "hero": {
     "cta_projects": "View projects",
     "cta_contact": "Get in touch"

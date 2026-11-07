@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Project } from '../lib/sanity.queries';
 import { urlFor } from '../lib/sanity';
 import styles from './ProjectCard.module.css';
@@ -81,10 +82,25 @@ function TechChips({ technologies }: { technologies: string[] }) {
   );
 }
 
-function CardLinks({ liveUrl, github }: { liveUrl?: string; github?: string }) {
-  if (!liveUrl && !github) return null;
+function CardLinks({
+  liveUrl,
+  github,
+  caseHref,
+  caseLabel,
+}: {
+  liveUrl?: string;
+  github?: string;
+  caseHref?: string;
+  caseLabel?: string;
+}) {
+  if (!liveUrl && !github && !caseHref) return null;
   return (
     <div className={styles.links}>
+      {caseHref && (
+        <Link href={caseHref} className={styles.linkBtn}>
+          <span>{caseLabel}</span>
+        </Link>
+      )}
       {liveUrl && (
         <a
           href={liveUrl}
@@ -168,7 +184,16 @@ export default function ProjectCard(props: ProjectCardProps) {
           <TechChips technologies={project.stack} />
         )}
 
-        <CardLinks liveUrl={project.liveUrl} github={project.github} />
+        <CardLinks
+          liveUrl={project.liveUrl}
+          github={project.github}
+          caseHref={
+            project.caseStudy && project.slug
+              ? `/${project.language}/projects/${project.slug.current}`
+              : undefined
+          }
+          caseLabel={project.language === 'en' ? 'Case study' : 'Caso de estudio'}
+        />
       </div>
 
       {!isFeatured && project.image && (

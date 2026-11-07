@@ -33,6 +33,16 @@ export interface BlogPost {
   body?: unknown[];
 }
 
+export interface CaseStudy {
+  summary?: string;
+  role?: string;
+  challenge?: string;
+  decisions?: Array<{ title: string; body: string; principles?: string[] }>;
+  business?: string;
+  leadership?: string;
+  results?: string[];
+}
+
 export interface Project {
   _id: string;
   language: Language;
@@ -45,6 +55,7 @@ export interface Project {
   liveUrl?: string;
   featured?: boolean;
   order?: number;
+  caseStudy?: CaseStudy;
 }
 
 export interface Experience {
@@ -136,7 +147,21 @@ export const PROJECTS_QUERY = `*[_type == "project" && language == $language] | 
   github,
   liveUrl,
   featured,
-  order
+  order,
+  caseStudy
+}`;
+
+export const PROJECT_BY_SLUG_QUERY = `*[_type == "project" && language == $language && slug.current == $slug][0] {
+  _id,
+  language,
+  title,
+  slug,
+  description,
+  image,
+  stack,
+  github,
+  liveUrl,
+  caseStudy
 }`;
 
 export const EXPERIENCE_QUERY = `*[_type == "experience" && language == $language] | order(order asc) {
@@ -248,6 +273,22 @@ export async function getBlogPostBySlug(slug: string, language: Language = 'es')
 
 export async function getProjects(language: Language = 'es'): Promise<Project[]> {
   return fetchWithFallback<Project>(PROJECTS_QUERY, language, 300, `project:${language}`, true);
+}
+
+export async function getProjectBySlug(slug: string, language: Language = 'es'): Promise<Project | null> {
+  const found = await sanityFetch<Project | null>({
+    query: PROJECT_BY_SLUG_QUERY,
+    params: { slug, language },
+    revalidate: 300,
+    tags: [`project:${slug}:${language}`],
+  });
+  if (found || language === 'es') return found;
+  return sanityFetch<Project | null>({
+    query: PROJECT_BY_SLUG_QUERY,
+    params: { slug, language: 'es' },
+    revalidate: 300,
+    tags: [`project:${slug}:es`],
+  });
 }
 
 export async function getExperience(language: Language = 'es'): Promise<Experience[]> {

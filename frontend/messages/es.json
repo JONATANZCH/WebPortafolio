@@ -6,6 +6,32 @@
     "contact": "Contacto",
     "available": "Disponible"
   },
+  "expertise": {
+    "title": "Cómo trabajo",
+    "subtitle": "Código que se mantiene, decisiones que se explican y equipos que avanzan.",
+    "items": {
+      "oop": {
+        "title": "POO y principios SOLID",
+        "body": "Diseño por responsabilidades, inversión de dependencias y límites claros entre dominio e infraestructura para que el código sea fácil de probar y cambiar."
+      },
+      "nest": {
+        "title": "Node.js y NestJS",
+        "body": "APIs REST y GraphQL modulares, con inyección de dependencias, validación, autenticación (JWT/OAuth2) y pruebas automatizadas."
+      },
+      "rag": {
+        "title": "IA generativa y RAG",
+        "body": "Pipelines de embeddings y búsqueda semántica en bases vectoriales, con guardrails, evaluaciones y observabilidad para llevarlos a producción."
+      },
+      "business": {
+        "title": "Negociación con negocio",
+        "body": "Traduzco requerimientos a alcance, riesgos y trade-offs medibles; acuerdo prioridades y fechas realistas antes de escribir código."
+      },
+      "leadership": {
+        "title": "Liderazgo técnico",
+        "body": "Guío decisiones de arquitectura, hago code review constructivo y dejo documentación y pipelines que el equipo puede mantener."
+      }
+    }
+  },
   "hero": {
     "cta_projects": "Ver proyectos",
     "cta_contact": "Contáctame"

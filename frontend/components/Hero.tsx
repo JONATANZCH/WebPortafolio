@@ -5,8 +5,6 @@ import { type About } from '@/lib/sanity.queries';
 import styles from './Hero.module.css';
 
 const TECH_STACK = [
-  'Java',
-  'Spring Boot',
   'Node.js',
   'NestJS',
   'Python',
@@ -18,6 +16,9 @@ const TECH_STACK = [
   'AWS',
   'Azure',
   'Terraform',
+  'Kubernetes',
+  'Kafka',
+  'Redis',
   'GraphQL',
   'REST APIs',
   'RAG / LangChain',

@@ -7,6 +7,7 @@ import {
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import ProjectsGrid from '@/components/ProjectsGrid';
+import Expertise from '@/components/Expertise';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ContactForm from '@/components/ContactForm';
@@ -38,6 +39,8 @@ export default async function Home(props: PageProps) {
 
       <main>
         <Hero about={about} />
+
+        <Expertise locale={locale} />
 
         <ProjectsGrid locale={locale} />
 
