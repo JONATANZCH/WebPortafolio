@@ -222,12 +222,14 @@
           "Infraestructura como código con Terraform en AWS (ECS, Lambda, SQS/SNS) y Azure",
           "Pipelines CI/CD en GitLab o GitHub Actions con despliegues por entorno y rollback",
           "Contenedores con Docker y Kubernetes cuando el caso lo justifica",
-          "Observabilidad con Grafana, CloudWatch o DataDog: métricas, trazas, alertas y SLOs"
+          "Observabilidad con Grafana, CloudWatch o DataDog: métricas, trazas, alertas y SLOs",
+          "Decisiones de infraestructura documentadas: comparativa de alternativas (serverless, contenedores, PaaS) por costo, escala, riesgo y operación, registradas en un ADR"
         ],
         "approach": [
           "Todo cambio de infraestructura pasa por código, revisión y pipeline",
           "Defino SLOs con producto y alerto por impacto en el usuario, no por ruido",
-          "Reviso el costo desde el diseño (FinOps) para que la plataforma escale sin sorpresas"
+          "Reviso el costo desde el diseño (FinOps) para que la plataforma escale sin sorpresas",
+          "Elijo la plataforma según el problema y no por moda; por ejemplo, migrar un backend de funciones serverless a contenedores cuando cambian el costo y las restricciones, desacoplando proveedores (correo, base de datos) para poder cambiarlos sin reescribir la lógica"
         ],
         "tools": [
           "Terraform",
@@ -239,7 +241,9 @@
           "GitHub Actions",
           "Grafana",
           "DataDog",
-          "OpenTelemetry"
+          "OpenTelemetry",
+          "ADR",
+          "FinOps"
         ]
       },
       {
@@ -303,7 +307,8 @@
           "Descubrimiento técnico: alcance, riesgos, dependencias y supuestos por escrito",
           "Propuestas con alternativas, costo y trade-offs, listas para decidir",
           "Planes de entrega por etapas con prioridades acordadas con producto",
-          "Revisión de código, lineamientos de calidad y mentoría para el equipo"
+          "Revisión de código, lineamientos de calidad y mentoría para el equipo",
+          "Decisiones de infraestructura con criterios explícitos (costo, escala, riesgo y tiempo de operación) y alternativas comparables"
         ],
         "approach": [
           "Traduzco requisitos de negocio a alcance medible y riesgos explícitos",

@@ -222,12 +222,14 @@
           "Infrastructure as code with Terraform on AWS (ECS, Lambda, SQS/SNS) and Azure",
           "CI/CD pipelines in GitLab or GitHub Actions with per-environment deployments and rollback",
           "Containers with Docker, and Kubernetes when the case justifies it",
-          "Observability with Grafana, CloudWatch or DataDog: metrics, traces, alerts and SLOs"
+          "Observability with Grafana, CloudWatch or DataDog: metrics, traces, alerts and SLOs",
+          "Documented infrastructure decisions: comparison of alternatives (serverless, containers, PaaS) by cost, scale, risk and operations, recorded in an ADR"
         ],
         "approach": [
           "Every infrastructure change goes through code, review and a pipeline",
           "I define SLOs with product and alert on user impact, not noise",
-          "I review cost from the design stage (FinOps) so the platform scales without surprises"
+          "I review cost from the design stage (FinOps) so the platform scales without surprises",
+          "I choose the platform for the problem, not for fashion; for example, moving a backend from serverless functions to containers when cost and constraints change, decoupling providers (email, database) so they can be swapped without rewriting the logic"
         ],
         "tools": [
           "Terraform",
@@ -239,7 +241,9 @@
           "GitHub Actions",
           "Grafana",
           "DataDog",
-          "OpenTelemetry"
+          "OpenTelemetry",
+          "ADR",
+          "FinOps"
         ]
       },
       {
@@ -303,7 +307,8 @@
           "Technical discovery: scope, risks, dependencies and assumptions in writing",
           "Proposals with alternatives, cost and trade-offs, ready for a decision",
           "Staged delivery plans with priorities agreed with product",
-          "Code review, quality guidelines and mentoring for the team"
+          "Code review, quality guidelines and mentoring for the team",
+          "Infrastructure decisions with explicit criteria (cost, scale, risk and operating effort) and comparable alternatives"
         ],
         "approach": [
           "I translate business requirements into measurable scope and explicit risks",
