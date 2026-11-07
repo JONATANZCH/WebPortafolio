@@ -44,7 +44,19 @@ export class CreateContactDto {
   website?: string;
 }
 
+/** Real server-side timings (ms) so the site can show how a message travelled. */
+export class ContactTrace {
+  /** Body parsing + rate limit + validation, before the controller runs. */
+  receivedMs?: number;
+  dbMs?: number;
+  emailMs?: number;
+  emailStatus?: 'sent' | 'failed';
+  provider?: string;
+  totalMs?: number;
+}
+
 export class ContactResponseDto {
   success!: boolean;
   messageId!: string;
+  trace?: ContactTrace;
 }

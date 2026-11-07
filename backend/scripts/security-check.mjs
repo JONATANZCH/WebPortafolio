@@ -20,7 +20,7 @@ const saved = [];
 const fakeService = {
   createContact: async (dto) => {
     saved.push(dto);
-    return { success: true, messageId: 'test-id' };
+    return { success: true, messageId: 'test-id', trace: { dbMs: 5, emailMs: 7, emailStatus: 'sent', provider: 'resend' } };
   },
 };
 
@@ -36,6 +36,11 @@ Module({
 })(TestModule);
 
 const app = await NestFactory.create(TestModule, { logger: false });
+// Same request stamp as main.ts, so the controller can report real timings.
+app.use((req, _res, next) => {
+  req.startedAtNs = process.hrtime.bigint();
+  next();
+});
 app.use(helmet());
 app.useGlobalPipes(
   new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }),
@@ -59,7 +64,17 @@ const results = [];
 const check = (name, ok, detail = '') => results.push({ name, ok, detail });
 
 let r = await post({ ...valid });
+const validBody = await r.json();
 check('Mensaje válido → 200', r.status === 200, `status ${r.status}`);
+check(
+  'Traza con tiempos reales (recepción, BD, correo, total)',
+  typeof validBody.trace?.receivedMs === 'number' &&
+    typeof validBody.trace?.totalMs === 'number' &&
+    validBody.trace.totalMs >= validBody.trace.receivedMs &&
+    validBody.trace.dbMs === 5 &&
+    validBody.trace.emailStatus === 'sent',
+  JSON.stringify(validBody.trace),
+);
 
 r = await post({ ...valid, email: 'no-es-un-correo' });
 check('Correo inválido → 400', r.status === 400, `status ${r.status}`);
@@ -81,7 +96,9 @@ check('JSON malformado → 400', r.status === 400, `status ${r.status}`);
 
 const before = saved.length;
 r = await post({ ...valid, website: 'http://spam.example' });
+const hpBody = await r.json();
 check('Honeypot lleno → 200 sin guardar nada', r.status === 200 && saved.length === before, `status ${r.status}, guardados ${saved.length - before}`);
+check('Honeypot no devuelve traza (no revela nada a los bots)', hpBody.trace === undefined);
 
 r = await post({ ...valid, message: 'x'.repeat(200 * 1024) });
 check('Cuerpo de 200 KB → rechazado (413)', r.status === 413, `status ${r.status}`);

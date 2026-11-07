@@ -50,6 +50,7 @@ export class ContactService implements OnModuleInit {
     this.logger.log(`Contact form submission from IP: ${ip || 'unknown'}, language: ${language}`);
     // 1. Persist to database
     let saved: ContactMessage;
+    const dbStart = performance.now();
     try {
       const entity = this.contactRepository.create({
         name: dto.name,
@@ -66,11 +67,16 @@ export class ContactService implements OnModuleInit {
       );
     }
 
-    // 2. Send email notification via SendGrid (best-effort — do not fail the
-    //    request if the email service is unavailable)
+    const dbMs = performance.now() - dbStart;
+
+    // 2. Send the email notification (best-effort — do not fail the request if
+    //    the email provider is unavailable)
+    const emailStart = performance.now();
+    let emailStatus: 'sent' | 'failed' = 'sent';
     try {
       await this.sendEmail(saved, language);
     } catch (emailError) {
+      emailStatus = 'failed';
       this.logger.warn(
         `Email notification failed for message ${saved.id}`,
         emailError,
@@ -78,9 +84,16 @@ export class ContactService implements OnModuleInit {
       // We intentionally do not rethrow: the record is already saved.
     }
 
+    const round = (n: number) => Math.round(n * 10) / 10;
     return {
       success: true,
       messageId: saved.id,
+      trace: {
+        dbMs: round(dbMs),
+        emailMs: round(performance.now() - emailStart),
+        emailStatus,
+        provider: this.emailProvider.name,
+      },
     };
   }
 

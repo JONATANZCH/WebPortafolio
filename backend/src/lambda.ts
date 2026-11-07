@@ -12,6 +12,10 @@ async function bootstrapApp(): Promise<ReturnType<typeof serverless>> {
 
   const app = await NestFactory.create(AppModule);
 
+  app.use((req: { startedAtNs?: bigint }, _res: unknown, next: () => void) => {
+    req.startedAtNs = process.hrtime.bigint();
+    next();
+  });
   app.use(helmet());
 
   const allowedOrigins = process.env.FRONTEND_URL

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, HttpCode, Ip, Headers } from '@nestjs/common';
+import { Body, Controller, Post, HttpCode, Ip, Headers, Req } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { ContactService } from './contact.service.js';
 import { ContactResponseDto, CreateContactDto, Language } from './contact.dto.js';
@@ -14,7 +14,11 @@ export class ContactController {
     @Body() dto: CreateContactDto,
     @Ip() ip: string,
     @Headers('accept-language') acceptLanguage?: string,
+    @Req() req?: { startedAtNs?: bigint },
   ): Promise<ContactResponseDto> {
+    const sinceStart = () => (req?.startedAtNs ? Math.round((Number(process.hrtime.bigint() - req.startedAtNs) / 1e6) * 10) / 10 : undefined);
+    const receivedMs = sinceStart();
+
     // Honeypot hit: pretend success so bots get no signal, store nothing
     if (dto.website) {
       return { success: true, messageId: 'ok' };
@@ -22,7 +26,8 @@ export class ContactController {
 
     // Language priority: dto.language > accept-language header > default (es)
     const language = this.resolveLanguage(dto.language, acceptLanguage);
-    return this.contactService.createContact(dto, ip, language);
+    const result = await this.contactService.createContact(dto, ip, language);
+    return { ...result, trace: { ...result.trace, receivedMs, totalMs: sinceStart() } };
   }
 
   /**
