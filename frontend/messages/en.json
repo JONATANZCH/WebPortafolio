@@ -55,7 +55,7 @@
           "tools": [
             "Next.js",
             "React",
-            "React Native",
+            "Flutter",
             "TypeScript",
             "OpenAPI"
           ]
@@ -68,6 +68,7 @@
             "OAuth2",
             "OIDC",
             "Auth0",
+            "Amazon Cognito",
             "JWT",
             "Rate limiting"
           ]
@@ -178,6 +179,7 @@
           "NestJS",
           "Node.js",
           "TypeScript",
+          "DDD",
           "FastAPI",
           "GraphQL",
           "OpenAPI",
@@ -185,7 +187,11 @@
           "MongoDB",
           "Redis",
           "Kafka",
-          "SQS/SNS"
+          "SQS/SNS",
+          "RabbitMQ",
+          "Stripe",
+          "Seguridata",
+          "NOM-151"
         ]
       },
       {
@@ -243,7 +249,14 @@
           "DataDog",
           "OpenTelemetry",
           "ADR",
-          "FinOps"
+          "FinOps",
+          "AWS Lambda",
+          "API Gateway",
+          "EventBridge",
+          "Step Functions",
+          "ECS Fargate",
+          "EC2",
+          "CloudWatch"
         ]
       },
       {
@@ -270,7 +283,10 @@
           "SAST",
           "Secrets management",
           "IAM",
-          "TLS"
+          "TLS",
+          "Amazon Cognito",
+          "KMS",
+          "Secrets Manager"
         ]
       },
       {
@@ -289,6 +305,7 @@
           "I deploy to test networks first and treat every deployment as irreversible"
         ],
         "tools": [
+          "Blockchain",
           "Solidity",
           "Ethereum",
           "EVM",

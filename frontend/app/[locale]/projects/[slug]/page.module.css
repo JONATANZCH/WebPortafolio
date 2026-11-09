@@ -29,3 +29,5 @@
 .caseNavLabel { font-size: 0.8rem; color: var(--muted); }
 .caseNavTitle { font-weight: 650; color: var(--text); letter-spacing: -0.01em; }
 @media (max-width: 560px) { .caseNav { grid-template-columns: 1fr; } .caseNavRight { text-align: left; } }
+
+.decision p { white-space: pre-line; }
