@@ -3,7 +3,10 @@ import path from 'node:path';
 
 // The PDF lives in /private (not in /public), so the only way to get it is through
 // this route. That lets every download be counted, whatever link it came from.
-const CV_PATH = path.join(process.cwd(), 'private', 'CV-David-Zapeta.pdf');
+const CV_FILES = {
+  es: { file: path.join(process.cwd(), 'private', 'CV-David-Zapeta.pdf'), name: 'CV David Jonatan Zapeta.pdf' },
+  en: { file: path.join(process.cwd(), 'private', 'CV-David-Zapeta-EN.pdf'), name: 'Resume David Jonatan Zapeta.pdf' },
+} as const;
 
 export const dynamic = 'force-dynamic';
 
@@ -18,10 +21,12 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const campaign = cleanLabel(url.searchParams.get('c'));
   const asAttachment = url.searchParams.get('download') === '1';
+  const lang = url.searchParams.get('lang') === 'en' ? 'en' : 'es';
+  const cv = CV_FILES[lang];
 
   let file: Buffer;
   try {
-    file = await readFile(CV_PATH);
+    file = await readFile(cv.file);
   } catch {
     return new Response('CV not available', { status: 404 });
   }
@@ -32,6 +37,7 @@ export async function GET(request: Request) {
       event: 'cv-download',
       at: new Date().toISOString(),
       campaign,
+      lang,
       referrerHost: (() => {
         try {
           const ref = request.headers.get('referer');
@@ -48,7 +54,7 @@ export async function GET(request: Request) {
     headers: {
       'Content-Type': 'application/pdf',
       'Content-Length': String(file.length),
-      'Content-Disposition': `${asAttachment ? 'attachment' : 'inline'}; filename="CV David Jonatan Zapeta.pdf"`,
+      'Content-Disposition': `${asAttachment ? 'attachment' : 'inline'}; filename="${cv.name}"`,
       // Every request must reach the server to be counted; never cache or index it.
       'Cache-Control': 'private, no-store',
       'X-Robots-Tag': 'noindex, nofollow',

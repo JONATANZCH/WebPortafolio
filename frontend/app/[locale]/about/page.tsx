@@ -52,11 +52,11 @@ export default async function AboutPage({ params }: PageProps) {
             <div>
               <h1 className={styles.title}>{t('title')}</h1>
               <p className={styles.lead}>{t('lead')}</p>
-              {locale === 'es' && (
-                <a
-                  href="/cv?c=sitio"
+              <a
+                  href={locale === 'en' ? '/cv?c=sitio&lang=en' : '/cv?c=sitio'}
                   data-umami-event="cv-download"
-                  download="CV David Jonatan Zapeta.pdf"
+                  data-umami-event-lang={locale}
+                  download={locale === 'en' ? 'Resume David Jonatan Zapeta.pdf' : 'CV David Jonatan Zapeta.pdf'}
                   className={styles.cv}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -64,7 +64,6 @@ export default async function AboutPage({ params }: PageProps) {
                   </svg>
                   {t('cv_cta')}
                 </a>
-              )}
             </div>
           </header>
 
