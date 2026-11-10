@@ -19,7 +19,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' data: https://fonts.gstatic.com",
   "img-src 'self' data: blob: https://cdn.sanity.io",
-  `connect-src 'self' ${apiOrigin} https://cloud.umami.is https://api-gateway.umami.dev`,
+  `connect-src 'self' ${apiOrigin} https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev`,
   "frame-src 'none'",
   "frame-ancestors 'none'",
   "object-src 'none'",
