@@ -51,6 +51,7 @@ export default function CommandPalette() {
       { id: 'proj', group: 'sections', label: t('projects'), run: () => go('proyectos') },
       { id: 'contact', group: 'sections', label: t('contact'), run: () => go('contacto') },
       { id: 'about', group: 'pages', label: t('about_me'), run: () => router.push(`/${locale}/about`) },
+      { id: 'business', group: 'pages', label: t('business'), run: () => router.push(`/${locale}/business`) },
       { id: 'blog', group: 'pages', label: t('blog'), run: () => router.push(`/${locale}/blog`) },
       { id: 'home', group: 'pages', label: t('home_top'), run: () => router.push(`/${locale}`) },
       { id: 'lang', group: 'actions', label: tp('language'), run: () => router.push(`/${other}${rest}`) },

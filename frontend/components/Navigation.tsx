@@ -90,6 +90,16 @@ export default function Navigation() {
           ))}
           <li>
             <Link
+              href={`/${locale}/business`}
+              className={`${styles.link} ${styles.linkBusiness} ${pathname.startsWith(`/${locale}/business`) ? styles.linkActive : ''}`}
+              data-umami-event="business-open"
+              data-umami-event-from="nav"
+            >
+              {t('business')}
+            </Link>
+          </li>
+          <li>
+            <Link
               href={`/${locale}/blog`}
               className={`${styles.link} ${pathname.startsWith(`/${locale}/blog`) ? styles.linkActive : ''}`}
             >

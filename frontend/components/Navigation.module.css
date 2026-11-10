@@ -101,3 +101,7 @@
   .rightSide { gap: 0.5rem; }
   .cta { padding: 0.45rem 0.8rem; }
 }
+
+.linkBusiness { color: var(--text); border: 1px solid var(--border); }
+.linkBusiness:hover { border-color: var(--primary); color: var(--primary); background: transparent; }
+.linkBusiness.linkActive { color: var(--primary); border-color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, transparent); }
